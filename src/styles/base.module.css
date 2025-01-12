@@ -23,7 +23,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -33,6 +33,14 @@
 }
 
 /* Utility Classes */
+
+.fontQuicksandBold {
+  font-family: 'Quicksand', serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .uFlex {
   display: flex;
 }
@@ -153,6 +161,12 @@
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+.btnIcon {
+  background-color: transparent;
+  border: none;
+  outline: nones;
 }
 
 .btn:hover {
