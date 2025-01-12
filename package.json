@@ -27,7 +27,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.2",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "typed-css-modules": "^0.9.1"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.4",
