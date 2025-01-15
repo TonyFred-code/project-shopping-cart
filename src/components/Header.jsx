@@ -3,6 +3,7 @@ import Icon from '@mdi/react';
 import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const HeaderWrapper = styled.header`
   & {
@@ -109,7 +110,7 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-function Header() {
+export default function Header({ toggleSideMenuOpen }) {
   return (
     <HeaderWrapper
       className={classNames(
@@ -128,6 +129,7 @@ function Header() {
         <button
           type="button"
           className={classNames(baseStyles.uGapD3r, 'menu-btn')}
+          onClick={toggleSideMenuOpen}
         >
           <Icon path={mdiMenu} size={1.35} />
           <span className="btn-icon-text">Menu</span>
@@ -181,4 +183,6 @@ function Header() {
   );
 }
 
-export default Header;
+Header.propTypes = {
+  toggleSideMenuOpen: PropTypes.func,
+};
