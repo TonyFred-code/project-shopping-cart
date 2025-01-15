@@ -7,11 +7,16 @@ import styled from 'styled-components';
 const HeaderWrapper = styled.header`
   & {
     border-bottom: 1.5px solid #74bf0482;
-    padding: 0.5rem 1rem;
+    background-color: #fff;
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
+    grid-area: 1 / 1 / 1 / 1;
+  }
+
+  & > div {
+    padding: 0.5rem;
   }
 
   h1 {
@@ -59,10 +64,6 @@ const HeaderWrapper = styled.header`
   }
 
   @media screen and (min-width: 1024px) {
-    & {
-      padding: 1.5rem 0;
-    }
-
     & > div {
       padding: 0 1.5rem;
     }
