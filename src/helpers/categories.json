@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Tropical",
+    "description": "Fruits that grow in warm climates and are rich in flavor."
+  },
+  {
+    "id": 2,
+    "name": "Citrus",
+    "description": "Fruits known for their tangy and refreshing taste, high in vitamin C."
+  },
+  {
+    "id": 3,
+    "name": "Berry",
+    "description": "Small, juicy fruits often eaten fresh or used in desserts."
+  },
+  {
+    "id": 4,
+    "name": "Stone Fruit",
+    "description": "Fruits with a central pit or stone, containing the seed."
+  },
+  {
+    "id": 5,
+    "name": "Temperate",
+    "description": "Fruits suited for moderate climates with a crisp and mild taste."
+  },
+  {
+    "id": 6,
+    "name": "Exotic",
+    "description": "Unique fruits with unusual flavors, typically not native to the area."
+  },
+  {
+    "id": 7,
+    "name": "Melon",
+    "description": "Large, sweet fruits with a juicy texture, often eaten in slices."
+  },
+  {
+    "id": 8,
+    "name": "Drupe",
+    "description": "Fruits with a hard stone or pit surrounded by fleshy fruit."
+  }
+]
