@@ -11,6 +11,12 @@ const HomePageWrapper = styled.div`
     grid-template-rows: 45px 1fr;
   }
 
+  @media screen and (min-width: 768px) {
+    & {
+      grid-template-rows: 57px 1fr;
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     & {
       grid-template-rows: 127px 1fr;
