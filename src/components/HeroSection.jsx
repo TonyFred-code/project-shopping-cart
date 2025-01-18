@@ -1,7 +1,3 @@
-// import { } from '@mdi/js';
-import Icon from '@mdi/react';
-import baseStyles from '../styles/base.module.css';
-import classNames from 'classnames';
 import styled from 'styled-components';
 import HeroImageLarge from '../assets/hero-image-large.jpeg';
 import HeroImage from '../assets/hero-image.jpeg';
@@ -36,7 +32,7 @@ const HeroSectionWrapper = styled.section`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
+    z-index: 1;
     width: 80%;
     padding: 20px;
     text-align: center;
