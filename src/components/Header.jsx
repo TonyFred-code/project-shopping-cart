@@ -1,9 +1,11 @@
-import { mdiCart, mdiMagnify, mdiMenu } from '@mdi/js';
+import { mdiCart, mdiChevronUp, mdiMagnify, mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
 import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+// import CATEGORIES from '../helpers/categories.json';
+import { useState } from 'react';
 
 const HeaderWrapper = styled.header`
   & {
@@ -13,6 +15,7 @@ const HeaderWrapper = styled.header`
     top: 0;
     right: 0;
     left: 0;
+    z-index: 3;
     grid-area: 1 / 1 / 1 / 1;
   }
 
@@ -91,26 +94,51 @@ const HeaderWrapper = styled.header`
       font-size: 1.5rem;
       flex: 1;
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-around;
     }
 
-    li > * {
-      width: 100%;
-      display: inline-block;
+    li > *:first-child {
+      display: flex;
       text-align: center;
       cursor: pointer;
       padding: 0.5rem 0;
       border-bottom: 1.5px solid #74bf04;
+      width: 65%;
     }
 
-    li > *:hover {
+    li > *:first-child:hover {
       font-weight: bold;
       border-color: #fff;
+    }
+
+    .dropdown {
+      align-items: flex-start;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .dropdown-content {
+      height: ${(props) => (props.subCategoryOpen ? '175px' : '0px')};
+      overflow: hidden auto;
+      transition: all 0.35s ease-in-out;
+      flex-direction: column;
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      position: absolute;
+      z-index: 2;
     }
   }
 `;
 
 export default function Header({ toggleSideMenuOpen }) {
+  const [subCategoryOpen, setSubCategoryOpen] = useState(false);
+
+  function toggleSubCategoryOpen() {
+    setSubCategoryOpen(!subCategoryOpen);
+  }
+
   return (
     <HeaderWrapper
       className={classNames(
@@ -118,6 +146,7 @@ export default function Header({ toggleSideMenuOpen }) {
         baseStyles.uFlexCol,
         baseStyles.uGap1r
       )}
+      subCategoryOpen={subCategoryOpen}
     >
       <div
         className={classNames(
@@ -168,8 +197,46 @@ export default function Header({ toggleSideMenuOpen }) {
           <li>
             <span>shop</span>
           </li>
-          <li>
-            <span>categories</span>
+          <li className="dropdown">
+            <header
+              onClick={toggleSubCategoryOpen}
+              className={classNames(
+                baseStyles.uFlex,
+                baseStyles.uAlignCenter,
+                baseStyles.uGapD5r,
+                baseStyles.uJustifySpaceBetween,
+                baseStyles.uCursorPointer,
+                baseStyles.uPadding1r
+              )}
+            >
+              <div
+                className={classNames(
+                  baseStyles.uFlex,
+                  baseStyles.uAlignCenter,
+                  baseStyles.uGapD5r
+                )}
+              >
+                <span>Categories</span>
+              </div>
+              <Icon
+                path={mdiChevronUp}
+                className="caret"
+                size={1.5}
+                rotate={subCategoryOpen ? 0 : 180}
+              />
+            </header>
+            {/* <div className="dropdown-content">
+              <div>
+                {CATEGORIES.map((catItem) => {
+                  const { name, id } = catItem;
+                  return (
+                    <span key={id} className="dropdown-item">
+                      {name}
+                    </span>
+                  );
+                })}
+              </div>
+            </div> */}
           </li>
           <li>
             <span>on sale</span>
