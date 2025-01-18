@@ -10,7 +10,10 @@ import {
   mdiStore,
   mdiCalendarStarFourPoints,
   mdiGithub,
+  mdiChevronUp,
 } from '@mdi/js';
+import CATEGORIES from '../helpers/categories.json';
+import { useState } from 'react';
 
 const SideMenuWrapper = styled.section`
   & {
@@ -51,15 +54,62 @@ const SideMenuWrapper = styled.section`
   ul {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
   }
 
   li {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
     border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+  }
+
+  li > *:first-child {
+    width: 100%;
+  }
+
+  li > *:first-child:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dropdown-content {
+    height: ${(props) => (props.subCategoryOpen ? '175px' : '0px')};
+    overflow: hidden auto;
+    transition: all 0.35s ease-in-out;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  .dropdown-content > * {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+  }
+
+  .dropdown-item {
+    border-bottom: 1.3px solid #eee;
+    display: inline-block;
+    width: 65%;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .dropdown-item:hover {
+    background-color: #eee;
+  }
+
+  .caret {
+    transition: all 0.35s ease-in-out;
   }
 
   .copyright {
@@ -93,16 +143,22 @@ const SideMenuWrapper = styled.section`
 `;
 
 export default function SideMenu({ open, toggleOpen }) {
+  const [subCategoryOpen, setSubCategoryOpen] = useState(false);
+
+  function toggleSubCategoryOpen() {
+    setSubCategoryOpen(!subCategoryOpen);
+  }
+
   const navItems = [
-    { label: 'All Products', icon: mdiStore },
-    { label: 'Categories', icon: mdiFruitCherries },
-    { label: 'On Sale', icon: mdiSale },
-    { label: 'In Season', icon: mdiCalendarStarFourPoints },
-    { label: 'Wishlist', icon: mdiHeartCircle },
+    { label: 'All Products', icon: mdiStore, dropDown: false },
+    { label: 'Categories', icon: mdiFruitCherries, dropDown: true },
+    { label: 'On Sale', icon: mdiSale, dropDown: false },
+    { label: 'In Season', icon: mdiCalendarStarFourPoints, dropDown: false },
+    { label: 'Wishlist', icon: mdiHeartCircle, dropDown: false },
   ];
 
   return (
-    <SideMenuWrapper open={open}>
+    <SideMenuWrapper open={open} subCategoryOpen={subCategoryOpen}>
       <div className="content">
         <header>
           <h1 className={classNames(baseStyles.fontQuicksandBold)}>
@@ -111,12 +167,71 @@ export default function SideMenu({ open, toggleOpen }) {
         </header>
         <nav>
           <ul>
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <Icon path={item.icon} size={1.5} />
-                <span>{item.label}</span>
-              </li>
-            ))}
+            {navItems.map((item, index) => {
+              if (!item.dropDown) {
+                return (
+                  <li key={index}>
+                    <div
+                      className={classNames(
+                        baseStyles.uFlex,
+                        baseStyles.uAlignCenter,
+                        baseStyles.uGapD5r,
+                        baseStyles.uCursorPointer,
+                        baseStyles.uPadding1r
+                      )}
+                    >
+                      <Icon path={item.icon} size={1.5} />
+                      <span>{item.label}</span>
+                    </div>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={index} className="dropdown">
+                  <header
+                    onClick={toggleSubCategoryOpen}
+                    className={classNames(
+                      baseStyles.uFlex,
+                      baseStyles.uAlignCenter,
+                      baseStyles.uGapD5r,
+                      baseStyles.uJustifySpaceBetween,
+                      baseStyles.uCursorPointer,
+                      baseStyles.uPadding1r
+                    )}
+                  >
+                    <div
+                      className={classNames(
+                        baseStyles.uFlex,
+                        baseStyles.uAlignCenter,
+                        baseStyles.uGapD5r
+                      )}
+                    >
+                      <Icon path={item.icon} size={1.5} />
+                      <span>{item.label}</span>
+                    </div>
+                    <Icon
+                      path={mdiChevronUp}
+                      className="caret"
+                      size={1.5}
+                      rotate={subCategoryOpen ? 0 : 180}
+                    />
+                  </header>
+                  <div className="dropdown-content">
+                    <div>
+                      {CATEGORIES.map((catItem) => {
+                        const { name, id } = catItem;
+                        return (
+                          <span key={id} className="dropdown-item">
+                            {name}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </nav>
         <footer className="copyright">
@@ -130,7 +245,13 @@ export default function SideMenu({ open, toggleOpen }) {
           </a>
         </footer>
       </div>
-      <div className="backdrop" onClick={toggleOpen}></div>
+      <div
+        className="backdrop"
+        onClick={() => {
+          toggleOpen();
+          toggleSubCategoryOpen();
+        }}
+      ></div>
     </SideMenuWrapper>
   );
 }
