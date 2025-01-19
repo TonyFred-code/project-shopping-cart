@@ -4,7 +4,7 @@ import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// import CATEGORIES from '../helpers/categories.json';
+import CATEGORIES from '../helpers/categories.json';
 import { useState } from 'react';
 
 const HeaderWrapper = styled.header`
@@ -119,15 +119,31 @@ const HeaderWrapper = styled.header`
     }
 
     .dropdown-content {
-      height: ${(props) => (props.subCategoryOpen ? '175px' : '0px')};
+      height: ${(props) => (props.$subCategoryOpen ? '175px' : '0px')};
       overflow: hidden auto;
       transition: all 0.35s ease-in-out;
       flex-direction: column;
-      display: flex;
-      align-items: flex-end;
-      width: 100%;
+      display: block;
       position: absolute;
       z-index: 2;
+      left: 0;
+      top: 100%;
+      width: 75%;
+    }
+
+    .dropdown-content ul {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdown-content li {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .dropdown-content li:hover {
+      font-weight: bold;
+      border-color: #fff;
     }
   }
 `;
@@ -146,7 +162,7 @@ export default function Header({ toggleSideMenuOpen }) {
         baseStyles.uFlexCol,
         baseStyles.uGap1r
       )}
-      subCategoryOpen={subCategoryOpen}
+      $subCategoryOpen={subCategoryOpen}
     >
       <div
         className={classNames(
@@ -225,18 +241,18 @@ export default function Header({ toggleSideMenuOpen }) {
                 rotate={subCategoryOpen ? 0 : 180}
               />
             </header>
-            {/* <div className="dropdown-content">
-              <div>
+            <div className="dropdown-content">
+              <ul>
                 {CATEGORIES.map((catItem) => {
                   const { name, id } = catItem;
                   return (
-                    <span key={id} className="dropdown-item">
+                    <li key={id} className="dropdown-item">
                       {name}
-                    </span>
+                    </li>
                   );
                 })}
-              </div>
-            </div> */}
+              </ul>
+            </div>
           </li>
           <li>
             <span>on sale</span>
