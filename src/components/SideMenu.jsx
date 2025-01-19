@@ -17,7 +17,7 @@ import { useState } from 'react';
 
 const SideMenuWrapper = styled.section`
   & {
-    width: ${(props) => (props.open ? '100%' : '0px')};
+    width: ${(props) => (props.$open ? '100%' : '0px')};
     z-index: 10;
     height: 100dvh;
     position: fixed;
@@ -79,7 +79,7 @@ const SideMenuWrapper = styled.section`
   }
 
   .dropdown-content {
-    height: ${(props) => (props.subCategoryOpen ? '175px' : '0px')};
+    height: ${(props) => (props.$subCategoryOpen ? '175px' : '0px')};
     overflow: hidden auto;
     transition: all 0.35s ease-in-out;
     flex-direction: column;
@@ -158,7 +158,7 @@ export default function SideMenu({ open, toggleOpen }) {
   ];
 
   return (
-    <SideMenuWrapper open={open} subCategoryOpen={subCategoryOpen}>
+    <SideMenuWrapper $open={open} $subCategoryOpen={subCategoryOpen}>
       <div className="content">
         <header>
           <h1 className={classNames(baseStyles.fontQuicksandBold)}>
