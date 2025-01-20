@@ -27,6 +27,7 @@
     "random-int": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-placeholder-image": "^0.1.8",
     "react-router-dom": "^7.0.2",
     "styled-components": "^6.1.13",
     "typed-css-modules": "^0.9.1"
