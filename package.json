@@ -24,6 +24,7 @@
     "@mdi/react": "^1.6.1",
     "classnames": "^2.5.1",
     "prop-types": "^15.8.1",
+    "random-int": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.2",
