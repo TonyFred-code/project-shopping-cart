@@ -1,30 +1,24 @@
 import randomInteger from 'random-int';
 
-function fruitOnSale(fruitData) {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const today = new Date();
-  const currentMonthName = months[today.getMonth()];
-
-  const { season_availability } = fruitData;
-
-  if (season_availability.includes(currentMonthName)) return 0;
-
-  return randomInteger(5, 55);
+function getCurrentMonth() {
+  return new Date().toLocaleString('default', { month: 'long' });
 }
 
-export default {
-  fruitOnSale,
-};
+function getRandomDiscount(min = 5, max = 55) {
+  return randomInteger(min, max);
+}
+
+export function fruitOnSale(fruitData, discountRange = { min: 5, max: 55 }) {
+  if (!fruitData || !Array.isArray(fruitData.season_availability)) {
+    throw new Error('Invalid fruit data');
+  }
+
+  const currentMonthName = getCurrentMonth();
+  if (
+    fruitData.season_availability.includes(currentMonthName) ||
+    fruitData.season_availability.includes('All year round')
+  )
+    return 0;
+
+  return getRandomDiscount(discountRange.min, discountRange.max);
+}
