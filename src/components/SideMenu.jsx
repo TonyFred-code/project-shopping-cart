@@ -45,6 +45,7 @@ const SideMenuWrapper = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    overflow: auto;
   }
 
   h1 {
