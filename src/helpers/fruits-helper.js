@@ -8,17 +8,22 @@ function getRandomDiscount(min = 5, max = 55) {
   return randomInteger(min, max);
 }
 
-export function fruitOnSale(fruitData, discountRange = { min: 5, max: 55 }) {
+export function fruitOnSale(fruitData) {
   if (!fruitData || !Array.isArray(fruitData.season_availability)) {
     throw new Error('Invalid fruit data');
   }
 
   const currentMonthName = getCurrentMonth();
-  if (
-    fruitData.season_availability.includes(currentMonthName) ||
-    fruitData.season_availability.includes('All year round')
-  )
-    return 0;
+  return (
+    !fruitData.season_availability.includes(currentMonthName) &&
+    !fruitData.season_availability.includes('All year round')
+  );
+}
 
-  return getRandomDiscount(discountRange.min, discountRange.max);
+export function fruitSalePercent(fruitData) {
+  if (!fruitData || !fruitOnSale(fruitData)) {
+    return 0;
+  }
+
+  return getRandomDiscount();
 }
