@@ -3,24 +3,11 @@ import styled from 'styled-components';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import SideMenu from '@/components/SideMenu';
+import OnSaleSection from '@/components/OnSaleSection';
 
 const HomePageWrapper = styled.div`
   & {
     min-height: 100dvh;
-    display: grid;
-    grid-template-rows: 45px 1fr;
-  }
-
-  @media screen and (min-width: 768px) {
-    & {
-      grid-template-rows: 57px 1fr;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    & {
-      grid-template-rows: 127px 1fr;
-    }
   }
 `;
 
@@ -36,6 +23,9 @@ export default function HomePage() {
       <Header toggleSideMenuOpen={toggleSideMenuOpen} />
       <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <HeroSection />
+      <div className="wrapper">
+        <OnSaleSection />
+      </div>
     </HomePageWrapper>
   );
 }
