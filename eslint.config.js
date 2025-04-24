@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js';
 import react from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'; // no type declaration from pkg developer
 import eslintPluginPrettier from 'eslint-plugin-prettier';
+import eslintPluginImport from 'eslint-plugin-import';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -14,6 +15,7 @@ export default [
     plugins: {
       eslintPluginReactHooks,
       eslintPluginPrettier,
+      eslintPluginImport,
     },
     languageOptions: {
       globals: {
@@ -52,6 +54,20 @@ export default [
       'no-var': 'error',
       'prefer-const': 'error',
       'no-unused-vars': 'warn',
+      'eslintPluginImport/extensions': [
+        'error',
+        'always',
+        {
+          ignorePackages: true,
+        },
+      ],
+      'eslintPluginImport/prefer-default-export': 'off',
+      'eslintPluginImport/no-unresolved': [
+        'error',
+        {
+          ignore: ['^@/'],
+        },
+      ],
 
       // 'import/no-extraneous-dependencies': [
       //   'error',
