@@ -1,16 +1,11 @@
-import App from '@/App';
-import ErrorPage from '@/pages/ErrorPage';
-import Profile from '@/pages/Profile';
+import App from '@/App.jsx';
+import ErrorPage from '@/pages/ErrorPage.jsx';
 
 const routes = [
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: 'profile/:name?',
-    element: <Profile />,
   },
 ];
 

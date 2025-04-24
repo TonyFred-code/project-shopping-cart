@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import ImageFiller from 'react-image-filler';
 import FRUITS_LIST from '../helpers/data.json';
-import { fruitOnSale } from '@/helpers/fruits-helper';
+import { fruitOnSale } from '@/helpers/fruits-helper.js';
 import Icon from '@mdi/react';
 import { mdiFruitGrapes } from '@mdi/js';
 
