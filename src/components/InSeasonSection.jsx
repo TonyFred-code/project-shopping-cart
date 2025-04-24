@@ -81,11 +81,11 @@ const InSeasonSectionWrapper = styled.section`
 `;
 
 export default function InSeasonSection() {
-  const onSaleFruits = FRUITS_LIST.filter((d) => {
+  const inSeasonFruits = FRUITS_LIST.filter((d) => {
     return fruitInSeason(d);
   });
 
-  const quantity = onSaleFruits.length;
+  const quantity = inSeasonFruits.length;
 
   return (
     <InSeasonSectionWrapper style={{ '--quantity': quantity }}>
@@ -103,7 +103,7 @@ export default function InSeasonSection() {
       </h2>
       <div className="slider-container">
         <div className="slider">
-          {onSaleFruits.map((fruit, i) => (
+          {inSeasonFruits.map((fruit, i) => (
             <div
               key={fruit.id}
               className="card slider-item"
