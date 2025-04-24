@@ -27,3 +27,12 @@ export function fruitSalePercent(fruitData) {
 
   return getRandomDiscount();
 }
+
+export function fruitInSeason(fruitData) {
+  if (!fruitData || !Array.isArray(fruitData.season_availability)) {
+    throw new Error('Invalid fruit data');
+  }
+
+  const currentMonthName = getCurrentMonth();
+  return fruitData.season_availability.includes(currentMonthName);
+}
