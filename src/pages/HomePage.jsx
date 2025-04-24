@@ -8,7 +8,21 @@ import OnSaleSection from '@/components/OnSaleSection';
 const HomePageWrapper = styled.div`
   & {
     min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
+  /*
+  @media screen and (min-width: 768px) {
+    & {
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    & {
+      grid-template-rows: auto 1fr;
+    }
+  } */
 `;
 
 export default function HomePage() {
@@ -23,9 +37,7 @@ export default function HomePage() {
       <Header toggleSideMenuOpen={toggleSideMenuOpen} />
       <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <HeroSection />
-      <div className="wrapper">
-        <OnSaleSection />
-      </div>
+      <OnSaleSection />
     </HomePageWrapper>
   );
 }
