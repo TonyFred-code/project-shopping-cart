@@ -4,8 +4,8 @@ import HeroImage from '../assets/hero-image.jpeg';
 
 const HeroSectionWrapper = styled.section`
   & {
-    min-height: 100%;
-    grid-area: 2 / 1;
+    height: 100dvh;
+    margin-top: 48px;
   }
 
   & .bg-image {
@@ -44,6 +44,10 @@ const HeroSectionWrapper = styled.section`
   }
 
   @media screen and (min-width: 768px) {
+    & {
+      margin-top: 56px;
+    }
+
     & .bg-image {
       /* The image used */
       background-image: url(${HeroImageLarge});
@@ -55,6 +59,10 @@ const HeroSectionWrapper = styled.section`
   }
 
   @media screen and (min-width: 1024px) {
+    & {
+      margin-top: 126px;
+    }
+
     & .bg-text {
       font-size: 3.25rem;
     }
