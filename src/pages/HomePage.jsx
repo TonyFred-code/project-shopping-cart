@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import SideMenu from '@/components/SideMenu';
 import OnSaleSection from '@/components/OnSaleSection';
+import InSeasonSection from '../components/InSeasonSection.jsx';
 
 const HomePageWrapper = styled.div`
   & {
@@ -11,18 +12,6 @@ const HomePageWrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
-  /*
-  @media screen and (min-width: 768px) {
-    & {
-      grid-template-rows: auto 1fr;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    & {
-      grid-template-rows: auto 1fr;
-    }
-  } */
 `;
 
 export default function HomePage() {
@@ -38,6 +27,7 @@ export default function HomePage() {
       <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <HeroSection />
       <OnSaleSection />
+      <InSeasonSection />
     </HomePageWrapper>
   );
 }
