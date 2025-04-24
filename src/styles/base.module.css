@@ -1,17 +1,12 @@
 /* base.module.css */
 
 /* Global Reset */
-:global(*) {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+:global(*),
 :global(*::after),
 :global(*::before) {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 :global(html) {
@@ -33,6 +28,10 @@
 }
 
 /* Utility Classes */
+
+.uHidden {
+  display: none;
+}
 
 .fontQuicksandBold {
   font-family: 'Quicksand', serif;
