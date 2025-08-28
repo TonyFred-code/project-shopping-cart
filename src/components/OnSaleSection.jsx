@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import ImageFiller from 'react-image-filler';
 import Icon from '@mdi/react';
 import { mdiFruitGrapes } from '@mdi/js';
-import { array } from 'prop-types';
+import { array, bool } from 'prop-types';
+import { ThreeDots } from 'react-loader-spinner';
 
 const OnSaleSectionWrapper = styled.section`
   & {
@@ -12,6 +13,13 @@ const OnSaleSectionWrapper = styled.section`
     flex-direction: column;
     --width: 250px;
     margin: 1.5rem 0;
+  }
+
+  .loading-container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   & h2 {
@@ -79,7 +87,7 @@ const OnSaleSectionWrapper = styled.section`
   }
 `;
 
-export default function OnSaleSection({ fruits }) {
+export default function OnSaleSection({ fruits, loading }) {
   const quantity = fruits.length;
 
   return (
@@ -96,31 +104,47 @@ export default function OnSaleSection({ fruits }) {
         <Icon path={mdiFruitGrapes} size={2.5} />
         <span>On Sale Now</span>
       </h2>
-      <div className="slider-container">
-        <div className="slider">
-          {fruits.map((fruit, i) => (
-            <div
-              key={fruit.id}
-              className="card slider-item"
-              style={{
-                '--position': i + 1,
-                animationDelay:
-                  'calc((10s / var(--quantity)) * (var(--quantity) - var(--position)) * -1)',
-              }}
-            >
-              <ImageFiller width={250} height={250} />
-              <div className="item-overlay">
-                <h3>{fruit.name}</h3>
-                <p>{fruit.price}</p>
-              </div>
-            </div>
-          ))}
+      {loading ? (
+        <div className="loading-container">
+          <ThreeDots
+            visible={true}
+            height="80"
+            width="80"
+            color="#4fa94d"
+            radius="9"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
         </div>
-      </div>
+      ) : (
+        <div className="slider-container">
+          <div className="slider">
+            {fruits.map((fruit, i) => (
+              <div
+                key={fruit.id}
+                className="card slider-item"
+                style={{
+                  '--position': i + 1,
+                  animationDelay:
+                    'calc((10s / var(--quantity)) * (var(--quantity) - var(--position)) * -1)',
+                }}
+              >
+                <ImageFiller width={250} height={250} />
+                <div className="item-overlay">
+                  <h3>{fruit.name}</h3>
+                  <p>{fruit.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </OnSaleSectionWrapper>
   );
 }
 
 OnSaleSection.propTypes = {
   fruits: array,
+  loading: bool,
 };

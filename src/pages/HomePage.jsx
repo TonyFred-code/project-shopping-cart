@@ -5,7 +5,6 @@ import HeroSection from '@/components/HeroSection.jsx';
 import SideMenu from '@/components/SideMenu.jsx';
 import OnSaleSection from '@/components/OnSaleSection.jsx';
 import InSeasonSection from '@/components/InSeasonSection.jsx';
-import { ThreeDots } from 'react-loader-spinner';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
 import { fruitOnSale } from '@/helpers/fruits-helper.js';
 
@@ -37,22 +36,7 @@ export default function HomePage() {
       <Header toggleSideMenuOpen={toggleSideMenuOpen} />
       <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <HeroSection />
-      {loading ? (
-        <div className="loading-container">
-          <ThreeDots
-            visible={true}
-            height="80"
-            width="80"
-            color="#4fa94d"
-            radius="9"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
-        </div>
-      ) : (
-        <OnSaleSection fruits={onSaleFruits} />
-      )}
+      <OnSaleSection fruits={onSaleFruits} loading={loading} />
       <InSeasonSection />
     </HomePageWrapper>
   );
