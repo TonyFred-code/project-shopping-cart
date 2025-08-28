@@ -1,11 +1,11 @@
 import { mdiCart, mdiChevronUp, mdiMagnify, mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
-import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import CATEGORIES from '../helpers/categories.json';
+import { func } from 'prop-types';
 import { useState } from 'react';
+import styled from 'styled-components';
+import CATEGORIES from '../helpers/categories.json';
+import baseStyles from '../styles/base.module.css';
 
 const HeaderWrapper = styled.header`
   & {
@@ -267,5 +267,5 @@ export default function Header({ toggleSideMenuOpen }) {
 }
 
 Header.propTypes = {
-  toggleSideMenuOpen: PropTypes.func,
+  toggleSideMenuOpen: func,
 };
