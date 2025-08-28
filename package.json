@@ -23,6 +23,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "classnames": "^2.5.1",
+    "flickity": "^3.0.0",
     "prop-types": "^15.8.1",
     "random-int": "^3.0.0",
     "react": "^18.2.0",
