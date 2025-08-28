@@ -1,19 +1,19 @@
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import baseStyles from '../styles/base.module.css';
-import classNames from 'classnames';
-import Icon from '@mdi/react';
 import {
+  mdiCalendarStarFourPoints,
+  mdiChevronUp,
+  mdiFruitCherries,
+  mdiGithub,
   mdiHeartCircle,
   mdiSale,
-  mdiFruitCherries,
   mdiStore,
-  mdiCalendarStarFourPoints,
-  mdiGithub,
-  mdiChevronUp,
 } from '@mdi/js';
-import CATEGORIES from '../helpers/categories.json';
+import Icon from '@mdi/react';
+import classNames from 'classnames';
+import { bool, func } from 'prop-types';
 import { useState } from 'react';
+import styled from 'styled-components';
+import CATEGORIES from '../helpers/categories.json';
+import baseStyles from '../styles/base.module.css';
 
 const SideMenuWrapper = styled.section`
   & {
@@ -258,6 +258,6 @@ export default function SideMenu({ open, toggleOpen }) {
 }
 
 SideMenu.propTypes = {
-  open: PropTypes.bool,
-  toggleOpen: PropTypes.func,
+  open: bool,
+  toggleOpen: func,
 };
