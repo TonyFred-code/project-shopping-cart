@@ -2,10 +2,9 @@ import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
 import ImageFiller from 'react-image-filler';
-import FRUITS_LIST from '../helpers/data.json';
-import { fruitOnSale } from '@/helpers/fruits-helper.js';
 import Icon from '@mdi/react';
 import { mdiFruitGrapes } from '@mdi/js';
+import { array } from 'prop-types';
 
 const OnSaleSectionWrapper = styled.section`
   & {
@@ -80,12 +79,8 @@ const OnSaleSectionWrapper = styled.section`
   }
 `;
 
-export default function OnSaleSection() {
-  const onSaleFruits = FRUITS_LIST.filter((d) => {
-    return fruitOnSale(d);
-  });
-
-  const quantity = onSaleFruits.length;
+export default function OnSaleSection({ fruits }) {
+  const quantity = fruits.length;
 
   return (
     <OnSaleSectionWrapper style={{ '--quantity': quantity }}>
@@ -103,7 +98,7 @@ export default function OnSaleSection() {
       </h2>
       <div className="slider-container">
         <div className="slider">
-          {onSaleFruits.map((fruit, i) => (
+          {fruits.map((fruit, i) => (
             <div
               key={fruit.id}
               className="card slider-item"
@@ -125,3 +120,7 @@ export default function OnSaleSection() {
     </OnSaleSectionWrapper>
   );
 }
+
+OnSaleSection.propTypes = {
+  fruits: array,
+};
