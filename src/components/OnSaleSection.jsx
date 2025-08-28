@@ -1,11 +1,11 @@
 import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
-import ImageFiller from 'react-image-filler';
 import Icon from '@mdi/react';
 import { mdiFruitGrapes } from '@mdi/js';
 import { array, bool } from 'prop-types';
 import { ThreeDots } from 'react-loader-spinner';
+import ProductCard from './ProductCard.jsx';
 
 const OnSaleSectionWrapper = styled.section`
   & {
@@ -130,11 +130,12 @@ export default function OnSaleSection({ fruits, loading }) {
                     'calc((10s / var(--quantity)) * (var(--quantity) - var(--position)) * -1)',
                 }}
               >
-                <ImageFiller width={250} height={250} />
-                <div className="item-overlay">
-                  <h3>{fruit.name}</h3>
-                  <p>{fruit.price}</p>
-                </div>
+                <ProductCard
+                  imageAlt={fruit.name}
+                  imageSrc={fruit.image_url}
+                  name={fruit.name}
+                  price={fruit.price}
+                />
               </div>
             ))}
           </div>
