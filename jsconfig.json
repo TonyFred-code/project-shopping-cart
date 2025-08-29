@@ -7,6 +7,13 @@
       "@helpers/*": ["./src/helpers/*"],
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/styles/*"]
-    }
-  }
+    },
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+  },
+  "include": ["src"]
 }
