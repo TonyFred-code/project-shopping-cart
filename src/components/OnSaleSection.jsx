@@ -6,12 +6,14 @@ import { mdiFruitGrapes } from '@mdi/js';
 import { array, bool } from 'prop-types';
 import { ThreeDots } from 'react-loader-spinner';
 import ProductCard from './ProductCard.jsx';
+import randomArrayElement from '@/helpers/randomArrayElement.js';
+
+// TODO: Make this into a carousel
 
 const OnSaleSectionWrapper = styled.section`
   & {
     display: flex;
     flex-direction: column;
-    --width: 250px;
     margin: 1.5rem 0;
   }
 
@@ -22,76 +24,30 @@ const OnSaleSectionWrapper = styled.section`
     justify-content: center;
   }
 
-  & h2 {
+  h2 {
     font-size: 2.5rem;
     border-bottom: 2px solid #ddd;
     border-top: 2px solid #ddd;
+    width: min(75%, 300px);
+  }
+  .fruits-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    padding: 2rem;
+  }
+
+  .fruits-container > * {
     max-width: 300px;
-  }
-
-  & .slider-container {
-    overflow: hidden;
-  }
-
-  & .slider {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    position: relative;
-    height: calc(var(--width) + 30px);
-    min-width: calc(var(--width) * var(--quantity));
-  }
-
-  & .slider-item {
-    flex: 0 0 auto;
-    width: var(--width);
-    height: var(--width);
-    border-radius: 15px;
-    position: absolute;
-    left: 100%;
-    animation-name: autoRun;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  & .slider:hover .slider-item {
-    animation-play-state: paused;
-  }
-
-  & .slider-item .item-overlay {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 0px;
-    width: 0px;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    font-weight: 800;
-  }
-
-  & .slider-item:hover .item-overlay {
-    display: flex;
-    height: 100%;
     width: 100%;
-    top: 0;
-    transition: all 0.3s;
-  }
-
-  @keyframes autoRun {
-    to {
-      left: calc(var(--width) * -1);
-    }
+    margin: 0 auto;
   }
 `;
 
 export default function OnSaleSection({ fruits, loading }) {
-  const quantity = fruits.length;
-
   return (
-    <OnSaleSectionWrapper style={{ '--quantity': quantity }}>
+    <OnSaleSectionWrapper>
       <h2
         className={classNames(
           baseStyles.fontQuicksandBold,
@@ -101,9 +57,10 @@ export default function OnSaleSection({ fruits, loading }) {
           baseStyles.uGap1r
         )}
       >
-        <Icon path={mdiFruitGrapes} size={2.5} />
+        <Icon path={mdiFruitGrapes} color="green" size={2.5} />
         <span>On Sale Now</span>
       </h2>
+
       {loading ? (
         <div className="loading-container">
           <ThreeDots
@@ -118,34 +75,23 @@ export default function OnSaleSection({ fruits, loading }) {
           />
         </div>
       ) : (
-        <div className="slider-container">
-          <div className="slider">
-            {fruits.map((fruit, i) => (
-              <div
+        <div className="fruits-container">
+          {fruits.map((fruit) => {
+            return (
+              <ProductCard
                 key={fruit.id}
-                className="card slider-item"
-                style={{
-                  '--position': i + 1,
-                  animationDelay:
-                    'calc((10s / var(--quantity)) * (var(--quantity) - var(--position)) * -1)',
-                }}
-              >
-                <ProductCard
-                  imageAlt={fruit.name}
-                  imageSrc={fruit.image_url}
-                  name={fruit.name}
-                  price={fruit.price}
-                />
-              </div>
-            ))}
-          </div>
+                imageAlt={fruit.name}
+                imageSrc={fruit.image_url}
+                name={fruit.name}
+                price={fruit.pricing.price_per_unit}
+                category={randomArrayElement(fruit.categories)}
+              />
+            );
+          })}
         </div>
       )}
     </OnSaleSectionWrapper>
   );
 }
 
-OnSaleSection.propTypes = {
-  fruits: array,
-  loading: bool,
-};
+OnSaleSection.propTypes = { fruits: array, loading: bool };
