@@ -3,9 +3,8 @@ import HeroImageLarge from '../assets/hero-image-large.jpeg';
 import HeroImage from '../assets/hero-image.jpeg';
 
 const HeroSectionWrapper = styled.section`
-  & {
-    height: 100dvh;
-    margin-top: 48px;
+  .hero-section {
+    height: calc(100dvh - 30px);
   }
 
   & .bg-image {
@@ -43,9 +42,25 @@ const HeroSectionWrapper = styled.section`
     font-weight: 500;
   }
 
+  .about-us-section {
+    margin: 2rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+    width: min(75%, 300px);
+    padding: 1rem;
+  }
+
+  .about-us-section p {
+    padding: 0 1rem;
+  }
+
   @media screen and (min-width: 768px) {
-    & {
-      margin-top: 56px;
+    .hero-section {
+      height: calc(100dvh - 50px);
     }
 
     & .bg-image {
@@ -59,8 +74,8 @@ const HeroSectionWrapper = styled.section`
   }
 
   @media screen and (min-width: 1024px) {
-    & {
-      margin-top: 126px;
+    .hero-section {
+      height: calc(100dvh - 80px);
     }
 
     & .bg-text {
@@ -72,11 +87,23 @@ const HeroSectionWrapper = styled.section`
 export default function HeroSection() {
   return (
     <HeroSectionWrapper>
-      <div className="bg-image"></div>
-      <div className="bg-text">
-        <h2>Fresh from Our Farm to Your Table</h2>
-        <p>Discover the finest fruits, grown with care, delivered with love.</p>
+      <div className="hero-section">
+        <div className="bg-image"></div>
+        <div className="bg-text">
+          <h2>Fresh from Our Farm to Your Table</h2>
+          <p>
+            Discover the finest fruits, grown with care, delivered with love.
+          </p>
+        </div>
       </div>
+      <section className="about-us-section">
+        <h2 className="title">About Us</h2>
+        <p>
+          We are passionate about bringing fresh, healthy, and affordable fruits
+          closer to you. Our mission is to make it easier for everyone to enjoy
+          nature&apos;s sweetness, whether for snacking, cooking, or juicing.
+        </p>
+      </section>
     </HeroSectionWrapper>
   );
 }
