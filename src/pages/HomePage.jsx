@@ -8,6 +8,7 @@ import InSeasonSection from '@/components/InSeasonSection.jsx';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
 import { fruitInSeason, fruitOnSale } from '@/helpers/fruits-helper.js';
 import useCategoriesData from '@/helpers/useCategoriesData.jsx';
+import Footer from '@/components/Footer.jsx';
 
 const HomePageWrapper = styled.div`
   & {
@@ -54,6 +55,7 @@ export default function HomePage() {
       <InSeasonSection fruits={inSeasonFruits} loading={fruitsData.loading} />
       {/*TODO: create a shop by categories section */}
       {/*TODO: create footer section */}
+      <Footer />
     </HomePageWrapper>
   );
 }
