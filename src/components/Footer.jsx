@@ -24,19 +24,6 @@ const FooterWrapper = styled.footer`
     gap: 0.5rem;
   }
 
-  .footer-about button {
-    align-self: flex-end;
-    display: flex;
-    color: green;
-    background-color: white;
-    border: 2px solid white;
-    outline: none;
-    padding: 1rem 1.25rem;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-  }
-
   address {
     padding: 1rem;
   }
@@ -69,6 +56,17 @@ const FooterWrapper = styled.footer`
     align-items: center;
     justify-content: center;
   }
+
+  @media screen and (min-width: 900px) {
+    & {
+      display: flex;
+      padding-bottom: 0.5rem;
+    }
+
+    & > * {
+      flex: 1;
+    }
+  }
 `;
 
 export default function Footer() {
@@ -77,13 +75,10 @@ export default function Footer() {
       <section className="footer-about">
         <h2 className={classNames(baseStyles.fontQuicksandBold)}>fruit.era</h2>
         <p>
-          We are passionate about bringing fresh, healthy, and affordable fruits
-          closer to you. Our mission is to make it easier for everyone to enjoy
-          nature&apos;s sweetness, whether for snacking, cooking, or juicing.
+          By providing a wide variety of locally grown and imported fruits, we
+          aim to support healthier lifestyles while also connecting farmers with
+          the people who need their produce most.
         </p>
-        <button type="button" className="read-more">
-          Read More
-        </button>
       </section>
       <section className="contact-info">
         <h2 className={classNames(baseStyles.fontQuicksandBold)}>
