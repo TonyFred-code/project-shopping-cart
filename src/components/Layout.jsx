@@ -12,6 +12,29 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  main {
+    margin-top: 55px;
+    flex: 1;
+  }
+
+  @media screen and (min-width: 768px) {
+    main {
+      margin-top: 65px;
+    }
+  }
+  /* 
+  @media screen and (min-width: 768px) {
+    main {
+      margin-top: 85px;
+    }
+  } */
+
+  @media screen and (min-width: 1024px) {
+    main {
+      margin-top: 140px;
+    }
+  }
 `;
 
 export default function LayoutWrapper({ children }) {
@@ -29,7 +52,7 @@ export default function LayoutWrapper({ children }) {
         // toggleSearchMenuOpen={toggleSearchMenuOpen}
         categories={categoriesData.categories}
       />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main>{children}</main>
       <SideMenu
         open={sideMenuOpen}
         toggleOpen={toggleSideMenuOpen}
