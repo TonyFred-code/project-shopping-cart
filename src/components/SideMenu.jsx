@@ -9,10 +9,9 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import classNames from 'classnames';
-import { bool, func } from 'prop-types';
+import { array, bool, func } from 'prop-types';
 import { useState } from 'react';
 import styled from 'styled-components';
-import CATEGORIES from '../helpers/categories.json';
 import baseStyles from '../styles/base.module.css';
 
 const SideMenuWrapper = styled.section`
@@ -143,7 +142,7 @@ const SideMenuWrapper = styled.section`
   }
 `;
 
-export default function SideMenu({ open, toggleOpen }) {
+export default function SideMenu({ open, toggleOpen, categories }) {
   const [subCategoryOpen, setSubCategoryOpen] = useState(false);
 
   function toggleSubCategoryOpen() {
@@ -220,7 +219,7 @@ export default function SideMenu({ open, toggleOpen }) {
                   </header>
                   <div className="dropdown-content">
                     <div>
-                      {CATEGORIES.map((catItem) => {
+                      {categories.map((catItem) => {
                         const { name, id } = catItem;
                         return (
                           <span key={id} className="dropdown-item">
@@ -260,4 +259,5 @@ export default function SideMenu({ open, toggleOpen }) {
 SideMenu.propTypes = {
   open: bool,
   toggleOpen: func,
+  categories: array,
 };
