@@ -6,6 +6,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import CATEGORIES from '../helpers/categories.json';
 import baseStyles from '../styles/base.module.css';
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   & {
@@ -105,6 +106,8 @@ const HeaderWrapper = styled.header`
       padding: 0.5rem 0;
       border-bottom: 1.5px solid #74bf04;
       width: 65%;
+      text-decoration: none;
+      color: inherit;
     }
 
     li > *:first-child:hover {
@@ -148,7 +151,7 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-export default function Header({ toggleSideMenuOpen }) {
+export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
   const [subCategoryOpen, setSubCategoryOpen] = useState(false);
 
   function toggleSubCategoryOpen() {
@@ -190,11 +193,22 @@ export default function Header({ toggleSideMenuOpen }) {
             baseStyles.uGap1r
           )}
         >
-          <button type="button" className={classNames(baseStyles.uGapD3r)}>
+          <button
+            type="button"
+            className={classNames(baseStyles.uGapD3r, 'cart-btn')}
+          >
             <Icon path={mdiCart} size={1.35} />
+            {/*TODO: SHOW BADGES */}
             <span className="btn-icon-text">Cart</span>
           </button>
-          <button type="button" className={classNames(baseStyles.uGapD3r)}>
+          <button
+            type="button"
+            className={classNames(
+              baseStyles.uGapD3r,
+              baseStyles.uCursorPointer,
+              'search-btn'
+            )}
+          >
             <Icon path={mdiMagnify} size={1.35} />
             <span className="btn-icon-text">Search</span>
           </button>
@@ -211,7 +225,9 @@ export default function Header({ toggleSideMenuOpen }) {
           )}
         >
           <li>
-            <span>shop</span>
+            <Link to={'/shop'}>
+              <span>shop</span>
+            </Link>
           </li>
           <li className="dropdown">
             <header
@@ -255,10 +271,14 @@ export default function Header({ toggleSideMenuOpen }) {
             </div>
           </li>
           <li>
-            <span>on sale</span>
+            <Link to={'/#on-sale'}>
+              <span>on sale</span>
+            </Link>
           </li>
           <li>
-            <span>in season</span>
+            <Link to={'/#in-season'}>
+              <span>in season</span>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -268,4 +288,5 @@ export default function Header({ toggleSideMenuOpen }) {
 
 Header.propTypes = {
   toggleSideMenuOpen: func,
+  toggleSearchMenuOpen: func,
 };

@@ -13,6 +13,7 @@ import { array, bool, func } from 'prop-types';
 import { useState } from 'react';
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
+import { Link } from 'react-router-dom';
 
 const SideMenuWrapper = styled.section`
   & {
@@ -150,11 +151,16 @@ export default function SideMenu({ open, toggleOpen, categories }) {
   }
 
   const navItems = [
-    { label: 'All Products', icon: mdiStore, dropDown: false },
-    { label: 'Categories', icon: mdiFruitCherries, dropDown: true },
-    { label: 'On Sale', icon: mdiSale, dropDown: false },
-    { label: 'In Season', icon: mdiCalendarStarFourPoints, dropDown: false },
-    { label: 'Wishlist', icon: mdiHeartCircle, dropDown: false },
+    { label: 'All Products', icon: mdiStore, dropDown: false, to: 'shop' },
+    { label: 'Categories', icon: mdiFruitCherries, dropDown: true, to: '/' },
+    { label: 'On Sale', icon: mdiSale, dropDown: false, to: '/' },
+    {
+      label: 'In Season',
+      icon: mdiCalendarStarFourPoints,
+      dropDown: false,
+      to: '#in-season',
+    },
+    { label: 'Wishlist', icon: mdiHeartCircle, dropDown: false, to: '/' },
   ];
 
   return (
@@ -171,7 +177,8 @@ export default function SideMenu({ open, toggleOpen, categories }) {
               if (!item.dropDown) {
                 return (
                   <li key={index}>
-                    <div
+                    <Link
+                      to={item.to}
                       className={classNames(
                         baseStyles.uFlex,
                         baseStyles.uAlignCenter,
@@ -179,10 +186,11 @@ export default function SideMenu({ open, toggleOpen, categories }) {
                         baseStyles.uCursorPointer,
                         baseStyles.uPadding1r
                       )}
+                      onClick={toggleOpen}
                     >
                       <Icon path={item.icon} size={1.5} />
                       <span>{item.label}</span>
-                    </div>
+                    </Link>
                   </li>
                 );
               }
