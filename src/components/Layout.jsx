@@ -13,25 +13,25 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 
-  main {
+  .layout-main {
     margin-top: 55px;
     flex: 1;
   }
 
   @media screen and (min-width: 768px) {
-    main {
+    .layout-main {
       margin-top: 65px;
     }
   }
   /* 
   @media screen and (min-width: 768px) {
-    main {
+    .layout-main {
       margin-top: 85px;
     }
   } */
 
   @media screen and (min-width: 1024px) {
-    main {
+    .layout-main {
       margin-top: 140px;
     }
   }
@@ -52,7 +52,7 @@ export default function LayoutWrapper({ children }) {
         // toggleSearchMenuOpen={toggleSearchMenuOpen}
         categories={categoriesData.categories}
       />
-      <main>{children}</main>
+      <main className="layout-main">{children}</main>
       <SideMenu
         open={sideMenuOpen}
         toggleOpen={toggleSideMenuOpen}
