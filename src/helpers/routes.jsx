@@ -1,10 +1,16 @@
-import App from '@/App.jsx';
 import ErrorPage from '@/pages/ErrorPage.jsx';
+import HomePage from '@/pages/HomePage.jsx';
+import ProductsPage from '@/pages/ProductsPage.jsx';
 
 const routes = [
   {
     path: '/',
-    element: <App />,
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/shop',
+    element: <ProductsPage />,
     errorElement: <ErrorPage />,
   },
 ];
