@@ -15,6 +15,7 @@ const OnSaleSectionWrapper = styled.section`
     display: flex;
     flex-direction: column;
     margin: 1.5rem 0;
+    scroll-margin-block: 60px;
   }
 
   .loading-container {
@@ -43,11 +44,17 @@ const OnSaleSectionWrapper = styled.section`
     width: 100%;
     margin: 0 auto;
   }
+
+  @media screen and (min-width: 1024px) {
+    & {
+      scroll-margin-block: 140px;
+    }
+  }
 `;
 
 export default function OnSaleSection({ fruits, loading }) {
   return (
-    <OnSaleSectionWrapper>
+    <OnSaleSectionWrapper id="on-sale">
       <h2
         className={classNames(
           baseStyles.fontQuicksandBold,
@@ -85,6 +92,8 @@ export default function OnSaleSection({ fruits, loading }) {
                 name={fruit.name}
                 price={fruit.pricing.price_per_unit}
                 category={randomArrayElement(fruit.categories)}
+                type="sale"
+                //TODO: figure out a way to create sale product card
               />
             );
           })}

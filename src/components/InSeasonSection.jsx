@@ -16,6 +16,7 @@ const InSeasonSectionWrapper = styled.section`
     display: flex;
     flex-direction: column;
     margin: 1.5rem 0;
+    scroll-margin-block: 60px;
   }
 
   .loading-container {
@@ -44,13 +45,19 @@ const InSeasonSectionWrapper = styled.section`
     width: 100%;
     margin: 0 auto;
   }
+
+  @media screen and (min-width: 1024px) {
+    & {
+      scroll-margin-block: 140px;
+    }
+  }
 `;
 
 export default function InSeasonSection({ fruits, loading }) {
   // const quantity = fruits.length;
 
   return (
-    <InSeasonSectionWrapper>
+    <InSeasonSectionWrapper id="in-season">
       <h2
         className={classNames(
           baseStyles.fontQuicksandBold,
