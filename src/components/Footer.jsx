@@ -46,11 +46,10 @@ const FooterWrapper = styled.footer`
   }
 
   .copyright {
-    margin-top: auto;
     font-size: 1rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.7);
-    padding: 0.8rem;
+    padding: 1rem;
     gap: 1rem;
     display: flex;
     align-items: center;
@@ -58,12 +57,12 @@ const FooterWrapper = styled.footer`
   }
 
   @media screen and (min-width: 900px) {
-    & {
+    .footer-content {
       display: flex;
       padding-bottom: 0.5rem;
     }
 
-    & > * {
+    .footer-content > * {
       flex: 1;
     }
   }
@@ -72,48 +71,57 @@ const FooterWrapper = styled.footer`
 export default function Footer() {
   return (
     <FooterWrapper>
-      <section className="footer-about">
-        <h2 className={classNames(baseStyles.fontQuicksandBold)}>fruit.era</h2>
-        <p>
-          By providing a wide variety of locally grown and imported fruits, we
-          aim to support healthier lifestyles while also connecting farmers with
-          the people who need their produce most.
-        </p>
-      </section>
-      <section className="contact-info">
-        <h2 className={classNames(baseStyles.fontQuicksandBold)}>
-          Contact Details
-        </h2>
-        <address>
+      <div className="footer-content">
+        <section className="footer-about">
+          <h2 className={classNames(baseStyles.fontQuicksandBold)}>
+            fruit.era
+          </h2>
           <p>
-            <span>
-              <Icon path={mdiPhone} size={1.2} />
-              Telephone:
-            </span>
-            <a href="tel:+2349112420253">0911-242-0253</a>
+            By providing a wide variety of locally grown and imported fruits, we
+            aim to support healthier lifestyles while also connecting farmers
+            with the people who need their produce most.
           </p>
-          <p>
-            <span>
-              <Icon path={mdiMail} size={1.2} />
-              Email Address:
-            </span>
-            <a href="mailto:alfredfaith35@gmail.com">
-              {' '}
-              alfredfaith35@gmail.com
-            </a>
-          </p>
-        </address>
-        <div className="copyright">
-          <span>&copy; {new Date().getFullYear()}. All Rights Reserved</span>
-          <a
-            href="https://github.com/TonyFred-code"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon path={mdiGithub} size={1} color="inherit" />
-          </a>
-        </div>
-      </section>
+        </section>
+        <section className="contact-info">
+          <h2 className={classNames(baseStyles.fontQuicksandBold)}>
+            Contact Details
+          </h2>
+          <address>
+            <p>
+              <span>
+                <Icon path={mdiPhone} size={1.2} />
+                Telephone:
+              </span>
+              <a href="tel:+2349112420253">0911-242-0253</a>
+            </p>
+            <p>
+              <span>
+                <Icon path={mdiMail} size={1.2} />
+                Email Address:
+              </span>
+              <a href="mailto:alfredfaith35@gmail.com">
+                {' '}
+                alfredfaith35@gmail.com
+              </a>
+            </p>
+          </address>
+        </section>
+      </div>
+      <div className="copyright">
+        <span>&copy; {new Date().getFullYear()}. All Rights Reserved</span>
+        <a
+          href="https://github.com/TonyFred-code"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={classNames(
+            baseStyles.uFlex,
+            baseStyles.uAlignCenter,
+            baseStyles.uJustifyCenter
+          )}
+        >
+          <Icon path={mdiGithub} size={1.2} color="white" />
+        </a>
+      </div>
     </FooterWrapper>
   );
 }
