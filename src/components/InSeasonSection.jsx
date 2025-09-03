@@ -92,16 +92,7 @@ export default function InSeasonSection({ fruits, loading }) {
       ) : (
         <div className="fruits-container">
           {fruits.map((fruit) => {
-            return (
-              <ProductCard
-                key={fruit.id}
-                imageAlt={fruit.name}
-                imageSrc={fruit.image_url}
-                name={fruit.name}
-                price={fruit.pricing.price_per_unit}
-                category={randomArrayElement(fruit.categories)}
-              />
-            );
+            return <ProductCard key={fruit.id} fruitData={fruit} />;
           })}
         </div>
       )}

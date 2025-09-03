@@ -1,4 +1,4 @@
-import { string, number, bool } from 'prop-types';
+import { string, number, bool, oneOf, shape } from 'prop-types';
 import className from 'classnames';
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
@@ -6,12 +6,15 @@ import ImageFiller from 'react-image-filler';
 import Icon from '@mdi/react';
 import { mdiCart, mdiHeart } from '@mdi/js';
 import classNames from 'classnames';
+import randomArrayElement from '@/helpers/randomArrayElement.js';
 
 const ProductCardWrapper = styled.div`
   & {
     position: relative;
     border: 1px solid #eee;
     width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
   .image-container {
@@ -115,14 +118,13 @@ const ProductCardWrapper = styled.div`
   }
 `;
 
-export default function ProductCard({
-  imageSrc,
-  imageAlt,
-  name,
-  price,
-  wishlist,
-  category,
-}) {
+const OnSaleProductCardWrapper = styled(ProductCardWrapper)``;
+
+export default function ProductCard({ fruitData, type = 'default' }) {
+  const { id, imageAlt, imageSrc, name, pricing, categories } = fruitData;
+  const category = randomArrayElement(categories);
+  const { price_per_unit } = pricing;
+
   return (
     <ProductCardWrapper>
       <div className="image-container">
@@ -152,7 +154,7 @@ export default function ProductCard({
           {new Intl.NumberFormat('en-NG', {
             style: 'currency',
             currency: 'NGN',
-          }).format(price)}
+          }).format(price_per_unit)}
         </p>
         <button type="button" className="add-to-cart">
           <Icon path={mdiCart} size={1.5} />
@@ -164,10 +166,13 @@ export default function ProductCard({
 }
 
 ProductCard.propTypes = {
-  imageAlt: string,
-  imageSrc: string,
-  name: string,
-  price: number,
-  wishlist: bool,
-  category: string,
+  fruitData: shape({
+    imageAlt: string,
+    imageSrc: string,
+    name: string,
+    price: number,
+    wishlist: bool,
+    category: string,
+  }),
+  type: oneOf(['default', 'sale', 'trending']),
 };

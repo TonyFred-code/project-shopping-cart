@@ -87,12 +87,7 @@ export default function OnSaleSection({ fruits, loading }) {
             return (
               <ProductCard
                 key={fruit.id}
-                imageAlt={fruit.name}
-                imageSrc={fruit.image_url}
-                name={fruit.name}
-                price={fruit.pricing.price_per_unit}
-                category={randomArrayElement(fruit.categories)}
-                type="sale"
+                fruitData={fruit}
                 //TODO: figure out a way to create sale product card
               />
             );
