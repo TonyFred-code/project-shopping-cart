@@ -4,7 +4,8 @@ import HeroImage from '../assets/hero-image.jpeg';
 
 const HeroSectionWrapper = styled.section`
   .hero-section {
-    height: calc(100dvh - 30px);
+    height: 100dvh;
+    margin-top: -20px;
   }
 
   & .bg-image {
@@ -60,7 +61,6 @@ const HeroSectionWrapper = styled.section`
 
   @media screen and (min-width: 768px) {
     .hero-section {
-      height: calc(100dvh - 50px);
     }
 
     & .bg-image {
@@ -75,7 +75,6 @@ const HeroSectionWrapper = styled.section`
 
   @media screen and (min-width: 1024px) {
     .hero-section {
-      height: calc(100dvh - 80px);
     }
 
     & .bg-text {
