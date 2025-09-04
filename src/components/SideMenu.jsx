@@ -152,7 +152,6 @@ export default function SideMenu({ open, toggleOpen, categories }) {
 
   const navItems = [
     { label: 'All Products', icon: mdiStore, dropDown: false, to: '/shop' },
-    { label: 'Categories', icon: mdiFruitCherries, dropDown: true, to: '/' },
     { label: 'On Sale', icon: mdiSale, dropDown: false, to: '/' },
     {
       label: 'In Season',
@@ -168,75 +167,28 @@ export default function SideMenu({ open, toggleOpen, categories }) {
       <div className="content">
         <header>
           <h1 className={classNames(baseStyles.fontQuicksandBold)}>
-            fruit.era
+            <Link to={'/'}>fruit.era</Link>
           </h1>
         </header>
         <nav>
           <ul>
             {navItems.map((item, index) => {
-              if (!item.dropDown) {
-                return (
-                  <li key={index}>
-                    <Link
-                      to={item.to}
-                      className={classNames(
-                        baseStyles.uFlex,
-                        baseStyles.uAlignCenter,
-                        baseStyles.uGapD5r,
-                        baseStyles.uCursorPointer,
-                        baseStyles.uPadding1r
-                      )}
-                      onClick={toggleOpen}
-                    >
-                      <Icon path={item.icon} size={1.5} />
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              }
-
               return (
-                <li key={index} className="dropdown">
-                  <header
-                    onClick={toggleSubCategoryOpen}
+                <li key={index}>
+                  <Link
+                    to={item.to}
                     className={classNames(
                       baseStyles.uFlex,
                       baseStyles.uAlignCenter,
                       baseStyles.uGapD5r,
-                      baseStyles.uJustifySpaceBetween,
                       baseStyles.uCursorPointer,
                       baseStyles.uPadding1r
                     )}
+                    onClick={toggleOpen}
                   >
-                    <div
-                      className={classNames(
-                        baseStyles.uFlex,
-                        baseStyles.uAlignCenter,
-                        baseStyles.uGapD5r
-                      )}
-                    >
-                      <Icon path={item.icon} size={1.5} />
-                      <span>{item.label}</span>
-                    </div>
-                    <Icon
-                      path={mdiChevronUp}
-                      className="caret"
-                      size={1.5}
-                      rotate={subCategoryOpen ? 0 : 180}
-                    />
-                  </header>
-                  <div className="dropdown-content">
-                    <div>
-                      {categories.map((catItem) => {
-                        const { name, id } = catItem;
-                        return (
-                          <span key={id} className="dropdown-item">
-                            {name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
+                    <Icon path={item.icon} size={1.5} />
+                    <span>{item.label}</span>
+                  </Link>
                 </li>
               );
             })}

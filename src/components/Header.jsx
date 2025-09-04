@@ -28,6 +28,11 @@ const HeaderWrapper = styled.header`
     font-size: 2.4rem;
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   button {
     background-color: transparent;
     border: none;
@@ -183,7 +188,9 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
           <span className="btn-icon-text">Menu</span>
         </button>
 
-        <h1 className={classNames(baseStyles.fontQuicksandBold)}>fruit.era</h1>
+        <h1 className={classNames(baseStyles.fontQuicksandBold)}>
+          <Link to={'/'}>fruit.era</Link>
+        </h1>
 
         <div
           className={classNames(
@@ -201,17 +208,7 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
             {/*TODO: SHOW BADGES */}
             <span className="btn-icon-text">Cart</span>
           </button>
-          <button
-            type="button"
-            className={classNames(
-              baseStyles.uGapD3r,
-              baseStyles.uCursorPointer,
-              'search-btn'
-            )}
-          >
-            <Icon path={mdiMagnify} size={1.35} />
-            <span className="btn-icon-text">Search</span>
-          </button>
+          {/* TODO: ADD PRODUCT SEARCHING */}
         </div>
       </div>
       <nav>
@@ -228,47 +225,6 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
             <Link to={'/shop'}>
               <span>shop</span>
             </Link>
-          </li>
-          <li className="dropdown">
-            <header
-              onClick={toggleSubCategoryOpen}
-              className={classNames(
-                baseStyles.uFlex,
-                baseStyles.uAlignCenter,
-                baseStyles.uGapD5r,
-                baseStyles.uJustifySpaceBetween,
-                baseStyles.uCursorPointer,
-                baseStyles.uPadding1r
-              )}
-            >
-              <div
-                className={classNames(
-                  baseStyles.uFlex,
-                  baseStyles.uAlignCenter,
-                  baseStyles.uGapD5r
-                )}
-              >
-                <span>Categories</span>
-              </div>
-              <Icon
-                path={mdiChevronUp}
-                className="caret"
-                size={1.5}
-                rotate={subCategoryOpen ? 0 : 180}
-              />
-            </header>
-            <div className="dropdown-content">
-              <ul>
-                {CATEGORIES.map((catItem) => {
-                  const { name, id } = catItem;
-                  return (
-                    <li key={id} className="dropdown-item">
-                      {name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
           </li>
           <li>
             <Link to={'/#on-sale'}>
