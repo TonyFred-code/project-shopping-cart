@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HeroSection from '@/components/HeroSection.jsx';
 import OnSaleSection from '@/components/OnSaleSection.jsx';
@@ -7,6 +7,7 @@ import useFruitsData from '@/helpers/useFruitsData.jsx';
 import { fruitInSeason, fruitOnSale } from '@/helpers/fruits-helper.js';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
+import ProductDetails from '@/components/ProductDetails.jsx';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -20,6 +21,8 @@ const HomePageWrapper = styled.div`
 export default function HomePage() {
   const location = useLocation();
   const fruitsData = useFruitsData();
+  const [openItemDetails, setOpenItemDetails] = useState(false);
+  const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
 
   const onSaleFruits = fruitsData.fruits.filter((d) => {
     return fruitOnSale(d);
@@ -28,6 +31,18 @@ export default function HomePage() {
   const inSeasonFruits = fruitsData.fruits.filter((d) => {
     return fruitInSeason(d);
   });
+
+  function handleShowItemDetails(fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (data) => data.id === fruitId
+    )[0];
+    setDisplayedItemDetails(fruitData);
+    setOpenItemDetails(true);
+  }
+
+  function toggleOpenItemDetails() {
+    setOpenItemDetails(!openItemDetails);
+  }
 
   useEffect(() => {
     if (location.hash) {
@@ -45,8 +60,23 @@ export default function HomePage() {
     <HomePageWrapper>
       <LayoutWrapper>
         <HeroSection />
-        <OnSaleSection fruits={onSaleFruits} loading={fruitsData.loading} />
-        <InSeasonSection fruits={inSeasonFruits} loading={fruitsData.loading} />
+        <OnSaleSection
+          fruits={onSaleFruits}
+          showProductDetails={handleShowItemDetails}
+          loading={fruitsData.loading}
+        />
+        <InSeasonSection
+          showProductDetails={handleShowItemDetails}
+          fruits={inSeasonFruits}
+          loading={fruitsData.loading}
+        />
+        {displayedItemDetails && (
+          <ProductDetails
+            fruitData={displayedItemDetails}
+            open={openItemDetails}
+            toggleOpen={toggleOpenItemDetails}
+          />
+        )}
       </LayoutWrapper>
     </HomePageWrapper>
   );

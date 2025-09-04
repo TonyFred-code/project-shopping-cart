@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import Icon from '@mdi/react';
 import { mdiFruitGrapes } from '@mdi/js';
-import { array, bool } from 'prop-types';
+import { array, bool, func } from 'prop-types';
 import { ThreeDots } from 'react-loader-spinner';
 import ProductCard from './ProductCard.jsx';
 import randomArrayElement from '@/helpers/randomArrayElement.js';
@@ -29,7 +29,7 @@ const OnSaleSectionWrapper = styled.section`
     font-size: 2.5rem;
     border-bottom: 2px solid #ddd;
     border-top: 2px solid #ddd;
-    width: min(75%, 300px);
+    width: min(85%, 320px);
   }
   .fruits-container {
     display: grid;
@@ -52,7 +52,8 @@ const OnSaleSectionWrapper = styled.section`
   }
 `;
 
-export default function OnSaleSection({ fruits, loading }) {
+export default function OnSaleSection({ fruits, showProductDetails, loading }) {
+  // console.log(showProductDetails);
   return (
     <OnSaleSectionWrapper id="on-sale">
       <h2
@@ -88,6 +89,7 @@ export default function OnSaleSection({ fruits, loading }) {
               <ProductCard
                 key={fruit.id}
                 fruitData={fruit}
+                showProductDetails={showProductDetails}
                 //TODO: figure out a way to create sale product card
               />
             );
@@ -98,4 +100,8 @@ export default function OnSaleSection({ fruits, loading }) {
   );
 }
 
-OnSaleSection.propTypes = { fruits: array, loading: bool };
+OnSaleSection.propTypes = {
+  fruits: array,
+  loading: bool,
+  showProductDetails: func,
+};

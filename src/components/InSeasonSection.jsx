@@ -7,7 +7,7 @@ import { fruitInSeason } from '@/helpers/fruits-helper.js';
 import Icon from '@mdi/react';
 import { mdiFire } from '@mdi/js';
 import { ThreeDots } from 'react-loader-spinner';
-import { array, arrayOf, bool, object } from 'prop-types';
+import { array, arrayOf, bool, func, object } from 'prop-types';
 import ProductCard from './ProductCard.jsx';
 import randomArrayElement from '@/helpers/randomArrayElement.js';
 
@@ -30,8 +30,9 @@ const InSeasonSectionWrapper = styled.section`
     font-size: 2.5rem;
     border-bottom: 2px solid #ddd;
     border-top: 2px solid #ddd;
-    width: min(75%, 300px);
+    width: min(85%, 320px);
   }
+
   .fruits-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -53,7 +54,11 @@ const InSeasonSectionWrapper = styled.section`
   }
 `;
 
-export default function InSeasonSection({ fruits, loading }) {
+export default function InSeasonSection({
+  fruits,
+  loading,
+  showProductDetails,
+}) {
   // const quantity = fruits.length;
 
   return (
@@ -67,7 +72,7 @@ export default function InSeasonSection({ fruits, loading }) {
           baseStyles.uGap1r
         )}
       >
-        <Icon path={mdiFire} size={2.5} />
+        <Icon path={mdiFire} color="red" size={2.5} />
         <span>Trending Picks</span>
       </h2>
       {loading ? (
@@ -92,7 +97,13 @@ export default function InSeasonSection({ fruits, loading }) {
       ) : (
         <div className="fruits-container">
           {fruits.map((fruit) => {
-            return <ProductCard key={fruit.id} fruitData={fruit} />;
+            return (
+              <ProductCard
+                key={fruit.id}
+                showProductDetails={showProductDetails}
+                fruitData={fruit}
+              />
+            );
           })}
         </div>
       )}
@@ -103,4 +114,5 @@ export default function InSeasonSection({ fruits, loading }) {
 InSeasonSection.propTypes = {
   fruits: array,
   loading: bool,
+  showProductDetails: func,
 };
