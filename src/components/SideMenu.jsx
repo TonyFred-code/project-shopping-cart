@@ -149,15 +149,14 @@ export default function SideMenu({ open, toggleOpen }) {
   }
 
   const navItems = [
-    { label: 'All Products', icon: mdiStore, dropDown: false, to: '/shop' },
-    { label: 'On Sale', icon: mdiSale, dropDown: false, to: '/' },
+    { label: 'All Products', icon: mdiStore, to: '/shop' },
+    { label: 'On Sale', icon: mdiSale, to: '/#on-sale' },
     {
       label: 'In Season',
       icon: mdiCalendarStarFourPoints,
-      dropDown: false,
       to: '/#in-season',
     },
-    { label: 'Wishlist', icon: mdiHeartCircle, dropDown: false, to: '/' },
+    { label: 'Wishlist', icon: mdiHeartCircle, to: '/' },
   ];
 
   return (
