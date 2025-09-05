@@ -1,7 +1,5 @@
 import {
   mdiCalendarStarFourPoints,
-  mdiChevronUp,
-  mdiFruitCherries,
   mdiGithub,
   mdiHeartCircle,
   mdiSale,
@@ -9,7 +7,7 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import classNames from 'classnames';
-import { array, bool, func } from 'prop-types';
+import { bool, func } from 'prop-types';
 import { useState } from 'react';
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
@@ -143,7 +141,7 @@ const SideMenuWrapper = styled.section`
   }
 `;
 
-export default function SideMenu({ open, toggleOpen, categories }) {
+export default function SideMenu({ open, toggleOpen }) {
   const [subCategoryOpen, setSubCategoryOpen] = useState(false);
 
   function toggleSubCategoryOpen() {
@@ -219,5 +217,4 @@ export default function SideMenu({ open, toggleOpen, categories }) {
 SideMenu.propTypes = {
   open: bool,
   toggleOpen: func,
-  categories: array,
 };
