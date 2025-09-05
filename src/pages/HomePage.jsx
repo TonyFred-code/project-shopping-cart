@@ -8,6 +8,7 @@ import { fruitInSeason, fruitOnSale } from '@/helpers/fruits-helper.js';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
+import useCartItems from '@/helpers/useCartItems.jsx';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -23,6 +24,7 @@ export default function HomePage() {
   const fruitsData = useFruitsData();
   const [openItemDetails, setOpenItemDetails] = useState(false);
   const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
+  const cartItemsData = useCartItems();
 
   const onSaleFruits = fruitsData.fruits.filter((d) => {
     return fruitOnSale(d);
@@ -58,7 +60,7 @@ export default function HomePage() {
 
   return (
     <HomePageWrapper>
-      <LayoutWrapper>
+      <LayoutWrapper cartItemsCount={cartItemsData.cartItems.length}>
         <HeroSection />
         <OnSaleSection
           fruits={onSaleFruits}

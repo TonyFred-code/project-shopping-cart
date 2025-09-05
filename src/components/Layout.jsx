@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from './Header.jsx';
 import SideMenu from './SideMenu.jsx';
 import Footer from './Footer.jsx';
-import { node } from 'prop-types';
+import { node, number } from 'prop-types';
 
 const Wrapper = styled.div`
   & {
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function LayoutWrapper({ children }) {
+export default function LayoutWrapper({ children, cartItemsCount }) {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
 
   function toggleSideMenuOpen() {
@@ -45,7 +45,10 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <Wrapper>
-      <Header toggleSideMenuOpen={toggleSideMenuOpen} />
+      <Header
+        toggleSideMenuOpen={toggleSideMenuOpen}
+        cartItemsCount={cartItemsCount}
+      />
       <main className="layout-main">{children}</main>
       <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <Footer />
@@ -54,5 +57,6 @@ export default function LayoutWrapper({ children }) {
 }
 
 LayoutWrapper.propTypes = {
+  cartItemsCount: number,
   children: node.isRequired,
 };
