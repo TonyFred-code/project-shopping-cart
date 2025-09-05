@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
 import Icon from '@mdi/react';
 import { mdiGithub, mdiMail, mdiPhone } from '@mdi/js';
+import { Link } from 'react-router-dom';
 
 const FooterWrapper = styled.footer`
   & {
@@ -16,6 +17,11 @@ const FooterWrapper = styled.footer`
     width: min(300px, 75%);
     padding: 1rem;
     font-size: 2.3rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   .footer-about {
@@ -74,7 +80,7 @@ export default function Footer() {
       <div className="footer-content">
         <section className="footer-about">
           <h2 className={classNames(baseStyles.fontQuicksandBold)}>
-            fruit.era
+            <Link to={'/'}>fruit.era</Link>
           </h2>
           <p>
             By providing a wide variety of locally grown and imported fruits, we
