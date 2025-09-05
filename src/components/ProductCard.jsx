@@ -1,4 +1,4 @@
-import { string, number, bool, oneOf, shape } from 'prop-types';
+import { string, number, bool, oneOf, shape, func } from 'prop-types';
 import className from 'classnames';
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
@@ -120,7 +120,11 @@ const ProductCardWrapper = styled.div`
 
 const OnSaleProductCardWrapper = styled(ProductCardWrapper)``;
 
-export default function ProductCard({ fruitData, type = 'default' }) {
+export default function ProductCard({
+  fruitData,
+  showProductDetails,
+  type = 'default',
+}) {
   const { id, imageAlt, imageSrc, name, pricing, categories } = fruitData;
   const category = randomArrayElement(categories);
   const { price_per_unit } = pricing;
@@ -156,7 +160,13 @@ export default function ProductCard({ fruitData, type = 'default' }) {
             currency: 'NGN',
           }).format(price_per_unit)}
         </p>
-        <button type="button" className="add-to-cart">
+        <button
+          type="button"
+          className="add-to-cart"
+          onClick={() => {
+            showProductDetails(id);
+          }}
+        >
           <Icon path={mdiCart} size={1.5} />
           <span>Add to cart</span>
         </button>
@@ -175,4 +185,5 @@ ProductCard.propTypes = {
     category: string,
   }),
   type: oneOf(['default', 'sale', 'trending']),
+  showProductDetails: func,
 };
