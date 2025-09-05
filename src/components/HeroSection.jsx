@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import HeroImageLarge from '../assets/hero-image-large.jpeg';
 import HeroImage from '../assets/hero-image.jpeg';
+import Icon from '@mdi/react';
+import { mdiInformation } from '@mdi/js';
+import classNames from 'classnames';
+import baseStyles from '../styles/base.module.css';
 
 const HeroSectionWrapper = styled.section`
   .hero-section {
@@ -51,12 +55,12 @@ const HeroSectionWrapper = styled.section`
     font-size: 2.5rem;
     border-bottom: 2px solid #ddd;
     border-top: 2px solid #ddd;
-    width: min(75%, 300px);
+    width: min(85%, 320px);
     padding: 1rem;
   }
 
   .about-us-section p {
-    padding: 0 1rem;
+    padding: 1rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -96,7 +100,17 @@ export default function HeroSection() {
         </div>
       </div>
       <section className="about-us-section">
-        <h2 className="title">About Us</h2>
+        <h2
+          className={classNames(
+            baseStyles.uAlignCenter,
+            baseStyles.uFlex,
+            baseStyles.uGap1r,
+            'title'
+          )}
+        >
+          <Icon path={mdiInformation} size={2} color="blue" />
+          <span>About Us</span>
+        </h2>
         <p>
           We are passionate about bringing fresh, healthy, and affordable fruits
           closer to you. Our mission is to make it easier for everyone to enjoy
