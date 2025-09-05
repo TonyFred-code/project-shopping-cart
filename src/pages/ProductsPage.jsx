@@ -128,7 +128,7 @@ export default function ProductsPage() {
     <ProductsPageWrapper>
       <LayoutWrapper>
         <div className="header-container">
-          <h1 className={(classNames(baseStyles.fontQuicksandBold), 'title')}>
+          <h1 className={classNames(baseStyles.fontQuicksandBold, 'title')}>
             SHOP
           </h1>
           <div className="order-option-container">
