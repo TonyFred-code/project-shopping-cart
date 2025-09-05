@@ -5,7 +5,7 @@ export async function fetchCategories() {
   const CACHE_KEY = 'categories_cache';
   const CACHE_TIME_KEY = 'categories_cache_time';
   const CACHE_EXPIRATION = 2 * 60 * 60 * 1000; // 2 hours
-  const LOADER_DURATION = randomInteger(799, 1099);
+  const LOADER_DURATION = randomInteger(500, 700);
 
   // utility: sleep
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

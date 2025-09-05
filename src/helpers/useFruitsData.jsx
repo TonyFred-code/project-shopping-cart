@@ -10,7 +10,7 @@ export default function useFruitsData() {
     const CACHE_KEY = 'fruits_cache';
     const CACHE_TIME_KEY = 'fruits_cache_time';
     const CACHE_EXPIRATION = 2 * 60 * 60 * 1000; // 2 hours in milliseconds;
-    const LOADER_DURATION = randomInteger(799, 1099);
+    const LOADER_DURATION = randomInteger(500, 799);
 
     async function fetchFruitsData() {
       const response = await fetch('/data.json');
