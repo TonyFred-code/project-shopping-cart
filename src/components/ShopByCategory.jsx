@@ -4,13 +4,16 @@ import { array, bool } from 'prop-types';
 import classNames from 'classnames';
 import { ThreeDots } from 'react-loader-spinner';
 import ImageFiller from 'react-image-filler';
+import Icon from '@mdi/react';
+import { mdiFileTableBoxMultipleOutline } from '@mdi/js';
 
 const ShopByCategoryWrapper = styled.section`
   h2 {
     font-size: 2.5rem;
     border-bottom: 2px solid #ddd;
     border-top: 2px solid #ddd;
-    width: min(75%, 300px);
+    width: min(75%, 320px);
+    padding: 1rem;
   }
 
   .categories-container {
@@ -53,8 +56,17 @@ const ShopByCategoryWrapper = styled.section`
 export default function ShopByCategory({ categories, loading }) {
   return (
     <ShopByCategoryWrapper>
-      <h2 className={classNames(baseStyles.fontQuicksandBold)}>
-        Shop by Categories
+      <h2
+        className={classNames(
+          baseStyles.fontQuicksandBold,
+          baseStyles.uPadding1r,
+          baseStyles.uFlex,
+          baseStyles.uAlignCenter,
+          baseStyles.uGap1r
+        )}
+      >
+        <Icon path={mdiFileTableBoxMultipleOutline} color="green" size={2} />
+        <span>Categories</span>
       </h2>
       {loading ? (
         <div className="loading-container">
