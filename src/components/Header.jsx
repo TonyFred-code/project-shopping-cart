@@ -1,11 +1,10 @@
-import { mdiCart, mdiChevronUp, mdiMagnify, mdiMenu } from '@mdi/js';
+import { mdiCart, mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
-import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
+import { func, number } from 'prop-types';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import CATEGORIES from '../helpers/categories.json';
-import { useState } from 'react';
+import baseStyles from '../styles/base.module.css';
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   & {
@@ -25,6 +24,11 @@ const HeaderWrapper = styled.header`
 
   h1 {
     font-size: 2.4rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   button {
@@ -105,56 +109,18 @@ const HeaderWrapper = styled.header`
       padding: 0.5rem 0;
       border-bottom: 1.5px solid #74bf04;
       width: 65%;
+      text-decoration: none;
+      color: inherit;
     }
 
     li > *:first-child:hover {
       font-weight: bold;
       border-color: #fff;
     }
-
-    .dropdown {
-      align-items: flex-start;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .dropdown-content {
-      height: ${(props) => (props.$subCategoryOpen ? '175px' : '0px')};
-      overflow: hidden auto;
-      transition: all 0.35s ease-in-out;
-      flex-direction: column;
-      display: block;
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      top: 100%;
-      width: 75%;
-    }
-
-    .dropdown-content ul {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dropdown-content li {
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-
-    .dropdown-content li:hover {
-      font-weight: bold;
-      border-color: #fff;
-    }
   }
 `;
 
-export default function Header({ toggleSideMenuOpen }) {
-  const [subCategoryOpen, setSubCategoryOpen] = useState(false);
-
-  function toggleSubCategoryOpen() {
-    setSubCategoryOpen(!subCategoryOpen);
-  }
-
+export default function Header({ cartItemsCount, toggleSideMenuOpen }) {
   return (
     <HeaderWrapper
       className={classNames(
@@ -162,7 +128,6 @@ export default function Header({ toggleSideMenuOpen }) {
         baseStyles.uFlexCol,
         baseStyles.uGap1r
       )}
-      $subCategoryOpen={subCategoryOpen}
     >
       <div
         className={classNames(
@@ -180,7 +145,9 @@ export default function Header({ toggleSideMenuOpen }) {
           <span className="btn-icon-text">Menu</span>
         </button>
 
-        <h1 className={classNames(baseStyles.fontQuicksandBold)}>fruit.era</h1>
+        <h1 className={classNames(baseStyles.fontQuicksandBold)}>
+          <Link to={'/'}>fruit.era</Link>
+        </h1>
 
         <div
           className={classNames(
@@ -190,14 +157,16 @@ export default function Header({ toggleSideMenuOpen }) {
             baseStyles.uGap1r
           )}
         >
-          <button type="button" className={classNames(baseStyles.uGapD3r)}>
+          <button
+            type="button"
+            className={classNames(baseStyles.uGapD3r, 'cart-btn')}
+          >
+            <span className="cart-badge">{cartItemsCount}</span>
             <Icon path={mdiCart} size={1.35} />
+            {/*TODO: SHOW BADGES */}
             <span className="btn-icon-text">Cart</span>
           </button>
-          <button type="button" className={classNames(baseStyles.uGapD3r)}>
-            <Icon path={mdiMagnify} size={1.35} />
-            <span className="btn-icon-text">Search</span>
-          </button>
+          {/* TODO: ADD PRODUCT SEARCHING */}
         </div>
       </div>
       <nav>
@@ -211,54 +180,19 @@ export default function Header({ toggleSideMenuOpen }) {
           )}
         >
           <li>
-            <span>shop</span>
-          </li>
-          <li className="dropdown">
-            <header
-              onClick={toggleSubCategoryOpen}
-              className={classNames(
-                baseStyles.uFlex,
-                baseStyles.uAlignCenter,
-                baseStyles.uGapD5r,
-                baseStyles.uJustifySpaceBetween,
-                baseStyles.uCursorPointer,
-                baseStyles.uPadding1r
-              )}
-            >
-              <div
-                className={classNames(
-                  baseStyles.uFlex,
-                  baseStyles.uAlignCenter,
-                  baseStyles.uGapD5r
-                )}
-              >
-                <span>Categories</span>
-              </div>
-              <Icon
-                path={mdiChevronUp}
-                className="caret"
-                size={1.5}
-                rotate={subCategoryOpen ? 0 : 180}
-              />
-            </header>
-            <div className="dropdown-content">
-              <ul>
-                {CATEGORIES.map((catItem) => {
-                  const { name, id } = catItem;
-                  return (
-                    <li key={id} className="dropdown-item">
-                      {name}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <Link to={'/shop'}>
+              <span>shop</span>
+            </Link>
           </li>
           <li>
-            <span>on sale</span>
+            <Link to={'/#on-sale'}>
+              <span>on sale</span>
+            </Link>
           </li>
           <li>
-            <span>in season</span>
+            <Link to={'/#in-season'}>
+              <span>in season</span>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -267,5 +201,6 @@ export default function Header({ toggleSideMenuOpen }) {
 }
 
 Header.propTypes = {
-  toggleSideMenuOpen: PropTypes.func,
+  toggleSideMenuOpen: func,
+  cartItemsCount: number,
 };

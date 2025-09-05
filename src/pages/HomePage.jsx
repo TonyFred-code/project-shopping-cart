@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Header from '@/components/Header.jsx';
 import HeroSection from '@/components/HeroSection.jsx';
-import SideMenu from '@/components/SideMenu.jsx';
 import OnSaleSection from '@/components/OnSaleSection.jsx';
 import InSeasonSection from '@/components/InSeasonSection.jsx';
+import useFruitsData from '@/helpers/useFruitsData.jsx';
+import { fruitInSeason, fruitOnSale } from '@/helpers/fruits-helper.js';
+import LayoutWrapper from '@/components/Layout.jsx';
+import { useLocation } from 'react-router-dom';
+import ProductDetails from '@/components/ProductDetails.jsx';
+import useCartItems from '@/helpers/useCartItems.jsx';
+// import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
   & {
@@ -15,19 +20,66 @@ const HomePageWrapper = styled.div`
 `;
 
 export default function HomePage() {
-  const [sideMenuOpen, setSideMenuOpen] = useState(false);
+  const location = useLocation();
+  const fruitsData = useFruitsData();
+  const [openItemDetails, setOpenItemDetails] = useState(false);
+  const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
+  const cartItemsData = useCartItems();
 
-  function toggleSideMenuOpen() {
-    setSideMenuOpen(!sideMenuOpen);
+  const onSaleFruits = fruitsData.fruits.filter((d) => {
+    return fruitOnSale(d);
+  });
+
+  const inSeasonFruits = fruitsData.fruits.filter((d) => {
+    return fruitInSeason(d);
+  });
+
+  function handleShowItemDetails(fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (data) => data.id === fruitId
+    )[0];
+    setDisplayedItemDetails(fruitData);
+    setOpenItemDetails(true);
   }
+
+  function toggleOpenItemDetails() {
+    setOpenItemDetails(!openItemDetails);
+  }
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.replace('#', ''));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
+  // ! REFACTOR FAILED FETCH
+  if (fruitsData.error) return <div> FAILED TO FETCH</div>;
 
   return (
     <HomePageWrapper>
-      <Header toggleSideMenuOpen={toggleSideMenuOpen} />
-      <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
-      <HeroSection />
-      <OnSaleSection />
-      <InSeasonSection />
+      <LayoutWrapper cartItemsCount={cartItemsData.cartItems.length}>
+        <HeroSection />
+        <OnSaleSection
+          fruits={onSaleFruits}
+          showProductDetails={handleShowItemDetails}
+          loading={fruitsData.loading}
+        />
+        <InSeasonSection
+          showProductDetails={handleShowItemDetails}
+          fruits={inSeasonFruits}
+          loading={fruitsData.loading}
+        />
+        {displayedItemDetails && (
+          <ProductDetails
+            fruitData={displayedItemDetails}
+            open={openItemDetails}
+            toggleOpen={toggleOpenItemDetails}
+          />
+        )}
+      </LayoutWrapper>
     </HomePageWrapper>
   );
 }

@@ -1,0 +1,933 @@
+[
+  {
+    "id": "1",
+    "name": "Mango",
+    "description": "A juicy tropical fruit with a sweet taste, rich in vitamins and often enjoyed fresh or in smoothies.",
+    "nutritional_information": {
+      "calories": "60 kcal",
+      "carbohydrates": "15g",
+      "fiber": "1.6g",
+      "sugar": "14g",
+      "protein": "0.8g",
+      "vitamin_c": "36mg",
+      "potassium": "168mg",
+      "calcium": "11mg"
+    },
+    "colors": ["Yellow", "Green", "Orange"],
+    "categories": ["Tropical", "Stone Fruit"],
+    "season_availability": ["March", "April", "May", "June"],
+    "stock": 200,
+    "image_url": "https://example.com/mango.jpg",
+    "gallery_urls": [
+      "https://example.com/mango1.jpg",
+      "https://example.com/mango2.jpg",
+      "https://example.com/mango3.jpg"
+    ],
+    "uses": ["Fresh", "Juices", "Smoothies", "Desserts"],
+    "allergy_information": "May cause allergic reactions in individuals sensitive to urushiol (found in poison ivy).",
+    "pricing": {
+      "unit": "Each",
+      "price_per_unit": 150,
+      "bulk_options": [
+        {
+          "quantity": 6,
+          "discounted_price_per_unit": 130
+        },
+        {
+          "quantity": 12,
+          "discounted_price_per_unit": 120
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "2",
+    "name": "Pineapple",
+    "description": "A tropical fruit with a spiky exterior and sweet, tangy yellow flesh, often enjoyed fresh or in juices.",
+    "nutritional_information": {
+      "calories": "50 kcal",
+      "carbohydrates": "13g",
+      "fiber": "1.4g",
+      "sugar": "10g",
+      "protein": "0.5g",
+      "vitamin_c": "47.8mg",
+      "potassium": "109mg",
+      "calcium": "13mg"
+    },
+    "colors": ["Yellow", "Green"],
+    "categories": ["Tropical"],
+    "season_availability": ["All year round"],
+    "stock": 150,
+    "image_url": "https://example.com/pineapple.jpg",
+    "gallery_urls": [
+      "https://example.com/pineapple1.jpg",
+      "https://example.com/pineapple2.jpg",
+      "https://example.com/pineapple3.jpg"
+    ],
+    "uses": ["Fresh", "Juices", "Desserts", "Cooking"],
+    "allergy_information": "May cause irritation to sensitive individuals due to bromelain content.",
+    "pricing": {
+      "unit": "Each",
+      "price_per_unit": 500,
+      "bulk_options": [
+        {
+          "quantity": 3,
+          "discounted_price_per_unit": 450
+        },
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 400
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "3",
+    "name": "Pawpaw",
+    "description": "A tropical fruit with a soft, sweet orange flesh, often consumed fresh or blended into smoothies.",
+    "nutritional_information": {
+      "calories": "43 kcal",
+      "carbohydrates": "11g",
+      "fiber": "1.7g",
+      "sugar": "7.8g",
+      "protein": "0.5g",
+      "vitamin_c": "60.9mg",
+      "potassium": "182mg",
+      "calcium": "20mg"
+    },
+    "colors": ["Orange", "Green"],
+    "categories": ["Tropical"],
+    "season_availability": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "November",
+      "December"
+    ],
+    "stock": 120,
+    "image_url": "https://example.com/pawpaw.jpg",
+    "gallery_urls": [
+      "https://example.com/pawpaw1.jpg",
+      "https://example.com/pawpaw2.jpg",
+      "https://example.com/pawpaw3.jpg"
+    ],
+    "uses": ["Fresh", "Smoothies", "Salads", "Juices"],
+    "allergy_information": "Rarely causes allergies; latex-allergic individuals may react.",
+    "pricing": {
+      "unit": "Each",
+      "price_per_unit": 400,
+      "bulk_options": [
+        {
+          "quantity": 3,
+          "discounted_price_per_unit": 350
+        },
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 300
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "4",
+    "name": "Banana",
+    "description": "A sweet and creamy fruit rich in potassium, enjoyed fresh or as an ingredient in various recipes.",
+    "nutritional_information": {
+      "calories": "89 kcal",
+      "carbohydrates": "23g",
+      "fiber": "2.6g",
+      "sugar": "12g",
+      "protein": "1.1g",
+      "vitamin_c": "8.7mg",
+      "potassium": "358mg",
+      "calcium": "5mg"
+    },
+    "colors": ["Yellow", "Green"],
+    "categories": ["Tropical"],
+    "season_availability": ["All year round"],
+    "stock": 200,
+    "image_url": "https://example.com/banana.jpg",
+    "gallery_urls": [
+      "https://example.com/banana1.jpg",
+      "https://example.com/banana2.jpg",
+      "https://example.com/banana3.jpg"
+    ],
+    "uses": ["Fresh", "Baking", "Smoothies", "Snacks"],
+    "allergy_information": "Safe for most individuals; those with latex allergies should consume cautiously.",
+    "pricing": {
+      "unit": "Bunch",
+      "price_per_unit": 700,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 650
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 600
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "5",
+    "name": "Plantain",
+    "description": "A starchy fruit often cooked and consumed as a savory dish, popular in tropical regions.",
+    "nutritional_information": {
+      "calories": "122 kcal",
+      "carbohydrates": "32g",
+      "fiber": "2.3g",
+      "sugar": "14g",
+      "protein": "1.3g",
+      "vitamin_c": "18.4mg",
+      "potassium": "499mg",
+      "calcium": "3mg"
+    },
+    "colors": ["Green", "Yellow", "Black"],
+    "categories": ["Tropical"],
+    "season_availability": ["All year round"],
+    "stock": 180,
+    "image_url": "https://example.com/plantain.jpg",
+    "gallery_urls": [
+      "https://example.com/plantain1.jpg",
+      "https://example.com/plantain2.jpg",
+      "https://example.com/plantain3.jpg"
+    ],
+    "uses": ["Frying", "Boiling", "Roasting", "Baking"],
+    "allergy_information": "Safe for most individuals.",
+    "pricing": {
+      "unit": "Bunch",
+      "price_per_unit": 800,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 750
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 700
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "6",
+    "name": "Coconut",
+    "description": "A versatile fruit with a fibrous husk, hard shell, and sweet, refreshing water inside.",
+    "nutritional_information": {
+      "calories": "354 kcal",
+      "carbohydrates": "15g",
+      "fiber": "9g",
+      "sugar": "6g",
+      "protein": "3.3g",
+      "vitamin_c": "3.3mg",
+      "potassium": "356mg",
+      "calcium": "14mg"
+    },
+    "colors": ["Brown", "Green"],
+    "categories": ["Tropical"],
+    "season_availability": ["All year round"],
+    "stock": 100,
+    "image_url": "https://example.com/coconut.jpg",
+    "gallery_urls": [
+      "https://example.com/coconut1.jpg",
+      "https://example.com/coconut2.jpg",
+      "https://example.com/coconut3.jpg"
+    ],
+    "uses": ["Fresh", "Cooking", "Oil Extraction", "Baking"],
+    "allergy_information": "Safe for most individuals; rare coconut allergies may occur.",
+    "pricing": {
+      "unit": "Each",
+      "price_per_unit": 300,
+      "bulk_options": [
+        {
+          "quantity": 6,
+          "discounted_price_per_unit": 270
+        },
+        {
+          "quantity": 12,
+          "discounted_price_per_unit": 250
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "7",
+    "name": "Orange",
+    "description": "A juicy, tangy citrus fruit packed with vitamin C, widely consumed fresh or as juice.",
+    "nutritional_information": {
+      "calories": "47 kcal",
+      "carbohydrates": "12g",
+      "fiber": "2.4g",
+      "sugar": "9g",
+      "protein": "0.9g",
+      "vitamin_c": "53.2mg",
+      "potassium": "181mg",
+      "calcium": "40mg"
+    },
+    "colors": ["Orange"],
+    "categories": ["Citrus"],
+    "season_availability": ["October", "November", "December", "January"],
+    "stock": 250,
+    "image_url": "https://example.com/orange.jpg",
+    "gallery_urls": [
+      "https://example.com/orange1.jpg",
+      "https://example.com/orange2.jpg",
+      "https://example.com/orange3.jpg"
+    ],
+    "uses": ["Fresh", "Juices", "Cooking", "Baking"],
+    "allergy_information": "Safe for most individuals; citric acid may irritate sensitive mouths.",
+    "pricing": {
+      "unit": "Dozen",
+      "price_per_unit": 1200,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 1150
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 1100
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "8",
+    "name": "Lemon",
+    "description": "A tangy citrus fruit known for its vibrant flavor and versatility in culinary and medicinal uses.",
+    "nutritional_information": {
+      "calories": "29 kcal",
+      "carbohydrates": "9g",
+      "fiber": "2.8g",
+      "sugar": "2.5g",
+      "protein": "1.1g",
+      "vitamin_c": "53mg",
+      "potassium": "138mg",
+      "calcium": "26mg"
+    },
+    "colors": ["Yellow"],
+    "categories": ["Citrus"],
+    "season_availability": ["All year round"],
+    "stock": 180,
+    "image_url": "https://example.com/lemon.jpg",
+    "gallery_urls": [
+      "https://example.com/lemon1.jpg",
+      "https://example.com/lemon2.jpg",
+      "https://example.com/lemon3.jpg"
+    ],
+    "uses": ["Cooking", "Baking", "Drinks", "Preserving"],
+    "allergy_information": "Safe for most; citric acid can irritate sensitive mouths.",
+    "pricing": {
+      "unit": "Dozen",
+      "price_per_unit": 1000,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 950
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 900
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "9",
+    "name": "Lime",
+    "description": "A small, green citrus fruit known for its tart flavor and use in drinks and cooking.",
+    "nutritional_information": {
+      "calories": "30 kcal",
+      "carbohydrates": "11g",
+      "fiber": "2.8g",
+      "sugar": "1.1g",
+      "protein": "0.7g",
+      "vitamin_c": "29.1mg",
+      "potassium": "102mg",
+      "calcium": "33mg"
+    },
+    "colors": ["Green"],
+    "categories": ["Citrus"],
+    "season_availability": ["All year round"],
+    "stock": 200,
+    "image_url": "https://example.com/lime.jpg",
+    "gallery_urls": [
+      "https://example.com/lime1.jpg",
+      "https://example.com/lime2.jpg",
+      "https://example.com/lime3.jpg"
+    ],
+    "uses": ["Drinks", "Cooking", "Baking", "Seasoning"],
+    "allergy_information": "Safe for most; citric acid may cause irritation for some.",
+    "pricing": {
+      "unit": "Dozen",
+      "price_per_unit": 900,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 850
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 800
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "10",
+    "name": "Tangerine",
+    "description": "A small, sweet citrus fruit with a thin, easy-to-peel skin, loved for its juicy segments.",
+    "nutritional_information": {
+      "calories": "53 kcal",
+      "carbohydrates": "13.3g",
+      "fiber": "1.8g",
+      "sugar": "10.6g",
+      "protein": "0.8g",
+      "vitamin_c": "26.7mg",
+      "potassium": "166mg",
+      "calcium": "37mg"
+    },
+    "colors": ["Orange"],
+    "categories": ["Citrus"],
+    "season_availability": ["October", "November", "December", "January"],
+    "stock": 300,
+    "image_url": "https://example.com/tangerine.jpg",
+    "gallery_urls": [
+      "https://example.com/tangerine1.jpg",
+      "https://example.com/tangerine2.jpg",
+      "https://example.com/tangerine3.jpg"
+    ],
+    "uses": ["Snacks", "Juices", "Desserts", "Salads"],
+    "allergy_information": "Safe for most individuals; citric acid may irritate sensitive mouths.",
+    "pricing": {
+      "unit": "Dozen",
+      "price_per_unit": 1000,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 950
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 900
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "11",
+    "name": "Cashew",
+    "description": "A tropical fruit with a juicy, pear-shaped base and a nut attached at the top, loved for its unique flavor.",
+    "nutritional_information": {
+      "calories": "55 kcal",
+      "carbohydrates": "13.8g",
+      "fiber": "2.5g",
+      "sugar": "8.1g",
+      "protein": "0.8g",
+      "vitamin_c": "265mg",
+      "potassium": "270mg",
+      "calcium": "15mg"
+    },
+    "colors": ["Yellow", "Red"],
+    "categories": ["Tropical"],
+    "season_availability": ["February", "March", "April"],
+    "stock": 180,
+    "image_url": "https://example.com/cashew.jpg",
+    "gallery_urls": [
+      "https://example.com/cashew1.jpg",
+      "https://example.com/cashew2.jpg",
+      "https://example.com/cashew3.jpg"
+    ],
+    "uses": ["Fresh", "Juice Making", "Snacks"],
+    "allergy_information": "Safe for most, but may trigger nut allergies if cross-contaminated.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 150,
+      "bulk_options": [
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 140
+        },
+        {
+          "quantity": 20,
+          "discounted_price_per_unit": 130
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "12",
+    "name": "Watermelon",
+    "description": "A large, juicy fruit with a refreshing taste, commonly enjoyed fresh or in drinks.",
+    "nutritional_information": {
+      "calories": "30 kcal",
+      "carbohydrates": "7.6g",
+      "fiber": "0.4g",
+      "sugar": "6.2g",
+      "protein": "0.6g",
+      "vitamin_c": "8.1mg",
+      "potassium": "112mg",
+      "calcium": "7mg"
+    },
+    "colors": ["Green (rind)", "Red (flesh)", "Yellow (flesh)"],
+    "categories": ["Tropical"],
+    "season_availability": ["March", "April", "May", "June"],
+    "stock": 120,
+    "image_url": "https://example.com/watermelon.jpg",
+    "gallery_urls": [
+      "https://example.com/watermelon1.jpg",
+      "https://example.com/watermelon2.jpg",
+      "https://example.com/watermelon3.jpg"
+    ],
+    "uses": ["Fresh", "Juices", "Desserts", "Salads"],
+    "allergy_information": "Safe for most individuals; rare cases of oral allergy syndrome reported.",
+    "pricing": {
+      "unit": "Whole",
+      "price_per_unit": 2000,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 1900
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 1800
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "13",
+    "name": "Agbalumo",
+    "description": "A sweet-sour tropical fruit with a chewy skin and creamy pulp, enjoyed as a snack in West Africa.",
+    "nutritional_information": {
+      "calories": "67 kcal",
+      "carbohydrates": "16.6g",
+      "fiber": "3.3g",
+      "sugar": "10.4g",
+      "protein": "1.1g",
+      "vitamin_c": "25mg",
+      "potassium": "134mg",
+      "calcium": "21mg"
+    },
+    "colors": ["Orange", "Red"],
+    "categories": ["Tropical"],
+    "season_availability": ["December", "January", "February", "March"],
+    "stock": 250,
+    "image_url": "https://example.com/agbalumo.jpg",
+    "gallery_urls": [
+      "https://example.com/agbalumo1.jpg",
+      "https://example.com/agbalumo2.jpg",
+      "https://example.com/agbalumo3.jpg"
+    ],
+    "uses": ["Snacks", "Juices", "Local Desserts"],
+    "allergy_information": "Safe for most individuals; citric acid may cause minor irritation for some.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 50,
+      "bulk_options": [
+        {
+          "quantity": 20,
+          "discounted_price_per_unit": 45
+        },
+        {
+          "quantity": 50,
+          "discounted_price_per_unit": 40
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "14",
+    "name": "Guava",
+    "description": "A tropical fruit with a fragrant aroma, soft flesh, and small edible seeds, enjoyed fresh or in beverages.",
+    "nutritional_information": {
+      "calories": "68 kcal",
+      "carbohydrates": "14.3g",
+      "fiber": "5.4g",
+      "sugar": "8.9g",
+      "protein": "2.6g",
+      "vitamin_c": "228.3mg",
+      "potassium": "417mg",
+      "calcium": "18mg"
+    },
+    "colors": ["Green", "Yellow", "Pink (flesh)"],
+    "categories": ["Tropical"],
+    "season_availability": ["All year round"],
+    "stock": 300,
+    "image_url": "https://example.com/guava.jpg",
+    "gallery_urls": [
+      "https://example.com/guava1.jpg",
+      "https://example.com/guava2.jpg",
+      "https://example.com/guava3.jpg"
+    ],
+    "uses": ["Snacks", "Juices", "Jams", "Desserts"],
+    "allergy_information": "Generally safe; rare cases of sensitivity to guava pollen reported.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 80,
+      "bulk_options": [
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 75
+        },
+        {
+          "quantity": 20,
+          "discounted_price_per_unit": 70
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "15",
+    "name": "Avocado",
+    "description": "A creamy, nutrient-rich fruit with a mild flavor, commonly used in spreads, salads, and smoothies.",
+    "nutritional_information": {
+      "calories": "160 kcal",
+      "carbohydrates": "8.5g",
+      "fiber": "6.7g",
+      "sugar": "0.7g",
+      "protein": "2g",
+      "vitamin_c": "10mg",
+      "potassium": "485mg",
+      "calcium": "12mg"
+    },
+    "colors": ["Green"],
+    "categories": ["Tropical"],
+    "season_availability": ["March", "April", "May"],
+    "stock": 200,
+    "image_url": "https://example.com/avocado.jpg",
+    "gallery_urls": [
+      "https://example.com/avocado1.jpg",
+      "https://example.com/avocado2.jpg",
+      "https://example.com/avocado3.jpg"
+    ],
+    "uses": ["Spreads", "Salads", "Smoothies", "Sandwiches"],
+    "allergy_information": "May cause latex-fruit syndrome in sensitive individuals.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 300,
+      "bulk_options": [
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 280
+        },
+        {
+          "quantity": 20,
+          "discounted_price_per_unit": 250
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "16",
+    "name": "Dates",
+    "description": "A sweet and chewy fruit often dried, rich in natural sugars and commonly used as a natural sweetener or snack.",
+    "nutritional_information": {
+      "calories": "277 kcal",
+      "carbohydrates": "75g",
+      "fiber": "6.7g",
+      "sugar": "66.5g",
+      "protein": "1.8g",
+      "vitamin_c": "0mg",
+      "potassium": "696mg",
+      "calcium": "64mg"
+    },
+    "colors": ["Brown", "Golden"],
+    "categories": ["Tropical", "Dried Fruit"],
+    "season_availability": ["All year round"],
+    "stock": 500,
+    "image_url": "https://example.com/dates.jpg",
+    "gallery_urls": [
+      "https://example.com/dates1.jpg",
+      "https://example.com/dates2.jpg",
+      "https://example.com/dates3.jpg"
+    ],
+    "uses": ["Snacks", "Baking", "Sweeteners", "Smoothies"],
+    "allergy_information": "Safe for most individuals; high sugar content may not suit diabetics.",
+    "pricing": {
+      "unit": "100g",
+      "price_per_unit": 250,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 240
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 230
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "17",
+    "name": "Apple",
+    "description": "A crisp, juicy fruit available in various colors and flavors, ideal for snacking or cooking.",
+    "nutritional_information": {
+      "calories": "52 kcal",
+      "carbohydrates": "13.8g",
+      "fiber": "2.4g",
+      "sugar": "10.4g",
+      "protein": "0.3g",
+      "vitamin_c": "4.6mg",
+      "potassium": "107mg",
+      "calcium": "6mg"
+    },
+    "colors": ["Red", "Green", "Yellow"],
+    "categories": ["Temperate"],
+    "season_availability": ["All year round"],
+    "stock": 400,
+    "image_url": "https://example.com/apple.jpg",
+    "gallery_urls": [
+      "https://example.com/apple1.jpg",
+      "https://example.com/apple2.jpg",
+      "https://example.com/apple3.jpg"
+    ],
+    "uses": ["Snacks", "Baking", "Juices", "Salads"],
+    "allergy_information": "May cause oral allergy syndrome in sensitive individuals.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 150,
+      "bulk_options": [
+        {
+          "quantity": 6,
+          "discounted_price_per_unit": 140
+        },
+        {
+          "quantity": 12,
+          "discounted_price_per_unit": 130
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "18",
+    "name": "Grapes",
+    "description": "A small, juicy fruit available in various colors, enjoyed fresh or used in wines, jams, and desserts.",
+    "nutritional_information": {
+      "calories": "69 kcal",
+      "carbohydrates": "18g",
+      "fiber": "0.9g",
+      "sugar": "16g",
+      "protein": "0.6g",
+      "vitamin_c": "3.2mg",
+      "potassium": "191mg",
+      "calcium": "10mg"
+    },
+    "colors": ["Green", "Red", "Black", "Purple"],
+    "categories": ["Temperate", "Berry"],
+    "season_availability": ["All year round"],
+    "stock": 300,
+    "image_url": "https://example.com/grapes.jpg",
+    "gallery_urls": [
+      "https://example.com/grapes1.jpg",
+      "https://example.com/grapes2.jpg",
+      "https://example.com/grapes3.jpg"
+    ],
+    "uses": ["Snacks", "Wine Making", "Jams", "Salads"],
+    "allergy_information": "Rarely causes allergies; safe for most individuals.",
+    "pricing": {
+      "unit": "100g",
+      "price_per_unit": 400,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 380
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 350
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "19",
+    "name": "Strawberry",
+    "description": "A sweet and tangy red fruit with a fragrant aroma, often eaten fresh or used in desserts and beverages.",
+    "nutritional_information": {
+      "calories": "32 kcal",
+      "carbohydrates": "7.7g",
+      "fiber": "2g",
+      "sugar": "4.9g",
+      "protein": "0.7g",
+      "vitamin_c": "58.8mg",
+      "potassium": "153mg",
+      "calcium": "16mg"
+    },
+    "colors": ["Red"],
+    "categories": ["Berry", "Temperate"],
+    "season_availability": ["December", "January", "February", "March"],
+    "stock": 200,
+    "image_url": "https://example.com/strawberry.jpg",
+    "gallery_urls": [
+      "https://example.com/strawberry1.jpg",
+      "https://example.com/strawberry2.jpg",
+      "https://example.com/strawberry3.jpg"
+    ],
+    "uses": ["Snacks", "Desserts", "Smoothies", "Salads"],
+    "allergy_information": "May cause allergic reactions in individuals with pollen-food syndrome.",
+    "pricing": {
+      "unit": "100g",
+      "price_per_unit": 700,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 650
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 600
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "20",
+    "name": "Passion Fruit",
+    "description": "A small, tropical fruit with a tangy flavor and a jelly-like interior filled with seeds.",
+    "nutritional_information": {
+      "calories": "97 kcal",
+      "carbohydrates": "23g",
+      "fiber": "10.4g",
+      "sugar": "11.2g",
+      "protein": "2.2g",
+      "vitamin_c": "30mg",
+      "potassium": "348mg",
+      "calcium": "12mg"
+    },
+    "colors": ["Purple", "Yellow"],
+    "categories": ["Tropical"],
+    "season_availability": ["January", "February", "July", "August"],
+    "stock": 100,
+    "image_url": "https://example.com/passionfruit.jpg",
+    "gallery_urls": [
+      "https://example.com/passionfruit1.jpg",
+      "https://example.com/passionfruit2.jpg",
+      "https://example.com/passionfruit3.jpg"
+    ],
+    "uses": ["Juices", "Desserts", "Cocktails", "Smoothies"],
+    "allergy_information": "Rarely causes allergies; seeds may pose a choking hazard for children.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 400,
+      "bulk_options": [
+        {
+          "quantity": 6,
+          "discounted_price_per_unit": 380
+        },
+        {
+          "quantity": 12,
+          "discounted_price_per_unit": 360
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "21",
+    "name": "Pomegranate",
+    "description": "A round fruit with a tough outer skin and a juicy interior filled with edible seeds called arils.",
+    "nutritional_information": {
+      "calories": "83 kcal",
+      "carbohydrates": "18.7g",
+      "fiber": "4g",
+      "sugar": "13.7g",
+      "protein": "1.7g",
+      "vitamin_c": "10.2mg",
+      "potassium": "236mg",
+      "calcium": "10mg"
+    },
+    "colors": ["Red", "Pink"],
+    "categories": ["Tropical", "Temperate"],
+    "season_availability": ["September", "October", "November"],
+    "stock": 150,
+    "image_url": "https://example.com/pomegranate.jpg",
+    "gallery_urls": [
+      "https://example.com/pomegranate1.jpg",
+      "https://example.com/pomegranate2.jpg",
+      "https://example.com/pomegranate3.jpg"
+    ],
+    "uses": ["Juices", "Salads", "Snacks", "Sauces"],
+    "allergy_information": "May cause mild reactions in individuals allergic to certain fruits.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 800,
+      "bulk_options": [
+        {
+          "quantity": 5,
+          "discounted_price_per_unit": 750
+        },
+        {
+          "quantity": 10,
+          "discounted_price_per_unit": 700
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "22",
+    "name": "Pear",
+    "description": "A sweet and juicy fruit with a soft, buttery texture, available in various colors and sizes.",
+    "nutritional_information": {
+      "calories": "57 kcal",
+      "carbohydrates": "15g",
+      "fiber": "3.1g",
+      "sugar": "9.8g",
+      "protein": "0.4g",
+      "vitamin_c": "4.3mg",
+      "potassium": "116mg",
+      "calcium": "9mg"
+    },
+    "colors": ["Green", "Yellow", "Red"],
+    "categories": ["Temperate"],
+    "season_availability": ["August", "September", "October"],
+    "stock": 200,
+    "image_url": "https://example.com/pear.jpg",
+    "gallery_urls": [
+      "https://example.com/pear1.jpg",
+      "https://example.com/pear2.jpg",
+      "https://example.com/pear3.jpg"
+    ],
+    "uses": ["Snacks", "Salads", "Desserts", "Juices"],
+    "allergy_information": "Rarely causes allergies but may trigger reactions in those with birch pollen allergy.",
+    "pricing": {
+      "unit": "Piece",
+      "price_per_unit": 300,
+      "bulk_options": [
+        {
+          "quantity": 6,
+          "discounted_price_per_unit": 280
+        },
+        {
+          "quantity": 12,
+          "discounted_price_per_unit": 250
+        }
+      ]
+    }
+  }
+]

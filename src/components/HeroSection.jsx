@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import HeroImageLarge from '../assets/hero-image-large.jpeg';
 import HeroImage from '../assets/hero-image.jpeg';
+import Icon from '@mdi/react';
+import { mdiInformation } from '@mdi/js';
+import classNames from 'classnames';
+import baseStyles from '../styles/base.module.css';
 
 const HeroSectionWrapper = styled.section`
-  & {
+  .hero-section {
     height: 100dvh;
-    margin-top: 48px;
+    margin-top: -20px;
   }
 
   & .bg-image {
@@ -43,9 +47,24 @@ const HeroSectionWrapper = styled.section`
     font-weight: 500;
   }
 
+  .about-us-section {
+    margin: 2rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+    width: min(85%, 320px);
+    padding: 1rem;
+  }
+
+  .about-us-section p {
+    padding: 1rem;
+  }
+
   @media screen and (min-width: 768px) {
-    & {
-      margin-top: 56px;
+    .hero-section {
     }
 
     & .bg-image {
@@ -59,8 +78,7 @@ const HeroSectionWrapper = styled.section`
   }
 
   @media screen and (min-width: 1024px) {
-    & {
-      margin-top: 126px;
+    .hero-section {
     }
 
     & .bg-text {
@@ -72,11 +90,33 @@ const HeroSectionWrapper = styled.section`
 export default function HeroSection() {
   return (
     <HeroSectionWrapper>
-      <div className="bg-image"></div>
-      <div className="bg-text">
-        <h2>Fresh from Our Farm to Your Table</h2>
-        <p>Discover the finest fruits, grown with care, delivered with love.</p>
+      <div className="hero-section">
+        <div className="bg-image"></div>
+        <div className="bg-text">
+          <h2>Fresh from Our Farm to Your Table</h2>
+          <p>
+            Discover the finest fruits, grown with care, delivered with love.
+          </p>
+        </div>
       </div>
+      <section className="about-us-section">
+        <h2
+          className={classNames(
+            baseStyles.uAlignCenter,
+            baseStyles.uFlex,
+            baseStyles.uGap1r,
+            'title'
+          )}
+        >
+          <Icon path={mdiInformation} size={2} color="blue" />
+          <span>About Us</span>
+        </h2>
+        <p>
+          We are passionate about bringing fresh, healthy, and affordable fruits
+          closer to you. Our mission is to make it easier for everyone to enjoy
+          nature&apos;s sweetness, whether for snacking, cooking, or juicing.
+        </p>
+      </section>
     </HeroSectionWrapper>
   );
 }
