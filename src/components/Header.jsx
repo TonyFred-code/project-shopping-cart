@@ -202,6 +202,5 @@ export default function Header({ cartItemsCount, toggleSideMenuOpen }) {
 
 Header.propTypes = {
   toggleSideMenuOpen: func,
-  toggleSearchMenuOpen: func,
   cartItemsCount: number,
 };
