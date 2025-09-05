@@ -1,10 +1,8 @@
-import { mdiCart, mdiChevronUp, mdiMagnify, mdiMenu } from '@mdi/js';
+import { mdiCart, mdiMenu } from '@mdi/js';
 import Icon from '@mdi/react';
 import classNames from 'classnames';
-import { func } from 'prop-types';
-import { useState } from 'react';
+import { func, number } from 'prop-types';
 import styled from 'styled-components';
-import CATEGORIES from '../helpers/categories.json';
 import baseStyles from '../styles/base.module.css';
 import { Link } from 'react-router-dom';
 
@@ -119,50 +117,10 @@ const HeaderWrapper = styled.header`
       font-weight: bold;
       border-color: #fff;
     }
-
-    .dropdown {
-      align-items: flex-start;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .dropdown-content {
-      height: ${(props) => (props.$subCategoryOpen ? '175px' : '0px')};
-      overflow: hidden auto;
-      transition: all 0.35s ease-in-out;
-      flex-direction: column;
-      display: block;
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      top: 100%;
-      width: 75%;
-    }
-
-    .dropdown-content ul {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dropdown-content li {
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-
-    .dropdown-content li:hover {
-      font-weight: bold;
-      border-color: #fff;
-    }
   }
 `;
 
-export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
-  const [subCategoryOpen, setSubCategoryOpen] = useState(false);
-
-  function toggleSubCategoryOpen() {
-    setSubCategoryOpen(!subCategoryOpen);
-  }
-
+export default function Header({ cartItemsCount, toggleSideMenuOpen }) {
   return (
     <HeaderWrapper
       className={classNames(
@@ -170,7 +128,6 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
         baseStyles.uFlexCol,
         baseStyles.uGap1r
       )}
-      $subCategoryOpen={subCategoryOpen}
     >
       <div
         className={classNames(
@@ -204,6 +161,7 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
             type="button"
             className={classNames(baseStyles.uGapD3r, 'cart-btn')}
           >
+            <span className="cart-badge">{cartItemsCount}</span>
             <Icon path={mdiCart} size={1.35} />
             {/*TODO: SHOW BADGES */}
             <span className="btn-icon-text">Cart</span>
@@ -245,4 +203,5 @@ export default function Header({ toggleSideMenuOpen, toggleSearchMenuOpen }) {
 Header.propTypes = {
   toggleSideMenuOpen: func,
   toggleSearchMenuOpen: func,
+  cartItemsCount: number,
 };
