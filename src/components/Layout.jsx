@@ -1,4 +1,3 @@
-import useCategoriesData from '@/helpers/useCategoriesData.jsx';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header.jsx';
@@ -39,7 +38,6 @@ const Wrapper = styled.div`
 
 export default function LayoutWrapper({ children }) {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
-  const categoriesData = useCategoriesData();
 
   function toggleSideMenuOpen() {
     setSideMenuOpen(!sideMenuOpen);
@@ -47,17 +45,9 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <Wrapper>
-      <Header
-        toggleSideMenuOpen={toggleSideMenuOpen}
-        // toggleSearchMenuOpen={toggleSearchMenuOpen}
-        categories={categoriesData.categories}
-      />
+      <Header toggleSideMenuOpen={toggleSideMenuOpen} />
       <main className="layout-main">{children}</main>
-      <SideMenu
-        open={sideMenuOpen}
-        toggleOpen={toggleSideMenuOpen}
-        categories={categoriesData.categories}
-      />
+      <SideMenu open={sideMenuOpen} toggleOpen={toggleSideMenuOpen} />
       <Footer />
     </Wrapper>
   );
