@@ -17,6 +17,8 @@ import {
   mdiSortAlphabeticalAscending,
   mdiSortAlphabeticalDescending,
 } from '@mdi/js';
+import useCartItems from '@/helpers/useCartItems.jsx';
+import ProductDetails from '@/components/ProductDetails.jsx';
 
 const ProductsPageWrapper = styled.div`
   & {
@@ -92,6 +94,9 @@ export default function ProductsPage() {
   const [sortOption, setSortOption] = useState('random');
   const fruitsData = useFruitsData();
   const categoriesData = useCategoriesData();
+  const [openItemDetails, setOpenItemDetails] = useState(false);
+  const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
+  const cartItemsData = useCartItems();
   let displayedData = arrayShuffle(fruitsData.fruits);
   let iconChoice = <Icon path={mdiShuffleVariant} size={1.3} />;
 
@@ -116,6 +121,18 @@ export default function ProductsPage() {
       break;
   }
 
+  function handleShowItemDetails(fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (data) => data.id === fruitId
+    )[0];
+    setDisplayedItemDetails(fruitData);
+    setOpenItemDetails(true);
+  }
+
+  function toggleOpenItemDetails() {
+    setOpenItemDetails(!openItemDetails);
+  }
+
   if (fruitsData.error || categoriesData.error) {
     return (
       <LayoutWrapper>
@@ -126,7 +143,7 @@ export default function ProductsPage() {
 
   return (
     <ProductsPageWrapper>
-      <LayoutWrapper>
+      <LayoutWrapper cartItemsCount={cartItemsData.cartItems.length}>
         <div className="header-container">
           <h1 className={classNames(baseStyles.fontQuicksandBold, 'title')}>
             SHOP
@@ -175,6 +192,7 @@ export default function ProductsPage() {
                   <ProductCard
                     key={fruit.id}
                     fruitData={fruit}
+                    showProductDetails={handleShowItemDetails}
                     //TODO: figure out a way to create sale product card
                   />
                 );
@@ -182,6 +200,13 @@ export default function ProductsPage() {
             </div>
           )}
         </main>
+        {displayedItemDetails && (
+          <ProductDetails
+            fruitData={displayedItemDetails}
+            open={openItemDetails}
+            toggleOpen={toggleOpenItemDetails}
+          />
+        )}
       </LayoutWrapper>
     </ProductsPageWrapper>
   );
