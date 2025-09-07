@@ -174,7 +174,12 @@ const ProductDetailsWrapper = styled.div`
   }
 `;
 
-export default function ProductDetails({ open, toggleOpen, fruitData }) {
+export default function ProductDetails({
+  open,
+  toggleOpen,
+  fruitData,
+  closeProductDetails,
+}) {
   const [quantity, setQuantity] = useState(1);
   const [showMaxWarning, setShowMaxWarning] = useState(false);
   const [showMinWarning, setShowMinWarning] = useState(false);
@@ -274,7 +279,7 @@ export default function ProductDetails({ open, toggleOpen, fruitData }) {
           <div></div>
         </div>
       </div>
-      <div className="backdrop" onClick={toggleOpen}></div>
+      <div className="backdrop" onClick={closeProductDetails}></div>
     </ProductDetailsWrapper>
   );
 }
@@ -282,5 +287,6 @@ export default function ProductDetails({ open, toggleOpen, fruitData }) {
 ProductDetails.propTypes = {
   fruitData: object,
   open: bool,
+  closeProductDetails: func,
   toggleOpen: func,
 };

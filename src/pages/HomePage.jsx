@@ -77,6 +77,10 @@ export default function HomePage() {
             fruitData={displayedItemDetails}
             open={openItemDetails}
             toggleOpen={toggleOpenItemDetails}
+            closeProductDetails={() => {
+              setDisplayedItemDetails(null);
+              setOpenItemDetails(false);
+            }}
           />
         )}
       </LayoutWrapper>

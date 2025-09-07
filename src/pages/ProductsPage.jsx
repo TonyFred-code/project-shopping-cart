@@ -205,6 +205,10 @@ export default function ProductsPage() {
             fruitData={displayedItemDetails}
             open={openItemDetails}
             toggleOpen={toggleOpenItemDetails}
+            closeProductDetails={() => {
+              setDisplayedItemDetails(null);
+              setOpenItemDetails(false);
+            }}
           />
         )}
       </LayoutWrapper>
