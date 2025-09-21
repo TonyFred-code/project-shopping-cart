@@ -1,6 +1,10 @@
 import randomInteger from 'random-int';
 
-function getCurrentMonth() {
+/**
+ *
+ * @returns Current date in long format
+ */
+export function getCurrentMonth() {
   return new Date().toLocaleString('default', { month: 'long' });
 }
 
