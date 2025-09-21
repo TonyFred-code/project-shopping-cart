@@ -1,0 +1,72 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductCard > should render to match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bRKDuR wruKV"
+  >
+    <div
+      class="image-container"
+    >
+      <div>
+        some image
+      </div>
+      <button
+        class="_uAlignCenter_2d2bfb _uFlex_2d2bfb _uJustifyCenter_2d2bfb wishlist-container"
+      >
+        <svg
+          role="presentation"
+          style="width: 2.625rem; height: 2.625rem;"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+            style="fill: currentColor;"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="product-details"
+    >
+      <div
+        class="title"
+      >
+        <p
+          class="category"
+        >
+          category1
+        </p>
+        <p
+          class="name"
+        >
+          Mango
+        </p>
+      </div>
+      <p
+        class="price"
+      >
+        ₦244.00
+      </p>
+      <button
+        class="add-to-cart"
+        type="button"
+      >
+        <svg
+          role="presentation"
+          style="width: 2.25rem; height: 2.25rem;"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z"
+            style="fill: currentColor;"
+          />
+        </svg>
+        <span>
+          Add to cart
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
