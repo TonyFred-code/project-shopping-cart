@@ -2,13 +2,19 @@ import randomInteger from 'random-int';
 
 /**
  *
- * @returns Current date in long format
+ * @returns {string} Current date in long format
  */
 export function getCurrentMonth() {
   return new Date().toLocaleString('default', { month: 'long' });
 }
 
-function getRandomDiscount(min = 5, max = 55) {
+/**
+ *
+ * @param {number} min - The minimum value (inclusive)
+ * @param {number} max - The maximum value (exclusive)
+ * @returns {number} A random integer discount value between max and min
+ */
+export function getRandomDiscount(min = 5, max = 55) {
   return randomInteger(min, max);
 }
 
