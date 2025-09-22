@@ -3,10 +3,12 @@ import { it, expect, describe, vi } from 'vitest';
 import ProductCard from '../../src/components/ProductCard.jsx';
 import userEvent from '@testing-library/user-event';
 
-vi.mock('../../src/helpers/randomArrayElement.js', {
-  spy: true,
-  default: () => 1,
+vi.mock('../../src/helpers/randomArrayElement.js', () => {
+  return {
+    default: vi.fn((array) => array[0]), // always return element at index 0
+  };
 });
+
 vi.mock('react-image-filler', () => ({
   default: () => {
     return <div>some image</div>;
@@ -20,7 +22,7 @@ const fruitData = {
   pricing: {
     price_per_unit: 244,
   },
-  categories: ['category1', 'category2'],
+  categories: ['category1', 'category3'],
 };
 
 const renderProductCard = (props = {}) => {
@@ -54,7 +56,7 @@ describe('ProductCard', () => {
     // test will serve as functionality testing later
     renderProductCard();
 
-    expect(screen.queryByTestId('wishlist-button')).toBeInTheDocument();
+    expect(screen.getByTestId('wishlist-button')).toBeInTheDocument();
   });
 
   it('renders product details', () => {
@@ -62,6 +64,6 @@ describe('ProductCard', () => {
 
     expect(screen.getByText(/mango/i)).toBeInTheDocument();
     expect(screen.queryByText(/244/)).toBeInTheDocument();
-    expect(screen.getByText(/category(1|2)/i)).toBeInTheDocument();
+    expect(screen.getByText(/category(1|3)/i)).toBeInTheDocument();
   });
 });
