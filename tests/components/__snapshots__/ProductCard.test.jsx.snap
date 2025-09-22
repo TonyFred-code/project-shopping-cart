@@ -13,6 +13,7 @@ exports[`ProductCard > should render to match snapshot 1`] = `
       </div>
       <button
         class="_uAlignCenter_2d2bfb _uFlex_2d2bfb _uJustifyCenter_2d2bfb wishlist-container"
+        data-testid="wishlist-button"
       >
         <svg
           role="presentation"

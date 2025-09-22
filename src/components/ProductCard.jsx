@@ -1,5 +1,4 @@
 import { string, number, bool, oneOf, shape, func } from 'prop-types';
-import className from 'classnames';
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
 import ImageFiller from 'react-image-filler';
@@ -118,7 +117,7 @@ const ProductCardWrapper = styled.div`
   }
 `;
 
-const OnSaleProductCardWrapper = styled(ProductCardWrapper)``;
+// const OnSaleProductCardWrapper = styled(ProductCardWrapper)``;
 
 export default function ProductCard({
   fruitData,
@@ -142,6 +141,7 @@ export default function ProductCard({
             baseStyles.uJustifyCenter,
             'wishlist-container'
           )}
+          data-testid="wishlist-button"
         >
           <Icon path={mdiHeart} size={1.75} />
         </button>
