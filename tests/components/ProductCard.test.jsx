@@ -49,4 +49,19 @@ describe('ProductCard', () => {
 
     expect(mockShowProductDetails).toHaveBeenCalledWith(fruitData.id);
   });
+
+  it('renders wishlist button', () => {
+    // test will serve as functionality testing later
+    renderProductCard();
+
+    expect(screen.queryByTestId('wishlist-button')).toBeInTheDocument();
+  });
+
+  it('renders product details', () => {
+    renderProductCard();
+
+    expect(screen.getByText(/mango/i)).toBeInTheDocument();
+    expect(screen.queryByText(/244/)).toBeInTheDocument();
+    expect(screen.getByText(/category(1|2)/i)).toBeInTheDocument();
+  });
 });
