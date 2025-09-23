@@ -203,6 +203,7 @@ export default function SideMenu({ open, toggleOpen }) {
         </footer>
       </div>
       <div
+        data-testid="backdrop"
         className="backdrop"
         onClick={() => {
           toggleOpen();
