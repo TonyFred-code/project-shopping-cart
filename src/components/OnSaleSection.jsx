@@ -89,7 +89,7 @@ export default function OnSaleSection({ fruits, showProductDetails, loading }) {
               <ProductCard
                 key={fruit.id}
                 fruitData={fruit}
-                showProductDetails={showProductDetails}
+                showProductDetails={() => showProductDetails(fruit.id)}
                 //TODO: figure out a way to create sale product card
               />
             );

@@ -94,7 +94,7 @@ export default function InSeasonSection({
             return (
               <ProductCard
                 key={fruit.id}
-                showProductDetails={showProductDetails}
+                showProductDetails={() => showProductDetails(fruit.id)}
                 fruitData={fruit}
               />
             );
