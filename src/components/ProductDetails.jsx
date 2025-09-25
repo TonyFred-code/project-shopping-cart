@@ -1,27 +1,32 @@
 import styled from 'styled-components';
 import baseStyles from '../styles/base.module.css';
-import { bool, exact, func, object, shape, string } from 'prop-types';
+import { bool, func, object } from 'prop-types';
 import Placeholder from 'react-image-filler';
 import classNames from 'classnames';
-import randomArrayElement from '@/helpers/randomArrayElement.js';
 import Icon from '@mdi/react';
-import { mdiCart, mdiMinus, mdiPlus } from '@mdi/js';
+import { mdiCartPlus, mdiClose, mdiMinus, mdiPlus } from '@mdi/js';
 import { useState } from 'react';
 
 const ProductDetailsWrapper = styled.div`
+  /* TODO: use proper dialog element */
   & {
-    width: ${(props) => (props.$open ? '100%' : '0px')};
     z-index: 10;
+    width: ${(props) => (props.open ? '100%' : '0px')};
     height: 100dvh;
     position: fixed;
     top: 0;
     left: 0;
     transition: width linear 0.3s;
     overflow: hidden;
+    border: none;
+  }
+
+  &::backdrop {
+    background-color: #504d4d;
   }
 
   .content {
-    width: min(75%, 600px);
+    width: min(100%, 320px);
     background-color: #fff;
     height: 100%;
     display: flex;
@@ -29,6 +34,13 @@ const ProductDetailsWrapper = styled.div`
     gap: 1rem;
     overflow: auto;
     padding: 2rem 0;
+  }
+
+  header {
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+    display: flex;
+    align-items: center;
   }
 
   .header {
@@ -40,10 +52,18 @@ const ProductDetailsWrapper = styled.div`
 
   h1 {
     font-size: 2.5rem;
-    border-bottom: 2px solid #ddd;
-    border-top: 2px solid #ddd;
     width: min(85%, 320px);
     text-transform: capitalize;
+  }
+
+  .close-btn {
+    border: none;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .fruit-info {
@@ -81,7 +101,6 @@ const ProductDetailsWrapper = styled.div`
 
   .quantity-add-container {
     display: flex;
-    flex-direction: column;
   }
 
   .quantity button {
@@ -128,10 +147,14 @@ const ProductDetailsWrapper = styled.div`
     font-size: 2rem;
     font-weight: bold;
     color: #504d4d;
+    display: flex;
+    align-items: center;
   }
 
   .price-total .total {
     color: black;
+    flex: 1;
+    text-align: end;
   }
 
   .backdrop {
@@ -185,17 +208,6 @@ export default function ProductDetails({
   const [showMinWarning, setShowMinWarning] = useState(false);
   const { id, imageAlt, imageSrc, name, pricing, categories, stock } =
     fruitData;
-  // const category = randomArrayElement(categories)
-
-  function handleQuantityChange(e) {
-    const val = Number(e.target.value);
-
-    if (val <= stock) {
-      setQuantity(val);
-    } else {
-      setShowMaxWarning(true);
-    }
-  }
 
   function handleQuantityIncrement() {
     const val = quantity + 1;
@@ -219,7 +231,17 @@ export default function ProductDetails({
   return (
     <ProductDetailsWrapper $open={open}>
       <div className="content">
-        <h1 className={classNames(baseStyles.uPadding1r)}>Product Details</h1>
+        <header>
+          <h1 className={classNames(baseStyles.uPadding1r)}>Product Details</h1>
+          <button
+            type="button"
+            className="close-btn"
+            onClick={closeProductDetails}
+            data-testid="close button"
+          >
+            <Icon path={mdiClose} size={1.3} />
+          </button>
+        </header>
         <div className="product-details">
           <div className="header">
             <div className="fruit-info">
@@ -249,27 +271,14 @@ export default function ProductDetails({
                 <button type="button" onClick={handleQuantityDecrement}>
                   <Icon path={mdiMinus} size={1.2} />
                 </button>
-                <input
-                  type="number"
-                  min={1}
-                  name="quantity"
-                  id="quantity"
-                  inputMode="numeric"
-                  value={quantity}
-                  onChange={(e) => {
-                    const cleaned = e.target.value.replace(/\D/g, ''); // remove non-digits
-                    handleQuantityChange({ target: { value: cleaned } });
-                  }}
-                  className="quantity-input"
-                />
-
+                <span>{quantity}</span>
                 <button type="button" onClick={handleQuantityIncrement}>
                   <Icon path={mdiPlus} size={1.2} />
                 </button>
               </div>
               <div className="add-container">
                 <button type="button">
-                  <Icon path={mdiCart} color="inherit" size={1.2} />
+                  <Icon path={mdiCartPlus} color="inherit" size={1.2} />
                   <span className="icon-text">Confirm</span>
                 </button>
               </div>
@@ -279,7 +288,11 @@ export default function ProductDetails({
           <div></div>
         </div>
       </div>
-      <div className="backdrop" onClick={closeProductDetails}></div>
+      <div
+        className="backdrop"
+        data-testid="backdrop"
+        onClick={closeProductDetails}
+      ></div>
     </ProductDetailsWrapper>
   );
 }
