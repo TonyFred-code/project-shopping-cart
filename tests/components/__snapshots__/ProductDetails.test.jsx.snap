@@ -1,0 +1,149 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductDetails > should render ProductDetails to match snapshot 1`] = `
+<div>
+  <div
+    class="sc-bRKDuR dqueMR"
+  >
+    <div
+      class="content"
+    >
+      <header>
+        <h1
+          class="_uPadding1r_2d2bfb"
+        >
+          Product Details
+        </h1>
+        <button
+          class="close-btn"
+          data-testid="close button"
+          type="button"
+        >
+          <svg
+            role="presentation"
+            style="width: 1.9500000000000002rem; height: 1.9500000000000002rem;"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+              style="fill: currentColor;"
+            />
+          </svg>
+        </button>
+      </header>
+      <div
+        class="product-details"
+      >
+        <div
+          class="header"
+        >
+          <div
+            class="fruit-info"
+          >
+            <div>
+              some image
+            </div>
+            <p
+              class="name"
+            >
+              Mango
+            </p>
+            <p>
+              <span
+                class="price"
+              >
+                ₦244.00
+              </span>
+            </p>
+          </div>
+          <div
+            class="price-total"
+          >
+            <span>
+              total:
+            </span>
+            <span
+              class="total"
+            >
+              ₦244.00
+            </span>
+          </div>
+          <div
+            class="quantity-add-container"
+          >
+            <div
+              class="quantity"
+            >
+              <button
+                type="button"
+              >
+                <svg
+                  role="presentation"
+                  style="width: 1.7999999999999998rem; height: 1.7999999999999998rem;"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19,13H5V11H19V13Z"
+                    style="fill: currentColor;"
+                  />
+                </svg>
+              </button>
+              <span>
+                1
+              </span>
+              <button
+                type="button"
+              >
+                <svg
+                  role="presentation"
+                  style="width: 1.7999999999999998rem; height: 1.7999999999999998rem;"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                    style="fill: currentColor;"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="add-container"
+            >
+              <button
+                type="button"
+              >
+                <svg
+                  role="presentation"
+                  style="width: 1.7999999999999998rem; height: 1.7999999999999998rem;"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M11 9H13V6H16V4H13V1H11V4H8V6H11M7 18C5.9 18 5 18.9 5 20S5.9 22 7 22 9 21.1 9 20 8.1 18 7 18M17 18C15.9 18 15 18.9 15 20S15.9 22 17 22 19 21.1 19 20 18.1 18 17 18M7.2 14.8V14.7L8.1 13H15.5C16.2 13 16.9 12.6 17.2 12L21.1 5L19.4 4L15.5 11H8.5L4.3 2H1V4H3L6.6 11.6L5.2 14C5.1 14.3 5 14.6 5 15C5 16.1 5.9 17 7 17H19V15H7.4C7.3 15 7.2 14.9 7.2 14.8Z"
+                    style="fill: inherit;"
+                  />
+                </svg>
+                <span
+                  class="icon-text"
+                >
+                  Confirm
+                </span>
+              </button>
+            </div>
+          </div>
+          <p
+            class="category"
+          >
+            CATEGORIES: 
+            category1,category3
+          </p>
+        </div>
+        <div />
+      </div>
+    </div>
+    <div
+      class="backdrop"
+      data-testid="backdrop"
+    />
+  </div>
+</div>
+`;
