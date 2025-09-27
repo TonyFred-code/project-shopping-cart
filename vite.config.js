@@ -19,6 +19,7 @@ export default defineConfig({
       '@helpers': path.resolve(__dirname, './src/helpers'), // For utility functions
       '@assets': path.resolve(__dirname, './src/assets'), // For static files
       '@styles': path.resolve(__dirname, './src/styles'), // For CSS/SCSS files
+      '@constants': path.resolve(__dirname, './src/constants'),
     },
   },
 
