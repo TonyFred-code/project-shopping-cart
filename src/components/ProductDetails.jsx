@@ -16,7 +16,7 @@ const ProductDetailsWrapper = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    transition: width linear 0.3s;
+    transition: width linear 0.3s; // todo: improve show and hiding animation
     overflow: hidden;
     border: none;
   }
@@ -168,6 +168,13 @@ const ProductDetailsWrapper = styled.div`
     z-index: -3;
   }
 
+  .limit-warning {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
   @media screen and (min-width: 425px) {
     .quantity-add-container {
       flex-direction: row;
@@ -206,13 +213,18 @@ export default function ProductDetails({
   const [showMaxWarning, setShowMaxWarning] = useState(false);
   const [showMinWarning, setShowMinWarning] = useState(false);
 
-  const { id, imageAlt, imageSrc, name, pricing, categories, stock } =
-    fruitData;
+  const { name, pricing, categories, stock } = fruitData;
+
+  function hideWarnings() {
+    setShowMaxWarning(false);
+    setShowMinWarning(false);
+  }
 
   function handleQuantityIncrement() {
     const val = quantity + 1;
     if (val <= stock) {
       setQuantity(val);
+      hideWarnings();
     } else {
       setShowMaxWarning(true);
     }
@@ -222,6 +234,7 @@ export default function ProductDetails({
     const val = quantity - 1;
     if (val >= 0) {
       setQuantity(val);
+      hideWarnings();
     } else {
       setShowMinWarning(true);
     }
@@ -284,6 +297,13 @@ export default function ProductDetails({
                 </button>
               </div>
             </div>
+            {(showMaxWarning || showMinWarning) && (
+              <span className="limit-warning">
+                {showMaxWarning && 'Maximum '}
+                {showMinWarning && 'Minimum '}
+                limit reached
+              </span>
+            )}
             <p className="category">CATEGORIES: {categories.join(',')}</p>
           </div>
           <div></div>
