@@ -11,7 +11,7 @@ const ProductDetailsWrapper = styled.div`
   /* TODO: use proper dialog element */
   & {
     z-index: 10;
-    width: ${(props) => (props.open ? '100%' : '0px')};
+    width: ${(props) => (props.$open ? '100%' : '0px')};
     height: 100dvh;
     position: fixed;
     top: 0;
@@ -199,13 +199,13 @@ const ProductDetailsWrapper = styled.div`
 
 export default function ProductDetails({
   open,
-  toggleOpen,
   fruitData,
   closeProductDetails,
 }) {
   const [quantity, setQuantity] = useState(1);
   const [showMaxWarning, setShowMaxWarning] = useState(false);
   const [showMinWarning, setShowMinWarning] = useState(false);
+
   const { id, imageAlt, imageSrc, name, pricing, categories, stock } =
     fruitData;
 
@@ -228,6 +228,7 @@ export default function ProductDetails({
   }
 
   const { price_per_unit } = pricing;
+
   return (
     <ProductDetailsWrapper $open={open}>
       <div className="content">
@@ -271,7 +272,7 @@ export default function ProductDetails({
                 <button type="button" onClick={handleQuantityDecrement}>
                   <Icon path={mdiMinus} size={1.2} />
                 </button>
-                <span>{quantity}</span>
+                <span aria-label="fruit quantity">{quantity}</span>
                 <button type="button" onClick={handleQuantityIncrement}>
                   <Icon path={mdiPlus} size={1.2} />
                 </button>
