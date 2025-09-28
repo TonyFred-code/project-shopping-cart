@@ -69,6 +69,6 @@ describe('InSeasonSection', () => {
     renderInSeason({ fruits });
 
     await user.click(screen.getByRole('button', { name: /click me/i }));
-    expect(mockShowProductDetails).toHaveBeenCalled();
+    expect(mockShowProductDetails).toHaveBeenCalledWith(fruits[0].id);
   });
 });
