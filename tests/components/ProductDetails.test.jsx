@@ -25,6 +25,7 @@ const fruitData = {
     price_per_unit: 244,
   },
   categories: ['category1', 'category3'],
+  stock: 5,
 };
 
 const renderProductDetails = (props = {}) => {
@@ -51,6 +52,7 @@ describe('ProductDetails', () => {
 
     expect(screen.getByText(/mango/i)).toBeInTheDocument();
     expect(screen.getByText(/category(1|3)/i)).toBeInTheDocument();
+    expect(screen.getByRole('spinbutton')).toHaveValue(1); // 1 is default quantity
   });
 
   it('clicking the backdrop should call closeProductDetails', async () => {
@@ -72,4 +74,53 @@ describe('ProductDetails', () => {
     await user.click(closeBtn);
     expect(mockCloseProductDetails).toHaveBeenCalled();
   });
+
+  it('should increase quantity to be added to cart when increase quantity button is clicked', async () => {
+    const user = userEvent.setup();
+    renderProductDetails();
+    const increaseBtn = screen.getByRole('button', {
+      name: /increase quantity/i,
+    });
+    await user.click(increaseBtn);
+
+    expect(screen.getByRole('spinbutton')).toHaveValue(2);
+  });
+
+  it('should increase quantity to be added to cart when increase quantity button is clicked', async () => {
+    const user = userEvent.setup();
+    renderProductDetails();
+    const decreaseBtn = screen.getByRole('button', {
+      name: /decrease quantity/i,
+    });
+    await user.click(decreaseBtn);
+
+    expect(screen.getByRole('spinbutton')).toHaveValue(0);
+  });
+
+  it('should show price as a multiple of quantity selected', async () => {
+    const user = userEvent.setup();
+    renderProductDetails();
+    const totalPriceEl = screen.getByTestId('total-price');
+
+    expect(totalPriceEl).toHaveTextContent(
+      new Intl.NumberFormat('en-NG', {
+        style: 'currency',
+        currency: 'NGN',
+      }).format(fruitData.pricing.price_per_unit * 1)
+    );
+
+    const increaseBtn = screen.getByRole('button', {
+      name: /increase quantity/i,
+    });
+    await user.click(increaseBtn);
+
+    expect(totalPriceEl).toHaveTextContent(
+      new Intl.NumberFormat('en-NG', {
+        style: 'currency',
+        currency: 'NGN',
+      }).format(fruitData.pricing.price_per_unit * 2)
+    );
+  });
+
+  it.todo('should call handleAddToCart on clicking confirm button');
 });
