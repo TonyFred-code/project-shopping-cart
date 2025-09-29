@@ -273,7 +273,11 @@ export default function ProductDetails({
               <Placeholder width={150} height={150} className="img" />
               <p className="name">{name}</p>
               <p>
-                <span className="price">
+                <span
+                  className="price"
+                  data-testid="price"
+                  aria-label={`Unit price ${price_per_unit} Naira`}
+                >
                   {/* // TODO: MAKE PRICING ACCOUNT FOR UNITS STYLE */}
                   {new Intl.NumberFormat('en-NG', {
                     style: 'currency',
@@ -283,14 +287,19 @@ export default function ProductDetails({
               </p>
             </div>
             <div className="price-total">
-              <span>total:</span>
-              <span className="total">
+              <span className="sr-only">Total price</span>
+              <span
+                aria-live="polite"
+                className="total"
+                data-testid="total-price"
+              >
                 {new Intl.NumberFormat('en-NG', {
                   style: 'currency',
                   currency: 'NGN',
                 }).format(price_per_unit * quantity)}
               </span>
             </div>
+
             <div className="quantity-add-container">
               <div
                 className="quantity-container"
@@ -311,6 +320,7 @@ export default function ProductDetails({
                   readOnly
                   aria-live="polite"
                   name="quantity"
+                  aria-label="Current quantity"
                 />
 
                 <button
