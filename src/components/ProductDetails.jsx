@@ -25,6 +25,10 @@ const ProductDetailsWrapper = styled.div`
     background-color: #504d4d;
   }
 
+  button {
+    cursor: pointer;
+  }
+
   .content {
     width: min(100%, 320px);
     background-color: #fff;
@@ -41,6 +45,7 @@ const ProductDetailsWrapper = styled.div`
     border-top: 2px solid #ddd;
     display: flex;
     align-items: center;
+    padding: 0 1rem;
   }
 
   .header {
@@ -54,6 +59,7 @@ const ProductDetailsWrapper = styled.div`
     font-size: 2.5rem;
     width: min(85%, 320px);
     text-transform: capitalize;
+    margin-right: auto;
   }
 
   .close-btn {
@@ -103,7 +109,7 @@ const ProductDetailsWrapper = styled.div`
     display: flex;
   }
 
-  .quantity button {
+  .quantity-container button {
     height: 100%;
     display: flex;
     align-items: center;
@@ -111,11 +117,22 @@ const ProductDetailsWrapper = styled.div`
     padding: 0.1rem 1rem;
   }
 
-  .quantity {
+  .quantity-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+  }
+
+  .quantity-container input {
+    width: 5ch;
+    text-align: center;
+    font-size: 1.25rem;
+    border: none;
+    font-weight: bold;
+    height: 100%;
+    outline: none;
+    pointer-events: none;
   }
 
   .add-container {
@@ -130,16 +147,6 @@ const ProductDetailsWrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.5rem 1rem;
-  }
-
-  .quantity-input {
-    max-width: 8ch;
-    text-align: center;
-    padding: 0.8rem;
-    flex: 1.5;
-    -webkit-appearance: textfield;
-    appearance: textfield;
-    height: 100%;
   }
 
   .price-total {
@@ -184,6 +191,10 @@ const ProductDetailsWrapper = styled.div`
   @media screen and (min-width: 768px) {
     .img {
       /* width: min(85%) ; */
+    }
+
+    .content {
+      width: min(50%, 500px);
     }
 
     .add-container button {
@@ -281,15 +292,36 @@ export default function ProductDetails({
               </span>
             </div>
             <div className="quantity-add-container">
-              <div className="quantity">
-                <button type="button" onClick={handleQuantityDecrement}>
+              <div
+                className="quantity-container"
+                role="group"
+                aria-label="Change product quantity"
+              >
+                <button
+                  type="button"
+                  onClick={handleQuantityDecrement}
+                  aria-label="Decrease quantity"
+                >
                   <Icon path={mdiMinus} size={1.2} />
                 </button>
-                <span aria-label="fruit quantity">{quantity}</span>
-                <button type="button" onClick={handleQuantityIncrement}>
+
+                <input
+                  type="number"
+                  value={quantity}
+                  readOnly
+                  aria-live="polite"
+                  name="quantity"
+                />
+
+                <button
+                  type="button"
+                  onClick={handleQuantityIncrement}
+                  aria-label="Increase quantity"
+                >
                   <Icon path={mdiPlus} size={1.2} />
                 </button>
               </div>
+
               <div className="add-container">
                 <button type="button">
                   <Icon path={mdiCartPlus} color="inherit" size={1.2} />
