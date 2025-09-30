@@ -8,6 +8,17 @@ export function getCurrentMonth() {
   return new Date().toLocaleString('default', { month: 'long' });
 }
 
+export function getMonthByIndex(index) {
+  if (index < 0 || index > 11)
+    throw new Error('Index argument is out of bounds');
+
+  const date = new Date();
+  date.setDate(1);
+  date.setMonth(index);
+
+  return date.toLocaleString('default', { month: 'long' });
+}
+
 /**
  *
  * @param {number} min - The minimum value (inclusive)
@@ -16,6 +27,20 @@ export function getCurrentMonth() {
  */
 export function getRandomDiscount(min = 5, max = 55) {
   return randomInteger(min, max);
+}
+
+export function fruitMonthOnSale(monthsArray) {
+  if (typeof monthsArray === 'string') {
+    return /all year round/i.test(monthsArray);
+  }
+
+  if (!monthsArray || !Array.isArray(monthsArray) || monthsArray.length === 0) {
+    throw new Error(
+      'Invalid argument: Expected array of months or array with "All year round"'
+    );
+  }
+
+  // const
 }
 
 export function fruitOnSale(fruitData) {
