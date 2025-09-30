@@ -1,6 +1,8 @@
 import { it, expect, describe, afterEach, vi } from 'vitest';
 import {
+  fruitMonthOnSale,
   getCurrentMonth,
+  getMonthByIndex,
   getRandomDiscount,
 } from '../../src/helpers/fruits-helper.js';
 
@@ -41,5 +43,68 @@ describe('FruitsHelper', () => {
       expect(randomInteger).toHaveBeenCalledWith(2, 25);
       expect(discount).toBe(42);
     });
+  });
+
+  describe('getMonthByIndex', () => {
+    it('should throw an error if month index is out of bounds', () => {
+      expect(() => getMonthByIndex(-1)).toThrowError(/out of bounds/i);
+      expect(() => getMonthByIndex(12)).toThrowError(/out of bounds/i);
+    });
+
+    it.each([
+      {
+        monthIndex: 0,
+        monthRegExp: /january/i,
+      },
+      {
+        monthIndex: 1,
+        monthRegExp: /february/i,
+      },
+      {
+        monthIndex: 2,
+        monthRegExp: /march/i,
+      },
+      {
+        monthIndex: 3,
+        monthRegExp: /april/i,
+      },
+      {
+        monthIndex: 4,
+        monthRegExp: /may/i,
+      },
+      {
+        monthIndex: 5,
+        monthRegExp: /june/i,
+      },
+      {
+        monthIndex: 6,
+        monthRegExp: /july/i,
+      },
+      {
+        monthIndex: 7,
+        monthRegExp: /august/i,
+      },
+      {
+        monthIndex: 8,
+        monthRegExp: /september/i,
+      },
+      {
+        monthIndex: 9,
+        monthRegExp: /october/i,
+      },
+      {
+        monthIndex: 10,
+        monthRegExp: /november/i,
+      },
+      {
+        monthIndex: 11,
+        monthRegExp: /december/i,
+      },
+    ])(
+      'should return $monthRegExp if index is $monthIndex',
+      ({ monthIndex, monthRegExp }) => {
+        expect(getMonthByIndex(monthIndex)).toMatch(monthRegExp);
+      }
+    );
   });
 });
