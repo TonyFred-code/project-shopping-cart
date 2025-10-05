@@ -4,11 +4,12 @@ import HeroSection from '@/components/HeroSection.jsx';
 import OnSaleSection from '@/components/OnSaleSection.jsx';
 import InSeasonSection from '@/components/InSeasonSection.jsx';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
-import { fruitInSeason, fruitOnSale } from '@/helpers/fruits-helper.js';
+import { seasonAvailabilityOnSale } from '@/helpers/fruits-helper.js';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
+import randomInteger from 'random-int';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -27,11 +28,21 @@ export default function HomePage() {
   const cartItemsData = useCartItems();
 
   const onSaleFruits = fruitsData.fruits.filter((d) => {
-    return fruitOnSale(d);
+    const { season_availability } = d;
+
+    return (
+      seasonAvailabilityOnSale(season_availability) &&
+      randomInteger(0, 10) % 2 === 0
+    );
   });
 
   const inSeasonFruits = fruitsData.fruits.filter((d) => {
-    return fruitInSeason(d);
+    const { season_availability } = d;
+
+    return (
+      !seasonAvailabilityOnSale(season_availability) &&
+      randomInteger(0, 10) % 2 !== 0
+    );
   });
 
   function handleShowItemDetails(fruitId) {

@@ -45,6 +45,20 @@ describe('FruitsHelper', () => {
     });
   });
 
+  // describe('fruitMonthOnSale', () => {
+  //   it('should throw error if months array is empty or non valid', () => {
+  //     expect(() => fruitMonthOnSale([])).toThrowError(/invalid argument/i);
+  //   });
+
+  //   it('should return true if months array is a string - "all year round"', () => {
+  //     expect(fruitMonthOnSale('All year round')).toBe(true);
+  //   });
+
+  //   it('should throw error if month', () => {
+
+  //   })
+  // });
+
   describe('getMonthByIndex', () => {
     it('should throw an error if month index is out of bounds', () => {
       expect(() => getMonthByIndex(-1)).toThrowError(/out of bounds/i);
