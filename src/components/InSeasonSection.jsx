@@ -1,15 +1,11 @@
 import baseStyles from '../styles/base.module.css';
 import classNames from 'classnames';
 import styled from 'styled-components';
-import ImageFiller from 'react-image-filler';
-import FRUITS_LIST from '../helpers/data.json';
-import { fruitInSeason } from '@/helpers/fruits-helper.js';
 import Icon from '@mdi/react';
 import { mdiFire } from '@mdi/js';
 import { ThreeDots } from 'react-loader-spinner';
-import { array, arrayOf, bool, func, object } from 'prop-types';
+import { array, bool, func } from 'prop-types';
 import ProductCard from './ProductCard.jsx';
-import randomArrayElement from '@/helpers/randomArrayElement.js';
 
 const InSeasonSectionWrapper = styled.section`
   & {
@@ -59,8 +55,6 @@ export default function InSeasonSection({
   loading,
   showProductDetails,
 }) {
-  // const quantity = fruits.length;
-
   return (
     <InSeasonSectionWrapper id="in-season">
       <h2
@@ -100,7 +94,7 @@ export default function InSeasonSection({
             return (
               <ProductCard
                 key={fruit.id}
-                showProductDetails={showProductDetails}
+                showProductDetails={() => showProductDetails(fruit.id)}
                 fruitData={fruit}
               />
             );

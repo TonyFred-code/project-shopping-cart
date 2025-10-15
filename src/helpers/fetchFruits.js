@@ -1,28 +1,28 @@
-// helpers/fetchCategories.js
 import randomInteger from 'random-int';
 import loadCachedData from './loadCachedData.js';
+import {
+  CACHE_EXPIRATION,
+  CACHE_KEY,
+  CACHE_TIME_KEY,
+} from '@/constants/fruitsCache.js';
 
-export async function fetchCategories() {
-  const CACHE_KEY = 'categories_cache';
-  const CACHE_TIME_KEY = 'categories_cache_time';
-  const CACHE_EXPIRATION = 2 * 60 * 60 * 1000; // 2 hours
-  const LOADER_DURATION = randomInteger(500, 700);
+export default async function fetchFruits() {
+  const LOADER_DURATION = randomInteger(500, 799);
 
-  // utility: sleep
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-  function loadCachedCategoriesData(offline = false) {
+  function loadCachedFruitsData(offline = false) {
     return loadCachedData(offline, CACHE_KEY, CACHE_TIME_KEY, CACHE_EXPIRATION);
   }
 
-  const cached = loadCachedCategoriesData();
+  const cached = loadCachedFruitsData();
   if (cached) {
-    await sleep(LOADER_DURATION); // keep the fake delay
+    await sleep(LOADER_DURATION);
     return cached;
   }
 
   try {
-    const response = await fetch('/categories.json');
+    const response = await fetch('/data.json');
     await sleep(LOADER_DURATION);
 
     if (!response.ok) throw new Error('Network response was not ok');
@@ -34,9 +34,10 @@ export async function fetchCategories() {
     localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
 
     return data;
-  } catch (err) {
-    const backup = loadCachedCategoriesData(true);
+  } catch (error) {
+    const backup = loadCachedFruitsData(true);
     if (backup) return backup;
-    throw err;
+
+    throw error;
   }
 }

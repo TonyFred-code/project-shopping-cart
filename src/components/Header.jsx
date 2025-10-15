@@ -40,6 +40,13 @@ const HeaderWrapper = styled.header`
     justify-content: center;
     cursor: pointer;
     padding: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  button a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   button:hover,
@@ -120,7 +127,7 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-export default function Header({ cartItemsCount, toggleSideMenuOpen }) {
+export default function Header({ cartItemsCount = 0, toggleSideMenuOpen }) {
   return (
     <HeaderWrapper
       className={classNames(
@@ -161,10 +168,12 @@ export default function Header({ cartItemsCount, toggleSideMenuOpen }) {
             type="button"
             className={classNames(baseStyles.uGapD3r, 'cart-btn')}
           >
-            <span className="cart-badge">{cartItemsCount}</span>
-            <Icon path={mdiCart} size={1.35} />
-            {/*TODO: SHOW BADGES */}
-            <span className="btn-icon-text">Cart</span>
+            <Link to={'/cart'}>
+              <span className="cart-badge">{cartItemsCount}</span>
+              <Icon path={mdiCart} size={1.35} />
+              {/*TODO: SHOW BADGES */}
+              <span className="btn-icon-text">Cart</span>
+            </Link>
           </button>
           {/* TODO: ADD PRODUCT SEARCHING */}
         </div>

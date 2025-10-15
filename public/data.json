@@ -57,7 +57,7 @@
     },
     "colors": ["Yellow", "Green"],
     "categories": ["Tropical"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 150,
     "image_url": "https://example.com/pineapple.jpg",
     "gallery_urls": [
@@ -149,7 +149,7 @@
     },
     "colors": ["Yellow", "Green"],
     "categories": ["Tropical"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 200,
     "image_url": "https://example.com/banana.jpg",
     "gallery_urls": [
@@ -191,7 +191,7 @@
     },
     "colors": ["Green", "Yellow", "Black"],
     "categories": ["Tropical"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 180,
     "image_url": "https://example.com/plantain.jpg",
     "gallery_urls": [
@@ -233,7 +233,7 @@
     },
     "colors": ["Brown", "Green"],
     "categories": ["Tropical"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 100,
     "image_url": "https://example.com/coconut.jpg",
     "gallery_urls": [
@@ -317,7 +317,7 @@
     },
     "colors": ["Yellow"],
     "categories": ["Citrus"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 180,
     "image_url": "https://example.com/lemon.jpg",
     "gallery_urls": [
@@ -359,7 +359,7 @@
     },
     "colors": ["Green"],
     "categories": ["Citrus"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 200,
     "image_url": "https://example.com/lime.jpg",
     "gallery_urls": [
@@ -569,7 +569,7 @@
     },
     "colors": ["Green", "Yellow", "Pink (flesh)"],
     "categories": ["Tropical"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 300,
     "image_url": "https://example.com/guava.jpg",
     "gallery_urls": [
@@ -653,7 +653,7 @@
     },
     "colors": ["Brown", "Golden"],
     "categories": ["Tropical", "Dried Fruit"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 500,
     "image_url": "https://example.com/dates.jpg",
     "gallery_urls": [
@@ -695,7 +695,7 @@
     },
     "colors": ["Red", "Green", "Yellow"],
     "categories": ["Temperate"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 400,
     "image_url": "https://example.com/apple.jpg",
     "gallery_urls": [
@@ -737,7 +737,7 @@
     },
     "colors": ["Green", "Red", "Black", "Purple"],
     "categories": ["Temperate", "Berry"],
-    "season_availability": ["All year round"],
+    "season_availability": "All year round",
     "stock": 300,
     "image_url": "https://example.com/grapes.jpg",
     "gallery_urls": [
