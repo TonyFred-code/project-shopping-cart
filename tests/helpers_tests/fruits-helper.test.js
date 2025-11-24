@@ -1,6 +1,8 @@
 import { it, expect, describe, afterEach, vi } from 'vitest';
 import {
+  fruitInSeason,
   fruitMonthOnSale,
+  fruitOnSale,
   getCurrentMonth,
   getMonthByIndex,
   getRandomDiscount,
@@ -45,19 +47,81 @@ describe('FruitsHelper', () => {
     });
   });
 
-  // describe('fruitMonthOnSale', () => {
-  //   it('should throw error if months array is empty or non valid', () => {
-  //     expect(() => fruitMonthOnSale([])).toThrowError(/invalid argument/i);
-  //   });
+  describe('fruitInSeason', () => {
+    it('should throw error if given an invalid string as argument', () => {
+      expect(() => fruitInSeason('')).toThrowError(/invalid argument/i);
+      expect(() => fruitInSeason('invalid')).toThrowError(/invalid argument/i);
+    });
 
-  //   it('should return true if months array is a string - "all year round"', () => {
-  //     expect(fruitMonthOnSale('All year round')).toBe(true);
-  //   });
+    it('should throw an error if given an invalid array ', () => {
+      expect(() => fruitInSeason([])).toThrowError(/invalid argument/i);
+    });
 
-  //   it('should throw error if month', () => {
+    it('should throw an error if array contains invalid month data', () => {
+      expect(() => fruitInSeason(['invalid'])).toThrowError(
+        /invalid argument/i
+      );
+    });
 
-  //   })
-  // });
+    it('should return false if seasonAvailability is all year round', () => {
+      expect(fruitInSeason('all year round')).toBe(false);
+    });
+
+    it('should return true if seasonAvailability includes current month', () => {
+      const date = new Date(2025, 10, 10);
+      vi.setSystemTime(date);
+
+      expect(fruitInSeason(['january', 'december', 'november'])).toBe(true);
+    });
+
+    it('should return false if seasonAvailability does not include current month', () => {
+      const date = new Date(2025, 10, 10);
+      vi.setSystemTime(date);
+
+      expect(fruitInSeason(['january', 'december'])).toBe(false);
+    });
+  });
+
+  describe('fruitOnSale', () => {
+    it('should throw an error if given an invalid string as argument', () => {
+      expect(() => fruitOnSale('')).toThrowError(/invalid argument/i);
+      expect(() => fruitOnSale('invalid')).toThrowError(/invalid argument/i);
+    });
+
+    it('should throw error if given an invalid array as argument', () => {
+      expect(() => fruitOnSale([])).toThrowError(/invalid argument/i);
+    });
+
+    it('should throw error if array contains invalid month data', () => {
+      expect(() => fruitOnSale(['invalid'])).toThrowError(/invalid argument/i);
+    });
+
+    it('should return true if seasonAvailability is all year round and randomCheck passes', () => {
+      vi.mocked(randomInteger).mockReturnValue(4);
+      expect(fruitOnSale('all year round')).toBe(true);
+    });
+
+    it('should return false if seasonAvailability is all year round but randomCheck fails', () => {
+      vi.mocked(randomInteger).mockReturnValue(9);
+      expect(fruitOnSale('all year round')).toBe(false);
+    });
+
+    it('should return true if out of season and randomCheck passes', () => {
+      vi.mocked(randomInteger).mockReturnValue(6);
+      const date = new Date(2025, 10, 10);
+      vi.setSystemTime(date);
+
+      expect(fruitOnSale(['january', 'february'])).toBe(true);
+    });
+
+    it('should return false if out of season but randomCheck fails', () => {
+      vi.mocked(randomInteger).mockReturnValue(9);
+      const date = new Date(2025, 10, 11);
+      vi.setSystemTime(date);
+
+      expect(fruitOnSale(['january', 'november'])).toBe(false);
+    });
+  });
 
   describe('getMonthByIndex', () => {
     it('should throw an error if month index is out of bounds', () => {
