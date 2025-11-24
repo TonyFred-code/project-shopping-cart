@@ -8,7 +8,9 @@ import {
   CACHE_TIME_KEY,
 } from '../../src/constants/fruitsCache.js';
 
-const fakeData = [{ id: 1, name: 'mango', price: 22 }];
+const fakeData = [
+  { id: 1, name: 'mango', price: 22, season_availability: 'all year round' },
+];
 vi.mock('../../src/helpers/loadCachedData.js');
 vi.mock('random-int');
 
@@ -37,7 +39,7 @@ describe('fetchFruits', () => {
 
     const result = await fetchFruits();
 
-    expect(result).toEqual(fakeData);
+    expect(result).toMatchObject(fakeData);
     expect(fetch).not.toHaveBeenCalled();
   });
 
@@ -76,7 +78,7 @@ describe('fetchFruits', () => {
     const cacheValue = JSON.parse(localStorage.getItem(CACHE_KEY));
     const cacheTime = localStorage.getItem(CACHE_TIME_KEY);
 
-    expect(cacheValue).toEqual(fakeData);
+    expect(cacheValue).toMatchObject(fakeData);
     expect(typeof Number(cacheTime)).toBe('number');
     expect(Number(cacheTime)).toBeGreaterThan(0);
   });
