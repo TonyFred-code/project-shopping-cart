@@ -41,9 +41,6 @@ vi.mock('../../src/components/Layout.jsx', () => ({
 vi.mock('../../src/components/HeroSection.jsx', () => ({
   default: () => <div>Hero</div>,
 }));
-// vi.mock('../../src/components/HomePageWrapper.jsx', () => ({
-//   default: ({ children }) => <div>{children}</div>,
-// }));
 
 const mockFruits = [
   {
