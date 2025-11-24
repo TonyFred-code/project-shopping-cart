@@ -29,6 +29,35 @@ export function getRandomDiscount(min = 5, max = 55) {
   return randomInteger(min, max);
 }
 
+function isAvailableAllYear(seasonAvailability) {
+  if (typeof seasonAvailability === 'string') {
+    seasonAvailability = seasonAvailability.trim();
+
+    if (
+      seasonAvailability.length === 0 ||
+      !/all year round/i.test(seasonAvailability)
+    ) {
+      throw new Error(
+        'Invalid Argument: expected parameter to match "all year round"'
+      );
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+function isArrayOfValidMonths(monthsArray) {
+  if (!Array.isArray(monthsArray) || monthsArray.length === 0) return false;
+
+  return monthsArray.every((month) =>
+    /january|february|march|april|may|june|july|august|september|october|november|december/i.test(
+      month
+    )
+  );
+}
+
 /**
  * Checks if a fruit is currently in season based on its seasonal availability.
  *
@@ -45,11 +74,11 @@ export function getRandomDiscount(min = 5, max = 55) {
  *   Throws if the argument is not a valid array or is an empty array.
  */
 function isCurrentlyInSeason(seasonAvailability) {
-  if (typeof seasonAvailability === 'string') {
-    return /all year round/i.test(seasonAvailability);
-  }
+  const availableAllYear = isAvailableAllYear(seasonAvailability);
 
-  if (!Array.isArray(seasonAvailability) || seasonAvailability.length === 0) {
+  if (availableAllYear) return false;
+
+  if (!isArrayOfValidMonths(seasonAvailability)) {
     throw new Error('Invalid argument: Expected non-empty array of months');
   }
 
