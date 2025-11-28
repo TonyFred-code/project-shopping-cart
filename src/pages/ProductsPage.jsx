@@ -4,11 +4,9 @@ import { useState } from 'react';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { array } from 'prop-types';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
-import useCategoriesData from '@/helpers/useCategoriesData.jsx';
 import classNames from 'classnames';
 import ProductCard from '@/components/ProductCard.jsx';
 import { ThreeDots } from 'react-loader-spinner';
-import randomArrayElement from '@/helpers/randomArrayElement.js';
 import sortBy from 'sort-by';
 import arrayShuffle from 'array-shuffle';
 import Icon from '@mdi/react';
@@ -93,7 +91,6 @@ const ProductsPageWrapper = styled.div`
 export default function ProductsPage() {
   const [sortOption, setSortOption] = useState('random');
   const fruitsData = useFruitsData();
-  const categoriesData = useCategoriesData();
   const [openItemDetails, setOpenItemDetails] = useState(false);
   const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
   const cartItemsData = useCartItems();
@@ -129,11 +126,7 @@ export default function ProductsPage() {
     setOpenItemDetails(true);
   }
 
-  function toggleOpenItemDetails() {
-    setOpenItemDetails(!openItemDetails);
-  }
-
-  if (fruitsData.error || categoriesData.error) {
+  if (fruitsData.error) {
     return (
       <LayoutWrapper>
         <div>Something went wrong with the data fetching</div>
@@ -172,7 +165,7 @@ export default function ProductsPage() {
         </div>
         <main className="products-page-main">
           {/* <aside></aside> */}
-          {categoriesData.loading || fruitsData.loading ? (
+          {fruitsData.loading ? (
             <div className="loading-container">
               <ThreeDots
                 visible={true}
@@ -204,7 +197,6 @@ export default function ProductsPage() {
           <ProductDetails
             fruitData={displayedItemDetails}
             open={openItemDetails}
-            toggleOpen={toggleOpenItemDetails}
             closeProductDetails={() => {
               setDisplayedItemDetails(null);
               setOpenItemDetails(false);
