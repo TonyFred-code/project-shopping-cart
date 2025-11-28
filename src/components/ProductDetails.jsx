@@ -219,12 +219,13 @@ export default function ProductDetails({
   open,
   fruitData,
   closeProductDetails,
+  confirmAddToCart,
 }) {
   const [quantity, setQuantity] = useState(1);
   const [showMaxWarning, setShowMaxWarning] = useState(false);
   const [showMinWarning, setShowMinWarning] = useState(false);
 
-  const { name, pricing, categories, stock } = fruitData;
+  const { name, pricing, categories, stock, id } = fruitData;
 
   function hideWarnings() {
     setShowMaxWarning(false);
@@ -333,7 +334,10 @@ export default function ProductDetails({
               </div>
 
               <div className="add-container">
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => confirmAddToCart(quantity, id)}
+                >
                   <Icon path={mdiCartPlus} color="inherit" size={1.2} />
                   <span className="icon-text">Confirm</span>
                 </button>
@@ -364,5 +368,5 @@ ProductDetails.propTypes = {
   fruitData: object,
   open: bool,
   closeProductDetails: func,
-  toggleOpen: func,
+  confirmAddToCart: func,
 };
