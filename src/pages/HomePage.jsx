@@ -8,6 +8,7 @@ import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
+import { CART_KEY } from '@/constants/cartsCache.js';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -37,8 +38,8 @@ export default function HomePage() {
     setOpenItemDetails(true);
   }
 
-  function toggleOpenItemDetails() {
-    setOpenItemDetails(!openItemDetails);
+  function handleAddToCart(quantity, fruitId) {
+    cartItemsData.uploadCartItem(quantity, fruitId, cartItemsData.cartItems);
   }
 
   useEffect(() => {
@@ -49,6 +50,12 @@ export default function HomePage() {
       }
     }
   }, [location]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem(CART_KEY, JSON.stringify(cartItemsData.cartItems));
+    };
+  }, [cartItemsData]);
 
   // ! REFACTOR FAILED FETCH
   if (fruitsData.error) return <div> FAILED TO FETCH</div>;
@@ -71,11 +78,11 @@ export default function HomePage() {
           <ProductDetails
             fruitData={displayedItemDetails}
             open={openItemDetails}
-            toggleOpen={toggleOpenItemDetails}
             closeProductDetails={() => {
               setDisplayedItemDetails(null);
               setOpenItemDetails(false);
             }}
+            confirmAddToCart={handleAddToCart}
           />
         )}
       </LayoutWrapper>
