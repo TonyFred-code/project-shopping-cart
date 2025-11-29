@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
 import { CART_KEY } from '@/constants/cartsCache.js';
+import randomInteger from 'random-int';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -43,11 +44,17 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+    const LOADER_DURATION = randomInteger(500, 799);
+
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
     if (location.hash) {
-      const el = document.getElementById(location.hash.replace('#', ''));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      sleep(LOADER_DURATION).then(() => {
+        const el = document.getElementById(location.hash.replace('#', ''));
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }
   }, [location]);
 
