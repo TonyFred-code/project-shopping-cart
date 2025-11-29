@@ -59,7 +59,7 @@ export default async function fetchFruits() {
     localStorage.setItem(CACHE_KEY, JSON.stringify(fruitData));
     localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
 
-    return data;
+    return fruitData;
   } catch (error) {
     const backup = loadCachedFruitsData(true);
     if (backup) return backup;

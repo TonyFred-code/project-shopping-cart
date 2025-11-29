@@ -72,7 +72,7 @@ describe('fetchFruits', () => {
   it('should load fresh data if no valid cache exists and store in cache', async () => {
     const result = await fetchFruits();
 
-    expect(result).toEqual(fakeData);
+    expect(result).toMatchObject(fakeData);
     expect(fetch).toHaveBeenCalledWith('/data.json');
 
     const cacheValue = JSON.parse(localStorage.getItem(CACHE_KEY));
