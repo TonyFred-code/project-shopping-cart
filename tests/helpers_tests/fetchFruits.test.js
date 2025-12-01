@@ -30,7 +30,6 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
-  vi.useRealTimers();
 });
 
 describe('fetchFruits', () => {
@@ -125,4 +124,6 @@ describe('fetchFruits', () => {
     ); // second call mock marked as offline
     expect(result).toEqual(fakeData);
   });
+
+  //TODO: add test for attaching in season, sale, and discount properties to fetched data
 });
