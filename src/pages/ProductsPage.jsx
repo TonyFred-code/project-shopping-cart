@@ -126,6 +126,15 @@ export default function ProductsPage() {
     setOpenItemDetails(true);
   }
 
+  function handleAddToCart(quantity, fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (fruit) => fruit.id === fruitId
+    )[0];
+
+    cartItemsData.uploadCartItem(quantity, fruitData);
+    // TODO: add notification for adding over items in stock.
+  }
+
   if (fruitsData.error) {
     return (
       <LayoutWrapper>
@@ -201,6 +210,7 @@ export default function ProductsPage() {
               setDisplayedItemDetails(null);
               setOpenItemDetails(false);
             }}
+            confirmAddToCart={handleAddToCart}
           />
         )}
       </LayoutWrapper>
