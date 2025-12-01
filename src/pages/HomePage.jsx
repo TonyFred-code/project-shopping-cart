@@ -8,7 +8,6 @@ import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
-import { CART_KEY } from '@/constants/cartsCache.js';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -39,7 +38,12 @@ export default function HomePage() {
   }
 
   function handleAddToCart(quantity, fruitId) {
-    cartItemsData.uploadCartItem(quantity, fruitId, cartItemsData.cartItems);
+    const fruitData = fruitsData.fruits.filter(
+      (fruit) => fruit.id === fruitId
+    )[0];
+
+    cartItemsData.uploadCartItem(quantity, fruitData);
+    // TODO: add notification for adding over items in stock.
   }
 
   useEffect(() => {
@@ -50,12 +54,6 @@ export default function HomePage() {
       }
     } //TODO: ADD DELAY BEFORE SCROLL HAPPENS
   }, [location]);
-
-  useEffect(() => {
-    return () => {
-      localStorage.setItem(CART_KEY, JSON.stringify(cartItemsData.cartItems));
-    };
-  }, [cartItemsData]);
 
   // ! REFACTOR FAILED FETCH
   if (fruitsData.error) return <div> FAILED TO FETCH</div>;
