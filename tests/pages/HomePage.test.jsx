@@ -57,6 +57,17 @@ const mockFruits = [
   },
 ];
 
+const mockCartItems = [
+  {
+    id: 1,
+    name: 'Mango',
+    pricing: { price_per_unit: 234 },
+    season_availability: ['January'],
+    cart_quantity: 100,
+    stock: 100,
+  },
+];
+
 import HomePage from '../../src/pages/HomePage.jsx';
 
 // mock hooks
@@ -75,8 +86,9 @@ describe('HomePage', () => {
       loading: false,
       error: null,
     });
+
     vi.spyOn(cartHook, 'default').mockReturnValue({
-      cartItems: [1],
+      cartItems: mockCartItems,
       loading: false,
       uploadCartItem: mockUploadCartItem,
     });
