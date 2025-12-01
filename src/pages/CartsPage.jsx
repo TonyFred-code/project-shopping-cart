@@ -108,14 +108,6 @@ const CartsWrapper = styled.div`
 export default function CartsPage() {
   const cartItemsData = useCartItems();
   const fruitsData = useFruitsData();
-  const fruitsInCart = cartItemsData.cartItems.map((cartItem) => {
-    const fruitData = fruitsData.fruits.find(
-      (fruit) => fruit.id === cartItem.id
-    );
-
-    return fruitData;
-  });
-
   if (fruitsData.error) {
     return <div>Failed to Fetch</div>;
   }
@@ -139,7 +131,7 @@ export default function CartsPage() {
       </header>
       <main>
         <section>
-          {fruitsInCart.length === 0 ? (
+          {cartItemsData.cartItems.length === 0 ? (
             <div className="empty-cart">
               <h1>Your cart is empty.</h1>
               <p>
@@ -148,7 +140,17 @@ export default function CartsPage() {
               </p>
             </div>
           ) : (
-            <div className="non-empty-cart"> You have some items in cart</div>
+            <div className="non-empty-cart">
+              {cartItemsData.cartItems.map((cartItem) => {
+                const { cart_quantity, name, pricing, id } = cartItem;
+
+                return (
+                  <div key={id}>
+                    {name} {pricing.price_per_unit} {cart_quantity}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </section>
         <footer></footer>
