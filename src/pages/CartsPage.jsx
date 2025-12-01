@@ -107,10 +107,6 @@ const CartsWrapper = styled.div`
 
 export default function CartsPage() {
   const cartItemsData = useCartItems();
-  const fruitsData = useFruitsData();
-  if (fruitsData.error) {
-    return <div>Failed to Fetch</div>;
-  }
 
   return (
     <CartsWrapper>
