@@ -10,22 +10,42 @@ export default function useCartItems() {
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
 
-  function uploadCartItem(quantity, fruitId) {
-    const isFruitInCart = fruitInCart(fruitId, cartItems);
+  function uploadCartItem(quantity, fruitData) {
+    const { stock, id } = fruitData;
+    const isFruitInCart = fruitInCart(id, cartItems);
+
     let updatedCartItems = [];
     if (isFruitInCart) {
       updatedCartItems = cartItems.map((cartItem) => {
-        if (cartItem.id === fruitId) {
-          return { ...cartItem, quantity: cartItem.quantity + quantity };
+        if (cartItem.id === id) {
+          const quantityToBeAdded = quantity + cartItem.cart_quantity;
+          if (stock >= quantityToBeAdded) {
+            return {
+              ...cartItem,
+              cart_quantity: quantityToBeAdded,
+            };
+          } else if (stock < quantityToBeAdded) {
+            return {
+              ...cartItem,
+              cart_quantity: stock,
+            };
+          }
         }
 
         return cartItem;
       });
     } else {
-      updatedCartItems = [...cartItems, { id: fruitId, quantity }];
+      updatedCartItems = [
+        ...cartItems,
+        {
+          ...fruitData,
+          cart_quantity: quantity,
+        },
+      ];
     }
 
     setCartItems(updatedCartItems);
+    localStorage.setItem(CART_KEY, JSON.stringify(updatedCartItems));
   }
 
   useEffect(() => {
