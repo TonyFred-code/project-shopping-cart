@@ -106,13 +106,16 @@ export default function ProductsPage() {
       displayedData.sort(sortBy('name'));
       iconChoice = <Icon path={mdiSortAlphabeticalAscending} size={1.3} />;
       break;
-    // TODO: add fix sorting by pricing
-    // case 'price-high-to-low':
-    //   displayedData.sort(sortBy('pricing.price_per_unit'));
-    //   break;
-    // case 'price-low-to-high':
-    //   displayedData.sort(sortBy('-pricing.price_per_unit'));
-    //   break;
+    case 'price-high-to-low':
+      displayedData.sort(
+        (a, b) => b.pricing.price_per_unit - a.pricing.price_per_unit
+      );
+      break;
+    case 'price-low-to-high':
+      displayedData.sort(
+        (a, b) => a.pricing.price_per_unit - b.pricing.price_per_unit
+      );
+      break;
     default:
       displayedData = arrayShuffle(fruitsData.fruits);
       break;
@@ -163,12 +166,12 @@ export default function ProductsPage() {
               <option value="random">Default Sorting (RANDOM)</option>
               <option value="desc-a-z">Alphabetically (descending)</option>
               <option value="ascending-a-z">Alphabetically (ascending)</option>
-              {/* <option value="price-low-to-high">
+              <option value="price-low-to-high">
                 Sort by price (Low to High)
               </option>
               <option value="price-high-to-low">
                 Sort by price: (High to Low)
-              </option> */}
+              </option>
             </select>
           </div>
         </div>
