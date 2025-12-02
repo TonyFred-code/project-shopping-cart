@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import Footer from '@/components/Footer.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
-import useFruitsData from '@/helpers/useFruitsData.jsx';
+import { ThreeDots } from 'react-loader-spinner';
 
 const CartsWrapper = styled.div`
   & {
@@ -126,29 +126,50 @@ export default function CartsPage() {
         </button>
       </header>
       <main>
-        <section>
-          {cartItemsData.cartItems.length === 0 ? (
-            <div className="empty-cart">
-              <h1>Your cart is empty.</h1>
-              <p>
-                It appears you have no items in your cart. Go ahead and explore
-                the shop for choice fruits
-              </p>
-            </div>
-          ) : (
-            <div className="non-empty-cart">
-              {cartItemsData.cartItems.map((cartItem) => {
-                const { cart_quantity, name, pricing, id } = cartItem;
+        {cartItemsData.loading ? (
+          <div
+            className={classNames(
+              baseStyles.uFlex,
+              baseStyles.uAlignCenter,
+              baseStyles.uJustifyCenter
+            )}
+          >
+            <ThreeDots
+              visible={true}
+              height="80"
+              width="80"
+              color="#4fa94d"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
+          <section>
+            {cartItemsData.cartItems.length === 0 ? (
+              <div className="empty-cart">
+                <h1>Your cart is empty.</h1>
+                <p>
+                  It appears you have no items in your cart. Go ahead and
+                  explore the shop for choice fruits
+                </p>
+              </div>
+            ) : (
+              <div className="non-empty-cart">
+                {cartItemsData.cartItems.map((cartItem) => {
+                  const { cart_quantity, name, pricing, id } = cartItem;
 
-                return (
-                  <div key={id}>
-                    {name} {pricing.price_per_unit} {cart_quantity}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </section>
+                  return (
+                    <div key={id}>
+                      {name} {pricing.price_per_unit} {cart_quantity}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+        )}
         <footer></footer>
       </main>
       <Footer />
