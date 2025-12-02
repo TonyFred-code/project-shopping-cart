@@ -3,48 +3,32 @@ import { screen, render } from '@testing-library/react';
 import CartsPage from '../../src/pages/CartsPage.jsx';
 import { MemoryRouter } from 'react-router-dom';
 
-import * as fruitsHook from '../../src/helpers/useFruitsData.jsx';
 import * as cartsHook from '../../src/helpers/useCartItems.jsx';
 
-const mockFruits = [
+const mockCartItems = [
   {
     id: 1,
     name: 'Mango',
     pricing: { price_per_unit: 234 },
     season_availability: ['January'],
+    cart_quantity: 100,
+    stock: 100,
   },
 ];
 
 describe('CartsPage', () => {
   beforeEach(() => {
-    vi.spyOn(fruitsHook, 'default').mockReturnValue({
-      fruits: mockFruits,
+    vi.spyOn(cartsHook, 'default').mockReturnValue({
+      cartItems: mockCartItems,
       loading: false,
-      error: null,
+      uploadCartItem: vi.fn(),
     });
-  });
-
-  it('should render error if fetch call fails', async () => {
-    fruitsHook.default.mockReturnValueOnce({
-      fruits: [],
-      loading: false,
-      error: new Error('failed'),
-    });
-
-    render(
-      <MemoryRouter>
-        <CartsPage />
-      </MemoryRouter>
-    );
-
-    expect(await screen.findByText(/failed to fetch/i)).toBeInTheDocument();
   });
 
   it('should show no items in cart when there are no items in the cart', async () => {
-    fruitsHook.default.mockReturnValueOnce({
-      fruits: [],
+    cartsHook.default.mockReturnValueOnce({
+      cartItems: [],
       loading: false,
-      error: null,
     });
 
     render(
