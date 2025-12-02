@@ -162,6 +162,16 @@ exports[`ProductsPage > should  match page load snapshot 1`] = `
                   >
                     Alphabetically (ascending)
                   </option>
+                  <option
+                    value="price-low-to-high"
+                  >
+                    Sort by price (Low to High)
+                  </option>
+                  <option
+                    value="price-high-to-low"
+                  >
+                    Sort by price: (High to Low)
+                  </option>
                 </select>
               </div>
             </div>
@@ -582,6 +592,16 @@ exports[`ProductsPage > should  match page load snapshot 1`] = `
                   value="ascending-a-z"
                 >
                   Alphabetically (ascending)
+                </option>
+                <option
+                  value="price-low-to-high"
+                >
+                  Sort by price (Low to High)
+                </option>
+                <option
+                  value="price-high-to-low"
+                >
+                  Sort by price: (High to Low)
                 </option>
               </select>
             </div>
