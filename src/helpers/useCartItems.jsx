@@ -19,6 +19,7 @@ export default function useCartItems() {
       updatedCartItems = cartItems.map((cartItem) => {
         if (cartItem.id === id) {
           const quantityToBeAdded = quantity + cartItem.cart_quantity;
+
           if (stock >= quantityToBeAdded) {
             return {
               ...cartItem,
@@ -44,8 +45,12 @@ export default function useCartItems() {
       ];
     }
 
-    setCartItems(updatedCartItems);
-    localStorage.setItem(CART_KEY, JSON.stringify(updatedCartItems));
+    const finalCartItems = updatedCartItems.filter(
+      (cartItem) => cartItem.cart_quantity > 0
+    );
+
+    setCartItems(finalCartItems);
+    localStorage.setItem(CART_KEY, JSON.stringify(finalCartItems));
   }
 
   useEffect(() => {
