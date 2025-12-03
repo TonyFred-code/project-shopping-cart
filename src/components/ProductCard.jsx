@@ -1,10 +1,8 @@
 import { string, number, bool, oneOf, shape, func } from 'prop-types';
 import styled from 'styled-components';
-import baseStyles from '../styles/base.module.css';
 import ImageFiller from 'react-image-filler';
 import Icon from '@mdi/react';
-import { mdiCart, mdiHeart } from '@mdi/js';
-import classNames from 'classnames';
+import { mdiCart } from '@mdi/js';
 import randomArrayElement from '@/helpers/randomArrayElement.js';
 
 const ProductCardWrapper = styled.div`
@@ -134,17 +132,6 @@ export default function ProductCard({
         {/**TODO: USE PROPER IMAGE, MAKE IMAGE A LINK */}
         {/* <img src={imageSrc} alt={imageAlt} /> */}
         <ImageFiller width={150} height={150} alt={imageAlt} />
-        <button
-          className={classNames(
-            baseStyles.uAlignCenter,
-            baseStyles.uFlex,
-            baseStyles.uJustifyCenter,
-            'wishlist-container'
-          )}
-          data-testid="wishlist-button"
-        >
-          <Icon path={mdiHeart} size={1.75} />
-        </button>
       </div>
       <div className="product-details">
         <div className="title">

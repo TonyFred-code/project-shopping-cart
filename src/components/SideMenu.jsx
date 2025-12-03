@@ -1,7 +1,6 @@
 import {
   mdiCalendarStarFourPoints,
   mdiGithub,
-  mdiHeartCircle,
   mdiSale,
   mdiStore,
 } from '@mdi/js';
@@ -156,7 +155,6 @@ export default function SideMenu({ open, toggleOpen }) {
       icon: mdiCalendarStarFourPoints,
       to: '/#in-season',
     },
-    { label: 'Wishlist', icon: mdiHeartCircle, to: '/' },
   ];
 
   return (
