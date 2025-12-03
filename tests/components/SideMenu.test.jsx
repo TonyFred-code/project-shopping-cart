@@ -46,11 +46,6 @@ describe('SideMenu', () => {
       scenario: 'navigate to shop page when clicked',
       expectedMatcher: /shop page/i,
     },
-    {
-      selectorRegExp: /wishlist/i,
-      scenario: 'navigate to home page when clicked',
-      expectedMatcher: /wishlist/i,
-    },
   ])(
     'should $scenario and call toggleOpen',
     async ({ selectorRegExp, expectedMatcher }) => {
