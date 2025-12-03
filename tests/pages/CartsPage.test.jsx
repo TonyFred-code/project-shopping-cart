@@ -5,6 +5,12 @@ import { MemoryRouter } from 'react-router-dom';
 
 import * as cartsHook from '../../src/helpers/useCartItems.jsx';
 
+vi.mock('react-image-filler', () => ({
+  default: () => {
+    return <div>some image</div>;
+  },
+}));
+
 const mockCartItems = [
   {
     id: 1,
