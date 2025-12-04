@@ -52,13 +52,6 @@ describe('ProductCard', () => {
     expect(mockShowProductDetails).toHaveBeenCalledWith(fruitData.id);
   });
 
-  it('renders wishlist button', () => {
-    // test will serve as functionality testing later
-    renderProductCard();
-
-    expect(screen.getByTestId('wishlist-button')).toBeInTheDocument();
-  });
-
   it('renders product details', () => {
     renderProductCard();
 

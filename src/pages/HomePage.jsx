@@ -4,12 +4,10 @@ import HeroSection from '@/components/HeroSection.jsx';
 import OnSaleSection from '@/components/OnSaleSection.jsx';
 import InSeasonSection from '@/components/InSeasonSection.jsx';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
-import { seasonAvailabilityOnSale } from '@/helpers/fruits-helper.js';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { useLocation } from 'react-router-dom';
 import ProductDetails from '@/components/ProductDetails.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
-import randomInteger from 'random-int';
 // import SearchMenu from '@/components/SearchMenu.jsx';
 
 const HomePageWrapper = styled.div`
@@ -27,23 +25,9 @@ export default function HomePage() {
   const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
   const cartItemsData = useCartItems();
 
-  const onSaleFruits = fruitsData.fruits.filter((d) => {
-    const { season_availability } = d;
+  const onSaleFruits = fruitsData.fruits.filter((d) => d.onSale);
 
-    return (
-      seasonAvailabilityOnSale(season_availability) &&
-      randomInteger(0, 10) % 2 === 0
-    );
-  });
-
-  const inSeasonFruits = fruitsData.fruits.filter((d) => {
-    const { season_availability } = d;
-
-    return (
-      !seasonAvailabilityOnSale(season_availability) &&
-      randomInteger(0, 10) % 2 !== 0
-    );
-  });
+  const inSeasonFruits = fruitsData.fruits.filter((d) => d.inSeason);
 
   function handleShowItemDetails(fruitId) {
     const fruitData = fruitsData.fruits.filter(
@@ -53,8 +37,13 @@ export default function HomePage() {
     setOpenItemDetails(true);
   }
 
-  function toggleOpenItemDetails() {
-    setOpenItemDetails(!openItemDetails);
+  function handleAddToCart(quantity, fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (fruit) => fruit.id === fruitId
+    )[0];
+
+    cartItemsData.addMultipleCartItems(quantity, fruitData);
+    // TODO: add notification for adding over items in stock.
   }
 
   useEffect(() => {
@@ -63,7 +52,7 @@ export default function HomePage() {
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
-    }
+    } //TODO: ADD DELAY BEFORE SCROLL HAPPENS
   }, [location]);
 
   // ! REFACTOR FAILED FETCH
@@ -87,11 +76,11 @@ export default function HomePage() {
           <ProductDetails
             fruitData={displayedItemDetails}
             open={openItemDetails}
-            toggleOpen={toggleOpenItemDetails}
             closeProductDetails={() => {
               setDisplayedItemDetails(null);
               setOpenItemDetails(false);
             }}
+            confirmAddToCart={handleAddToCart}
           />
         )}
       </LayoutWrapper>

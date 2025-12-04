@@ -4,11 +4,9 @@ import { useState } from 'react';
 import LayoutWrapper from '@/components/Layout.jsx';
 import { array } from 'prop-types';
 import useFruitsData from '@/helpers/useFruitsData.jsx';
-import useCategoriesData from '@/helpers/useCategoriesData.jsx';
 import classNames from 'classnames';
 import ProductCard from '@/components/ProductCard.jsx';
 import { ThreeDots } from 'react-loader-spinner';
-import randomArrayElement from '@/helpers/randomArrayElement.js';
 import sortBy from 'sort-by';
 import arrayShuffle from 'array-shuffle';
 import Icon from '@mdi/react';
@@ -93,7 +91,6 @@ const ProductsPageWrapper = styled.div`
 export default function ProductsPage() {
   const [sortOption, setSortOption] = useState('random');
   const fruitsData = useFruitsData();
-  const categoriesData = useCategoriesData();
   const [openItemDetails, setOpenItemDetails] = useState(false);
   const [displayedItemDetails, setDisplayedItemDetails] = useState(null);
   const cartItemsData = useCartItems();
@@ -109,13 +106,16 @@ export default function ProductsPage() {
       displayedData.sort(sortBy('name'));
       iconChoice = <Icon path={mdiSortAlphabeticalAscending} size={1.3} />;
       break;
-    // TODO: add fix sorting by pricing
-    // case 'price-high-to-low':
-    //   displayedData.sort(sortBy('pricing.price_per_unit'));
-    //   break;
-    // case 'price-low-to-high':
-    //   displayedData.sort(sortBy('-pricing.price_per_unit'));
-    //   break;
+    case 'price-high-to-low':
+      displayedData.sort(
+        (a, b) => b.pricing.price_per_unit - a.pricing.price_per_unit
+      );
+      break;
+    case 'price-low-to-high':
+      displayedData.sort(
+        (a, b) => a.pricing.price_per_unit - b.pricing.price_per_unit
+      );
+      break;
     default:
       displayedData = arrayShuffle(fruitsData.fruits);
       break;
@@ -129,11 +129,16 @@ export default function ProductsPage() {
     setOpenItemDetails(true);
   }
 
-  function toggleOpenItemDetails() {
-    setOpenItemDetails(!openItemDetails);
+  function handleAddToCart(quantity, fruitId) {
+    const fruitData = fruitsData.fruits.filter(
+      (fruit) => fruit.id === fruitId
+    )[0];
+
+    cartItemsData.addMultipleCartItems(quantity, fruitData);
+    // TODO: add notification for adding over items in stock.
   }
 
-  if (fruitsData.error || categoriesData.error) {
+  if (fruitsData.error) {
     return (
       <LayoutWrapper>
         <div>Something went wrong with the data fetching</div>
@@ -161,18 +166,18 @@ export default function ProductsPage() {
               <option value="random">Default Sorting (RANDOM)</option>
               <option value="desc-a-z">Alphabetically (descending)</option>
               <option value="ascending-a-z">Alphabetically (ascending)</option>
-              {/* <option value="price-low-to-high">
+              <option value="price-low-to-high">
                 Sort by price (Low to High)
               </option>
               <option value="price-high-to-low">
                 Sort by price: (High to Low)
-              </option> */}
+              </option>
             </select>
           </div>
         </div>
         <main className="products-page-main">
           {/* <aside></aside> */}
-          {categoriesData.loading || fruitsData.loading ? (
+          {fruitsData.loading ? (
             <div className="loading-container">
               <ThreeDots
                 visible={true}
@@ -204,11 +209,11 @@ export default function ProductsPage() {
           <ProductDetails
             fruitData={displayedItemDetails}
             open={openItemDetails}
-            toggleOpen={toggleOpenItemDetails}
             closeProductDetails={() => {
               setDisplayedItemDetails(null);
               setOpenItemDetails(false);
             }}
+            confirmAddToCart={handleAddToCart}
           />
         )}
       </LayoutWrapper>

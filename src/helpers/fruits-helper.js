@@ -29,51 +29,89 @@ export function getRandomDiscount(min = 5, max = 55) {
   return randomInteger(min, max);
 }
 
-/**
- *
- * @param {months | "all year round"} monthsArray
- * @returns true if months Array is the string "all year round"
- * @throws "invalid argument error" if months is not an array or invalid array (0 length)
- * all year round season availability is not on sale
- * if one of months in seasonAvailability is same as current month, it is not on sale
- * if current month is not in seasonAvailability fruit is on sale
- */
-export function seasonAvailabilityOnSale(seasonAvailability) {
+function isAvailableAllYear(seasonAvailability) {
   if (typeof seasonAvailability === 'string') {
-    return /all year round/i.test(seasonAvailability);
+    seasonAvailability = seasonAvailability.trim();
+
+    if (
+      seasonAvailability.length === 0 ||
+      !/all year round/i.test(seasonAvailability)
+    ) {
+      throw new Error(
+        'Invalid Argument: expected parameter to match "all year round"'
+      );
+    }
+
+    return true;
   }
 
-  if (
-    !seasonAvailability ||
-    !Array.isArray(seasonAvailability) ||
-    seasonAvailability.length === 0
-  ) {
-    throw new Error(
-      'Invalid argument: Expected array of months or array with "All year round"'
-    );
-  }
-
-  let onSale = false;
-
-  seasonAvailability.forEach((month) => {
-    const matcher = new RegExp(getCurrentMonth(), 'i');
-
-    onSale = matcher.test(month);
-  });
-
-  return onSale;
+  return false;
 }
 
-export function fruitOnSale(fruitData) {
-  if (!fruitData || !Array.isArray(fruitData.season_availability)) {
-    throw new Error('Invalid fruit data');
+function isArrayOfValidMonths(monthsArray) {
+  if (!Array.isArray(monthsArray) || monthsArray.length === 0) return false;
+
+  return monthsArray.every((month) =>
+    /january|february|march|april|may|june|july|august|september|october|november|december/i.test(
+      month
+    )
+  );
+}
+
+/**
+ * Checks if a fruit is currently in season based on its seasonal availability.
+ *
+ * @param {string | string[]} seasonAvailability
+ *   A string "all year round" OR an array of month names (e.g., ["January", "Feb"]).
+ *
+ * @returns {boolean}
+ *   Returns true if:
+ *     - seasonAvailability is not "all year round", OR
+ *     - the current month matches any month in the array.
+ *   Otherwise returns false.
+ *
+ * @throws {Error}
+ *   Throws if the argument is not a valid array or is an empty array.
+ */
+function isCurrentlyInSeason(seasonAvailability) {
+  const availableAllYear = isAvailableAllYear(seasonAvailability);
+
+  if (availableAllYear) return false;
+
+  if (!isArrayOfValidMonths(seasonAvailability)) {
+    throw new Error('Invalid argument: Expected non-empty array of months');
   }
 
-  const currentMonthName = getCurrentMonth();
-  return (
-    !fruitData.season_availability.includes(currentMonthName) &&
-    !fruitData.season_availability.includes('All year round')
+  const currentMonth = getCurrentMonth();
+  return seasonAvailability.some((month) =>
+    new RegExp(currentMonth, 'i').test(month)
   );
+}
+
+/**
+ * Determines if a fruit is currently in season.
+ *
+ * @param {string | string[]} seasonAvailability
+ * @returns {boolean}
+ */
+export function fruitInSeason(seasonAvailability) {
+  return isCurrentlyInSeason(seasonAvailability);
+}
+
+/**
+ * Determines if a fruit should be considered "on sale".
+ *
+ * A fruit is on sale only if it is **not currently in season**
+ * AND a random check passes.
+ *
+ * @param {string | string[]} seasonAvailability
+ * @returns {boolean}
+ */
+export function fruitOnSale(seasonAvailability) {
+  const outOfSeason = !isCurrentlyInSeason(seasonAvailability);
+  const shouldDiscount = randomInteger(0, 10) % 2 === 0; // 50% chance
+
+  return outOfSeason && shouldDiscount;
 }
 
 export function fruitSalePercent(fruitData) {

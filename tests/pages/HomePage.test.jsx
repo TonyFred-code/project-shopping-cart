@@ -1,46 +1,45 @@
 import { render, screen } from '@testing-library/react';
 import { it, describe, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import HomePage from '../../src/pages/HomePage.jsx';
-
-// mock hooks
-import * as fruitsHook from '../../src/helpers/useFruitsData.jsx';
-import * as cartHook from '../../src/helpers/useCartItems.jsx';
 
 // mock children (since already unit tested)
 vi.mock('../../src/components/OnSaleSection.jsx', () => ({
-  default: ({ showProductDetails }) => (
-    <div>
-      OnSale
-      <button onClick={() => showProductDetails(1)}>Show</button>
-    </div>
-  ),
+  default: ({ showProductDetails }) => {
+    return (
+      <div>
+        OnSale
+        <button onClick={() => showProductDetails(1)}>Show</button>
+      </div>
+    );
+  },
 }));
+
 vi.mock('../../src/components/InSeasonSection.jsx', () => ({
   default: () => <div>InSeason</div>,
 }));
 vi.mock('../../src/components/ProductDetails.jsx', () => ({
-  default: ({ fruitData, toggleOpen, closeProductDetails }) => (
-    <div>
-      ProductDetails {fruitData?.name}
-      <button onClick={toggleOpen}>Toggle</button>
-      <button onClick={closeProductDetails}>Close</button>
-    </div>
-  ),
+  default: ({ fruitData, toggleOpen, closeProductDetails }) => {
+    return (
+      <div>
+        ProductDetails {fruitData?.name}
+        <button onClick={toggleOpen}>Toggle</button>
+        <button onClick={closeProductDetails}>Close</button>
+      </div>
+    );
+  },
 }));
-vi.mock('../../src/components/LayoutWrapper.jsx', () => ({
-  default: ({ children, cartItemsCount }) => (
-    <div>
-      CartCount:{cartItemsCount}
-      {children}
-    </div>
-  ),
+vi.mock('../../src/components/Layout.jsx', () => ({
+  default: ({ children, cartItemsCount }) => {
+    return (
+      <div>
+        CartCount:{cartItemsCount}
+        {children}
+      </div>
+    );
+  },
 }));
 vi.mock('../../src/components/HeroSection.jsx', () => ({
   default: () => <div>Hero</div>,
-}));
-vi.mock('../../src/components/HomePageWrapper.jsx', () => ({
-  default: ({ children }) => <div>{children}</div>,
 }));
 
 const mockFruits = [
@@ -58,6 +57,24 @@ const mockFruits = [
   },
 ];
 
+const mockCartItems = [
+  {
+    id: 1,
+    name: 'Mango',
+    pricing: { price_per_unit: 234 },
+    season_availability: ['January'],
+    cart_quantity: 100,
+    stock: 100,
+  },
+];
+
+import HomePage from '../../src/pages/HomePage.jsx';
+
+// mock hooks
+import * as fruitsHook from '../../src/helpers/useFruitsData.jsx';
+import * as cartHook from '../../src/helpers/useCartItems.jsx';
+import userEvent from '@testing-library/user-event';
+
 describe('HomePage', () => {
   beforeEach(() => {
     vi.spyOn(fruitsHook, 'default').mockReturnValue({
@@ -65,10 +82,21 @@ describe('HomePage', () => {
       loading: false,
       error: null,
     });
+
     vi.spyOn(cartHook, 'default').mockReturnValue({
-      cartItems: [1],
+      cartItems: mockCartItems,
       loading: false,
     });
+  });
+
+  it('should match page load snapshot', () => {
+    const container = render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    expect(container).toMatchSnapshot();
   });
 
   it('renders FAILED TO FETCH on error', () => {
@@ -87,36 +115,39 @@ describe('HomePage', () => {
     expect(screen.getByText(/failed to fetch/i)).toBeInTheDocument();
   });
 
-  it('passes cart count to LayoutWrapper', () => {
+  it('passes cart count to LayoutWrapper', async () => {
     render(
       <MemoryRouter>
         <HomePage />
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/CartCount:1/)).toBeInTheDocument();
+    expect(await screen.findByText(/CartCount:1/)).toBeInTheDocument();
   });
 
-  it('opens product details when showProductDetails is called', () => {
+  it('opens product details when showProductDetails is called', async () => {
+    const user = userEvent.setup();
+
     render(
       <MemoryRouter>
         <HomePage />
       </MemoryRouter>
     );
 
-    screen.getByText('Show').click();
+    await user.click(screen.getByRole('button', { name: /show/i }));
     expect(screen.getByText(/ProductDetails Mango/)).toBeInTheDocument();
   });
 
-  it('closes product details when closeProductDetails is called', () => {
+  it('closes product details when closeProductDetails is called', async () => {
+    const user = userEvent.setup();
     render(
       <MemoryRouter>
         <HomePage />
       </MemoryRouter>
     );
 
-    screen.getByText('Show').click();
-    screen.getByText('Close').click();
+    await user.click(screen.getByRole('button', { name: /show/i }));
+    await user.click(screen.getByRole('button', { name: /close/i }));
 
     expect(screen.queryByText(/ProductDetails/)).not.toBeInTheDocument();
   });

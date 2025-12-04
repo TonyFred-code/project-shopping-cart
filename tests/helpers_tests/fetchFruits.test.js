@@ -8,7 +8,9 @@ import {
   CACHE_TIME_KEY,
 } from '../../src/constants/fruitsCache.js';
 
-const fakeData = [{ id: 1, name: 'mango', price: 22 }];
+const fakeData = [
+  { id: 1, name: 'mango', price: 22, season_availability: 'all year round' },
+];
 vi.mock('../../src/helpers/loadCachedData.js');
 vi.mock('random-int');
 
@@ -28,7 +30,6 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
   localStorage.clear();
-  vi.useRealTimers();
 });
 
 describe('fetchFruits', () => {
@@ -37,7 +38,7 @@ describe('fetchFruits', () => {
 
     const result = await fetchFruits();
 
-    expect(result).toEqual(fakeData);
+    expect(result).toMatchObject(fakeData);
     expect(fetch).not.toHaveBeenCalled();
   });
 
@@ -70,13 +71,13 @@ describe('fetchFruits', () => {
   it('should load fresh data if no valid cache exists and store in cache', async () => {
     const result = await fetchFruits();
 
-    expect(result).toEqual(fakeData);
+    expect(result).toMatchObject(fakeData);
     expect(fetch).toHaveBeenCalledWith('/data.json');
 
     const cacheValue = JSON.parse(localStorage.getItem(CACHE_KEY));
     const cacheTime = localStorage.getItem(CACHE_TIME_KEY);
 
-    expect(cacheValue).toEqual(fakeData);
+    expect(cacheValue).toMatchObject(fakeData);
     expect(typeof Number(cacheTime)).toBe('number');
     expect(Number(cacheTime)).toBeGreaterThan(0);
   });
@@ -123,4 +124,6 @@ describe('fetchFruits', () => {
     ); // second call mock marked as offline
     expect(result).toEqual(fakeData);
   });
+
+  //TODO: add test for attaching in season, sale, and discount properties to fetched data
 });
