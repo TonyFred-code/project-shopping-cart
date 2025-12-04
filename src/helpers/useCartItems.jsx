@@ -92,15 +92,16 @@ export default function useCartItems() {
 
   function addMultipleCartItems(quantity, fruitData) {
     let updatedCartItems = [];
-    const { id, stock, cart_quantity } = fruitData;
+    const { id, stock } = fruitData;
     const isFruitInCart = fruitInCart(id, cartItems);
 
     if (isFruitInCart) {
-      const quantityToBeAdded =
-        cart_quantity + quantity <= stock ? cart_quantity + quantity : stock;
-
       updatedCartItems = cartItems.map((cartItem) => {
         if (cartItem.id === id) {
+          const quantityToBeAdded =
+            cartItem.cart_quantity + quantity <= stock
+              ? cartItem.cart_quantity + quantity
+              : stock;
           return {
             ...cartItem,
             cart_quantity: quantityToBeAdded,
