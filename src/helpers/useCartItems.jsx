@@ -10,27 +10,101 @@ export default function useCartItems() {
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
 
-  function uploadCartItem(quantity, fruitData) {
-    const { stock, id } = fruitData;
+  function cacheCartItems(cache) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cache));
+  }
+
+  function addItemToCart(fruitData) {
+    const isFruitInCart = fruitInCart(fruitData.id, cartItems);
+
+    if (!isFruitInCart) {
+      setCartItems([...cartItems, fruitData]);
+      cacheCartItems([...cartItems, fruitData]);
+    }
+  }
+
+  function removeItemFromCart(fruitId) {
+    const isFruitInCart = fruitInCart(fruitId, cartItems);
+
+    if (isFruitInCart) {
+      const updatedCartItems = cartItems.filter(
+        (cartItem) => cartItem.id !== fruitId
+      );
+      setCartItems(updatedCartItems);
+
+      cacheCartItems(updatedCartItems);
+    }
+  }
+
+  function emptyCart() {
+    setCartItems([]);
+    cacheCartItems([]);
+  }
+
+  function decreaseCartItem(fruitData) {
+    const { id, cart_quantity } = fruitData;
     const isFruitInCart = fruitInCart(id, cartItems);
 
-    let updatedCartItems = [];
     if (isFruitInCart) {
-      updatedCartItems = cartItems.map((cartItem) => {
-        if (cartItem.id === id) {
-          const quantityToBeAdded = quantity + cartItem.cart_quantity;
+      const quantityToBeAdded = cart_quantity - 1 >= 0 ? cart_quantity - 1 : 0;
 
-          if (stock >= quantityToBeAdded) {
+      const updatedCartItem = cartItems
+        .map((cartItem) => {
+          if (cartItem.id === id) {
             return {
               ...cartItem,
               cart_quantity: quantityToBeAdded,
             };
-          } else if (stock < quantityToBeAdded) {
-            return {
-              ...cartItem,
-              cart_quantity: stock,
-            };
           }
+
+          return cartItem;
+        })
+        .filter((item) => item.cart_quantity > 0);
+
+      setCartItems(updatedCartItem);
+      cacheCartItems(updatedCartItem);
+    }
+  }
+
+  function increaseCartItem(fruitData) {
+    const { id, cart_quantity, stock } = fruitData;
+    const isFruitInCart = fruitInCart(id, cartItems);
+
+    if (isFruitInCart) {
+      const quantityToBeAdded =
+        cart_quantity + 1 <= stock ? cart_quantity + 1 : stock;
+
+      const updatedCartItem = cartItems.map((cartItem) => {
+        if (cartItem.id === id) {
+          return {
+            ...cartItem,
+            cart_quantity: quantityToBeAdded,
+          };
+        }
+
+        return cartItem;
+      });
+
+      setCartItems(updatedCartItem);
+      cacheCartItems(updatedCartItem);
+    }
+  }
+
+  function addMultipleCartItems(quantity, fruitData) {
+    let updatedCartItems = [];
+    const { id, stock, cart_quantity } = fruitData;
+    const isFruitInCart = fruitInCart(id, cartItems);
+
+    if (isFruitInCart) {
+      const quantityToBeAdded =
+        cart_quantity + 1 <= stock ? cart_quantity + 1 : stock;
+
+      updatedCartItems = cartItems.map((cartItem) => {
+        if (cartItem.id === id) {
+          return {
+            ...cartItem,
+            cart_quantity: quantityToBeAdded,
+          };
         }
 
         return cartItem;
@@ -38,19 +112,12 @@ export default function useCartItems() {
     } else {
       updatedCartItems = [
         ...cartItems,
-        {
-          ...fruitData,
-          cart_quantity: quantity,
-        },
+        { ...fruitData, cart_quantity: quantity },
       ];
     }
 
-    const finalCartItems = updatedCartItems.filter(
-      (cartItem) => cartItem.cart_quantity > 0
-    );
-
-    setCartItems(finalCartItems);
-    localStorage.setItem(CART_KEY, JSON.stringify(finalCartItems));
+    setCartItems(updatedCartItems);
+    cacheCartItems(updatedCartItems);
   }
 
   useEffect(() => {
@@ -59,5 +126,14 @@ export default function useCartItems() {
       .finally(() => setLoading(false));
   }, []);
 
-  return { cartItems, loading, uploadCartItem };
+  return {
+    cartItems,
+    loading,
+    addItemToCart,
+    removeItemFromCart,
+    decreaseCartItem,
+    increaseCartItem,
+    emptyCart,
+    addMultipleCartItems,
+  };
 }
