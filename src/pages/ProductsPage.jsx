@@ -134,7 +134,7 @@ export default function ProductsPage() {
       (fruit) => fruit.id === fruitId
     )[0];
 
-    cartItemsData.uploadCartItem(quantity, fruitData);
+    cartItemsData.addMultipleCartItems(quantity, fruitData);
     // TODO: add notification for adding over items in stock.
   }
 

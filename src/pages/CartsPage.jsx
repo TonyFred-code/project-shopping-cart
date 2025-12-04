@@ -111,7 +111,6 @@ const CartsWrapper = styled.div`
   }
 
   .summary h3 {
-    max-width: 80%;
     border-bottom: 1.5px solid black;
     text-align: center;
   }
@@ -148,18 +147,21 @@ const CartsWrapper = styled.div`
 `;
 
 export default function CartsPage() {
-  const { cartItems, loading, uploadCartItem, emptyCart } = useCartItems();
+  const {
+    cartItems,
+    loading,
+    emptyCart,
+    decreaseCartItem,
+    increaseCartItem,
+    removeItemFromCart,
+  } = useCartItems();
   const cartTotalCost = cartItems.reduce((acc, { cart_quantity, pricing }) => {
     return acc + cart_quantity * pricing.price_per_unit;
   }, 0);
   const itemsCount = cartItems.length;
 
   function handleRemoveFromCart(fruitId) {
-    const fruitData = cartItems.filter((cartItem) => {
-      return cartItem.id === fruitId;
-    })[0];
-
-    uploadCartItem(-fruitData.cart_quantity, fruitData);
+    removeItemFromCart(fruitId);
   }
 
   function handleQuantityIncrement(fruitId) {
@@ -167,7 +169,7 @@ export default function CartsPage() {
       return cartItem.id === fruitId;
     })[0];
 
-    uploadCartItem(1, fruitData);
+    increaseCartItem(fruitData);
   }
 
   function handleQuantityDecrement(fruitId) {
@@ -175,7 +177,7 @@ export default function CartsPage() {
       return cartItem.id === fruitId;
     })[0];
 
-    uploadCartItem(-1, fruitData);
+    decreaseCartItem(fruitData);
   }
 
   function handleCheckout() {
