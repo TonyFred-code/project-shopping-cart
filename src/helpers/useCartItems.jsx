@@ -97,7 +97,7 @@ export default function useCartItems() {
 
     if (isFruitInCart) {
       const quantityToBeAdded =
-        cart_quantity + 1 <= stock ? cart_quantity + 1 : stock;
+        cart_quantity + quantity <= stock ? cart_quantity + quantity : stock;
 
       updatedCartItems = cartItems.map((cartItem) => {
         if (cartItem.id === id) {
