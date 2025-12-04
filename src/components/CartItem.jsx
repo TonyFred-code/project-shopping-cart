@@ -107,7 +107,7 @@ export default function CartItem({
   decreaseQuantity,
   removeFromCart,
 }) {
-  const { id, pricing, cart_quantity } = fruitData;
+  const { id, pricing, cart_quantity, name } = fruitData;
   const { price_per_unit } = pricing;
 
   return (
