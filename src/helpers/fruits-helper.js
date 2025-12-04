@@ -66,7 +66,7 @@ function isArrayOfValidMonths(monthsArray) {
  *
  * @returns {boolean}
  *   Returns true if:
- *     - seasonAvailability is "all year round", OR
+ *     - seasonAvailability is not "all year round", OR
  *     - the current month matches any month in the array.
  *   Otherwise returns false.
  *
