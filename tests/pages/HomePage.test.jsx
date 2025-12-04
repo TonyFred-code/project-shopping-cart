@@ -75,10 +75,6 @@ import * as fruitsHook from '../../src/helpers/useFruitsData.jsx';
 import * as cartHook from '../../src/helpers/useCartItems.jsx';
 import userEvent from '@testing-library/user-event';
 
-function mockUploadCartItem(args) {
-  return `cart uploaded  ${args}`;
-}
-
 describe('HomePage', () => {
   beforeEach(() => {
     vi.spyOn(fruitsHook, 'default').mockReturnValue({
@@ -90,7 +86,6 @@ describe('HomePage', () => {
     vi.spyOn(cartHook, 'default').mockReturnValue({
       cartItems: mockCartItems,
       loading: false,
-      uploadCartItem: mockUploadCartItem,
     });
   });
 
