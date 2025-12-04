@@ -8,6 +8,7 @@ import Footer from '@/components/Footer.jsx';
 import useCartItems from '@/helpers/useCartItems.jsx';
 import { ThreeDots } from 'react-loader-spinner';
 import CartItem from '@/components/CartItem.jsx';
+import { toast, ToastContainer } from 'react-toastify';
 
 const CartsWrapper = styled.div`
   & {
@@ -147,7 +148,7 @@ const CartsWrapper = styled.div`
 `;
 
 export default function CartsPage() {
-  const { cartItems, loading, uploadCartItem } = useCartItems();
+  const { cartItems, loading, uploadCartItem, emptyCart } = useCartItems();
   const cartTotalCost = cartItems.reduce((acc, { cart_quantity, pricing }) => {
     return acc + cart_quantity * pricing.price_per_unit;
   }, 0);
@@ -175,6 +176,11 @@ export default function CartsPage() {
     })[0];
 
     uploadCartItem(-1, fruitData);
+  }
+
+  function handleCheckout() {
+    toast.success('Yay checkout complete');
+    emptyCart();
   }
 
   return (
@@ -248,7 +254,7 @@ export default function CartsPage() {
                       currency: 'NGN',
                     }).format(cartTotalCost)}
                   </p>
-                  <button type="button">
+                  <button type="button" onClick={handleCheckout}>
                     <Icon path={mdiSend} size={1.2} />
                     <span>Proceed to Checkout</span>
                   </button>
@@ -257,9 +263,9 @@ export default function CartsPage() {
             )}
           </section>
         )}
-        <footer></footer>
       </main>
       <Footer />
+      <ToastContainer />
     </CartsWrapper>
   );
 }
